@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function loginAdmin(){
+        if(auth()->check()){
+            return redirect()->to('home');
+        }
         return view('login');
     }
 
@@ -20,6 +23,7 @@ class AdminController extends Controller
         ],$remember)){
             return redirect()->to('home');
         }
+
         return view('login');
     }
 }
