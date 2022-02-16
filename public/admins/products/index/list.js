@@ -14,11 +14,11 @@ function actionDelete(event){
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-
             $.ajax({
                 type: 'GET',
                 url: urlRequest,
                 success: function (response) {
+                    console.log(response)
                     if(response.code === 200){
                         that.parent().parent().remove()
 
@@ -30,7 +30,7 @@ function actionDelete(event){
                     }
                 },
                 error: function (err) {
-
+                    console.log(err)
                 },
             })
         }
