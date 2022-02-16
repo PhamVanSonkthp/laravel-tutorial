@@ -22,8 +22,8 @@ class Recusive
                     $this->htmlSelect .= "<option selected value='" . $value['id'] . "'>" . $text . $value['name'] . "</option>";
                 }else{
                     $this->htmlSelect .= "<option value='" . $value['id'] . "'>" . $text . $value['name'] . "</option>";
-                    $this->categoryRecusive($parent_id, $value['id'], $text . '--');
                 }
+                $this->categoryRecusive($parent_id, $value['id'], $text . '--');
             }
         }
         return $this->htmlSelect;

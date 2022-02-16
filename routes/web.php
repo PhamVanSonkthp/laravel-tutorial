@@ -108,7 +108,43 @@ Route::prefix('admin')->group(function () {
             'uses'=>'App\Http\Controllers\AdminProductController@store',
         ]);
 
+        Route::put('/update/{id}', [
+            'as'=>'products.update',
+            'uses'=>'App\Http\Controllers\AdminProductController@update',
+        ]);
 
+        Route::get('/delete/{id}', [
+            'as'=>'products.delete',
+            'uses'=>'App\Http\Controllers\AdminProductController@delete',
+        ]);
+
+    });
+
+    Route::prefix('slider')->group(function () {
+        Route::get('/', [
+            'as'=>'slider.index',
+            'uses'=>'App\Http\Controllers\SliderAdminController@index',
+        ]);
+
+        Route::get('/create', [
+            'as'=>'slider.create',
+            'uses'=>'App\Http\Controllers\SliderAdminController@create',
+        ]);
+
+        Route::post('/store', [
+            'as'=>'slider.store',
+            'uses'=>'App\Http\Controllers\SliderAdminController@store',
+        ]);
+
+        Route::get('/edit/{id}', [
+            'as'=>'slider.edit',
+            'uses'=>'App\Http\Controllers\SliderAdminController@edit',
+        ]);
+
+        Route::get('/delete/{id}', [
+            'as'=>'slider.delete',
+            'uses'=>'App\Http\Controllers\SliderAdminController@delete',
+        ]);
 
     });
 });

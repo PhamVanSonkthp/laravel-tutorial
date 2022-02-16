@@ -18,7 +18,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-    @include('partials.content-header' , ['name'=> 'products', 'key'=> 'List'])
+    @include('partials.content-header' , ['name'=> 'sliders', 'key'=> 'List'])
     <!-- /.content-header -->
 
         <!-- Main content -->
@@ -26,7 +26,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('products.create') }}" class="btn btn-success float-right m-2">Add</a>
+                        <a href="{{ route('slider.create') }}" class="btn btn-success float-right m-2">Add</a>
                     </div>
 
                     <div class="col-md-12">
@@ -34,25 +34,23 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">Giá</th>
+                                <th scope="col">Tên slider</th>
+                                <th scope="col">Decription</th>
                                 <th scope="col">Hình ảnh</th>
-                                <th scope="col">Danh mục</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            @foreach($products as $productItem)
+                            @foreach($sliders as $slidersItem)
                                 <tr>
-                                    <th scope="row">{{ $productItem->id }}</th>
-                                    <td>{{$productItem->name}}</td>
-                                    <td>{{ ($productItem->price) }}</td>
-                                    <td> <img class="product_image_150_100" src="{{$productItem->feature_image_path}}"> </td>
-                                    <td>{{ optional($productItem->category)->name }}</td>
+                                    <th scope="row">{{ $slidersItem->id }}</th>
+                                    <td>{{$slidersItem->name}}</td>
+                                    <td>{{ ($slidersItem->decription) }}</td>
+                                    <td> <img class="product_image_150_100" src="{{$slidersItem->image_path}}"> </td>
                                     <td>
-                                        <a href="{{route('products.edit' , ['id'=> $productItem->id])}}" class="btn btn-default">Edit</a>
-                                        <a href="{{route('products.delete' , ['id'=> $productItem->id])}}" data-url="{{route('products.delete' , ['id'=> $productItem->id])}}" class="btn btn-danger action_delete">Delete</a>
+                                        <a href="{{route('slider.edit' , ['id'=> $slidersItem->id])}}" class="btn btn-default">Edit</a>
+                                        <a href="{{route('slider.delete' , ['id'=> $slidersItem->id])}}" data-url="{{route('slider.delete' , ['id'=> $slidersItem->id])}}" class="btn btn-danger action_delete">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -62,7 +60,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        {{ $products->links('pagination::bootstrap-4') }}
+                        {{ $sliders->links('pagination::bootstrap-4') }}
                     </div>
 
                 </div>
