@@ -35,12 +35,12 @@ class AdminProductController extends Controller
     public function index(){
 
         $products = $this->product->latest()->paginate(10);
-        return view('admin.products.index' , compact('products'));
+        return view('administrator.products.index' , compact('products'));
     }
 
     public function create(){
         $htmlOption = $this->getCategory($parent_id = '');
-        return view('admin.products.add' , compact('htmlOption'));
+        return view('administrator.products.add' , compact('htmlOption'));
     }
 
     public function getCategory($parent_id){

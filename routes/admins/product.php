@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('administrator')->group(function () {
     Route::prefix('products')->group(function () {
         Route::get('/', [
             'as'=>'products.index',

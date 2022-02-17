@@ -19,7 +19,7 @@ class AdminRoleController extends Controller
 
     public function index(){
         $roles = $this->role->paginate(10);
-        return view('admin.role.index', compact('roles'));
+        return view('administrator.role.index', compact('roles'));
     }
 
     public function create(){
