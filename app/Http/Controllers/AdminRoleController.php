@@ -6,7 +6,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
-class AdminRolerController extends Controller
+class AdminRoleController extends Controller
 {
     private $premission;
     private $role;

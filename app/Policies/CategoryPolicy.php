@@ -30,7 +30,7 @@ class CategoryPolicy
      */
     public function view(User $user)
     {
-        return $user->checkPermissionAccess(config('permissions.access.list-category'));
+        return $user->checkPermissionAccess(config('permissions.access.category-list'));
     }
 
     /**
@@ -41,7 +41,7 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-        return $user->checkPermissionAccess(config('permissions.access.add-category'));
+        return $user->checkPermissionAccess(config('permissions.access.category-add'));
     }
 
     /**
@@ -53,7 +53,7 @@ class CategoryPolicy
      */
     public function update(User $user)
     {
-        return $user->checkPermissionAccess(config('permissions.access.edit-category'));
+        return $user->checkPermissionAccess(config('permissions.access.category-edit'));
     }
 
     /**
@@ -65,7 +65,7 @@ class CategoryPolicy
      */
     public function delete(User $user)
     {
-        return $user->checkPermissionAccess(config('permissions.access.delete-category'));
+        return $user->checkPermissionAccess(config('permissions.access.category-delete'));
     }
 
     /**

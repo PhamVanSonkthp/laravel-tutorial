@@ -43,13 +43,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [
             'as'=>'categories.edit',
             'uses'=>'App\Http\Controllers\CategoryController@edit',
-            'middleware'=>'can:category-edt',
+            'middleware'=>'can:category-edit',
         ]);
 
         Route::put('/update/{id}', [
             'as'=>'categories.update',
             'uses'=>'App\Http\Controllers\CategoryController@update',
-            'middleware'=>'can:category-edt',
+            'middleware'=>'can:category-edit',
         ]);
 
         Route::get('/delete/{id}', [
@@ -89,39 +89,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [
             'as'=>'menus.delete',
             'uses'=>'App\Http\Controllers\MenuController@delete',
-        ]);
-
-    });
-
-    Route::prefix('products')->group(function () {
-        Route::get('/', [
-            'as'=>'products.index',
-            'uses'=>'App\Http\Controllers\AdminProductController@index',
-        ]);
-
-        Route::get('/create', [
-            'as'=>'products.create',
-            'uses'=>'App\Http\Controllers\AdminProductController@create',
-        ]);
-
-        Route::get('/edit/{id}', [
-            'as'=>'products.edit',
-            'uses'=>'App\Http\Controllers\AdminProductController@edit',
-        ]);
-
-        Route::post('/store', [
-            'as'=>'products.store',
-            'uses'=>'App\Http\Controllers\AdminProductController@store',
-        ]);
-
-        Route::put('/update/{id}', [
-            'as'=>'products.update',
-            'uses'=>'App\Http\Controllers\AdminProductController@update',
-        ]);
-
-        Route::get('/delete/{id}', [
-            'as'=>'products.delete',
-            'uses'=>'App\Http\Controllers\AdminProductController@delete',
         ]);
 
     });
@@ -190,27 +157,27 @@ Route::prefix('admin')->group(function () {
     Route::prefix('roles')->group(function () {
         Route::get('/', [
             'as'=>'roles.index',
-            'uses'=>'App\Http\Controllers\AdminRolerController@index',
+            'uses'=>'App\Http\Controllers\AdminRoleController@index',
         ]);
 
         Route::get('/create', [
             'as'=>'roles.create',
-            'uses'=>'App\Http\Controllers\AdminRolerController@create',
+            'uses'=>'App\Http\Controllers\AdminRoleController@create',
         ]);
 
         Route::post('/store', [
             'as'=>'roles.store',
-            'uses'=>'App\Http\Controllers\AdminRolerController@store',
+            'uses'=>'App\Http\Controllers\AdminRoleController@store',
         ]);
 
         Route::get('/edit/{id}', [
             'as'=>'roles.edit',
-            'uses'=>'App\Http\Controllers\AdminRolerController@edit',
+            'uses'=>'App\Http\Controllers\AdminRoleController@edit',
         ]);
 
         Route::put('/update/{id}', [
             'as'=>'roles.update',
-            'uses'=>'App\Http\Controllers\AdminRolerController@update',
+            'uses'=>'App\Http\Controllers\AdminRoleController@update',
         ]);
 
     });

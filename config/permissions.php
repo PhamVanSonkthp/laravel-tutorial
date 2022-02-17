@@ -3,8 +3,10 @@
 
 return [
     'access' => [
-        'list-category' => 'category_list',
-        'list-menu' => 'menu_list',
+        'category-list' => 'category_list',
+        'category-add' => 'category_add',
+        'category-edit' => 'category_edit',
+        'category-delete' => 'category_delete',
     ],
     'table_module'=>[
         'category',
