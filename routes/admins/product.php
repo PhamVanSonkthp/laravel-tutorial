@@ -7,7 +7,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [
             'as'=>'products.index',
             'uses'=>'App\Http\Controllers\AdminProductController@index',
-            'middleware'=>'can:product-list',
+//            'middleware'=>'can:product-list',
         ]);
 
         Route::get('/create', [
@@ -18,7 +18,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [
             'as'=>'products.edit',
             'uses'=>'App\Http\Controllers\AdminProductController@edit',
-            'middleware'=>'can:product-edit',
+//            'middleware'=>'can:product-edit',
         ]);
 
         Route::post('/store', [

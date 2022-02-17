@@ -79,6 +79,7 @@ class AdminProductController extends Controller
             }
 
             // insert tag for product
+            $tagsIds = [];
             if(!empty($request->tags)){
                 foreach ($request->tags as $tagItem){
                     $tagInstance = $this->tag->firstOrCreate([

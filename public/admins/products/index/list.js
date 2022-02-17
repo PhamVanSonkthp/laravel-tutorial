@@ -3,6 +3,7 @@ function actionDelete(event){
     event.preventDefault()
     let urlRequest = $(this).data('url')
     let that = $(this)
+    console.log(urlRequest)
 
     Swal.fire({
         title: 'Are you sure?',
@@ -18,7 +19,6 @@ function actionDelete(event){
                 type: 'GET',
                 url: urlRequest,
                 success: function (response) {
-                    console.log(response)
                     if(response.code === 200){
                         that.parent().parent().remove()
 
