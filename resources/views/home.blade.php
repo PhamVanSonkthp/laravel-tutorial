@@ -1,30 +1,23 @@
-@extends('layouts.admin')
-
-@section('title')
-    <title>Trang chu</title>
-@endsection
+@extends('layouts.app')
 
 @section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        @include('partials.content-header' , ['name'=> 'Home', 'key'=> 'home'])
-        <!-- /.content-header -->
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        Trang chủ
-                    </div>
+                    {{ __('You are logged in!') }}
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </div>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
+</div>
 @endsection

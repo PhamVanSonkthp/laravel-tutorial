@@ -7,7 +7,7 @@ Route::get('/', [
     'uses'=>'App\Http\Controllers\UserController@index',
 ]);
 
-Route::get('/register', [
-    'as'=>'user.register',
-    'uses'=>'App\Http\Controllers\UserController@register',
-]);
+//Route::get('/register', [
+//    'as'=>'user.register',
+//    'uses'=>'App\Http\Controllers\UserController@register',
+//]);
