@@ -5,7 +5,7 @@ $(function (){
     });
 
     $(".select2_init").select2({
-        placeholder: "Chọn danh mục",
+        placeholder: "Chọn",
         allowClear: true
     });
 

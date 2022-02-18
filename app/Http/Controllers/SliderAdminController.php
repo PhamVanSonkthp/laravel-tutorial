@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SliderAddRequest;
+use App\Http\Requests\SliderEditRequest;
 use App\Models\Slider;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Traits\StorageImageTrait;
+use Illuminate\Support\Str;
 
 class SliderAdminController extends Controller
 {
@@ -23,11 +25,11 @@ class SliderAdminController extends Controller
 
     public function index(){
         $sliders = $this->slider->latest()->paginate(10);
-        return view('admin.slider.index', compact('sliders'));
+        return view('administrator.slider.index', compact('sliders'));
     }
 
     public function create(){
-        return view('admin.slider.add');
+        return view('administrator.slider.add');
     }
 
     public function store(SliderAddRequest $request){
@@ -55,7 +57,26 @@ class SliderAdminController extends Controller
     }
 
     public function edit($id){
+        $slider = $this->slider->find($id);
+        return view('administrator.slider.edit' , compact('slider'));
+    }
 
+    public function update($id , SliderEditRequest $request){
+
+        $updateItem = [
+            'name' => $request->name,
+            'decription'=> $request->decription,
+        ];
+
+        $dataUploadFeatureImage = $this->storageTraitUpload($request , 'image_path' , 'slider');
+        if(!empty($dataUploadFeatureImage)){
+            $updateItem['image_name'] = $dataUploadFeatureImage['file_name'];
+            $updateItem['image_path'] = $dataUploadFeatureImage['file_path'];
+        }
+
+        $this->slider->find($id)->update($updateItem);
+
+        return redirect()->route('slider.index');
     }
 
     public function delete($id){

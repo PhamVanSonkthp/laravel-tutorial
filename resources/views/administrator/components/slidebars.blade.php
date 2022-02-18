@@ -36,21 +36,21 @@
                 </li>
 
                 <li>
-                    <a href="" class="waves-effect">
+                    <a href="{{route('slider.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Quản lý Slider </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="" class="waves-effect">
+                    <a href="#" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Quản lý Menu </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="" class="waves-effect">
+                    <a href="#" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Quản lý rương quà </span>
                     </a>
@@ -59,19 +59,19 @@
                 <li class="menu-title">Quản lý khách hàng</li>
 
                 <li>
-                    <a href="" class="waves-effect">
+                    <a href="{{route('users.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Danh sách khách hàng </span>
                     </a>
                 </li>
 
                 <li class="menu-title">Phân quyền</li>
-                <li>
-                    <a href="{{route('roles.index')}}" class="waves-effect">
-                        <i class="mdi mdi-calendar-check"></i>
-                        <span>Danh sách nhân viên</span>
-                    </a>
-                </li>
+{{--                <li>--}}
+{{--                    <a href="{{route('users.index')}}" class="waves-effect">--}}
+{{--                        <i class="mdi mdi-calendar-check"></i>--}}
+{{--                        <span>Danh sách người dùng</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
                 <li>
                     <a href="{{route('roles.index')}}" class="waves-effect">
@@ -81,7 +81,7 @@
                 </li>
 
                 <li>
-                    <a href="{{route('roles.index')}}" class="waves-effect">
+                    <a href="{{route('permissions.create')}}" class="waves-effect">
                         <i class="mdi mdi-calendar-check"></i>
                         <span>Tạo dữ liệu phân quyền</span>
                     </a>

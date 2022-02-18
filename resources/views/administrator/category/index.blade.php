@@ -9,7 +9,7 @@
 @endsection
 
 @section('css')
-
+    <link href="{{asset('admins/products/index/list.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')

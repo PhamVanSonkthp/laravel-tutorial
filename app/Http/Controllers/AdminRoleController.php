@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use App\Models\Role;
+use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 
 class AdminRoleController extends Controller
 {
+    use DeleteModelTrait;
     private $premission;
     private $role;
 
@@ -24,7 +26,7 @@ class AdminRoleController extends Controller
 
     public function create(){
         $premissionsParent = $this->premission->where('parent_id' , 0)->get();
-        return view('admin.role.add' , compact('premissionsParent'));
+        return view('administrator.role.add' , compact('premissionsParent'));
     }
 
     public function store(Request $request){
@@ -40,7 +42,7 @@ class AdminRoleController extends Controller
         $premissionsParent = $this->premission->where('parent_id' , 0)->get();
         $role = $this->role->find($id);
         $permissionsChecked = $role->permissions;
-        return view('admin.role.edit' , compact('premissionsParent'  , 'role' , 'permissionsChecked'));
+        return view('administrator.role.edit' , compact('premissionsParent'  , 'role' , 'permissionsChecked'));
     }
 
     public function update($id , Request $request){
@@ -53,5 +55,9 @@ class AdminRoleController extends Controller
 
         $role->permissions()->sync($request->permission_id);
         return redirect()->route('roles.index');
+    }
+
+    public function delete($id){
+        return $this->deleteModelTrait($id, $this->role);
     }
 }

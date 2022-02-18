@@ -65,6 +65,42 @@
         </div>
 
         <div class="col-md-12">
+
+            <div class="row container_sources">
+
+                <div class="col-md-12 mt-3">
+                    <label>Nhập khóa học</label>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input name="sources_name[]" type="text" class="form-control @error('sources_name') is-invalid @enderror" placeholder="Tên bài học">
+                        @error('sources_name')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input name="sources_link[]" type="text" class="form-control @error('sources_link') is-invalid @enderror" placeholder="Link bài học">
+                        @error('sources_link')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 mt-3">
+                    <button type="button" class="btn btn-success waves-effect waves-light action_add_source">Thêm
+                    </button>
+                </div>
+
+            </div>
+
+
             <div class="form-group mt-3">
                 <label>Nhập nội dung</label>
                 <textarea style="min-height: 400px;" name="contents"
@@ -87,4 +123,27 @@
             integrity="sha512-ykwx/3dGct2v2AKqqaDCHLt1QFVzdcpad7P5LfgpqY8PJCRqAqOeD4Bj63TKnSQy4Yok/6QiCHiSV/kPdxB7AQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{asset('admins/products/add/add.js') }}"></script>
+
+    <script>
+
+
+        function actionAddSource(event) {
+            event.preventDefault()
+            $('.container_sources').append(`<div class="col-md-6 mt-1">
+                    <div class="form-group">
+                        <input name="sources_name[]" type="text" class="form-control" placeholder="Tên bài học">
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-1">
+                    <div class="form-group">
+                        <input name="sources_link[]" type="text" class="form-control" placeholder="Link bài học">
+                    </div>
+                </div>`)
+        }
+
+        $(function () {
+            $(document).on('click', '.action_add_source', actionAddSource);
+        })
+    </script>
 @endsection

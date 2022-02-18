@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Components\Recusive;
 use App\Http\Requests\ProductAddRequest;
+use App\Http\Requests\ProductEditRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -33,7 +34,6 @@ class AdminProductController extends Controller
     }
 
     public function index(){
-
         $products = $this->product->latest()->paginate(10);
         return view('administrator.products.index' , compact('products'));
     }
@@ -53,6 +53,7 @@ class AdminProductController extends Controller
 
     public function store(ProductAddRequest $request){
         try {
+
             DB::beginTransaction();
             $dataProductCreate = [
                 'name'=> $request->name,
@@ -78,6 +79,19 @@ class AdminProductController extends Controller
                 }
             }
 
+            if($request->has('sources_name')){
+
+                $sourceNames = $request->sources_name;
+                $sourceLinks = $request->sources_link;
+
+                for($i = 0 ; $i < count($sourceNames) ; $i++){
+                    $product->sources()->create([
+                        'name'=>$sourceNames[$i],
+                        'link'=>$sourceLinks[$i],
+                    ]);
+                }
+            }
+
             // insert tag for product
             $tagsIds = [];
             if(!empty($request->tags)){
@@ -94,6 +108,8 @@ class AdminProductController extends Controller
             DB::commit();
         }catch (\Exception $exception){
             DB::rollBack();
+
+            dd($exception->getMessage() );
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
         return redirect()->route('products.index');
@@ -102,10 +118,10 @@ class AdminProductController extends Controller
     public function edit($id){
         $product = $this->product->find($id);
         $htmlOption = $this->getCategory($product->category_id);
-        return view('admin.products.edit',compact('htmlOption' , 'product'));
+        return view('administrator.products.edit',compact('htmlOption' , 'product'));
     }
 
-    public function update($id, Request $request){
+    public function update($id, ProductEditRequest $request){
         try {
             DB::beginTransaction();
             $dataProductUpdate = [

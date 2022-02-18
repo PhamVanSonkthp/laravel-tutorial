@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserAddRequest;
+use App\Http\Requests\UserEditRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Traits\DeleteModelTrait;
@@ -25,15 +27,15 @@ class UserAdminController extends Controller
 
     public function index(){
         $users = $this->user->paginate(10);
-        return view('admin.user.index' , compact('users'));
+        return view('administrator.user.index' , compact('users'));
     }
 
     public function create(){
         $roles = $this->role->all();
-        return view('admin.user.add' , compact('roles'));
+        return view('administrator.user.add' , compact('roles'));
     }
 
-    public function store(Request $request){
+    public function store(UserAddRequest $request){
         try {
             DB::beginTransaction();
             $user = $this->user->create([
@@ -56,17 +58,22 @@ class UserAdminController extends Controller
         $user = $this->user->find($id);
         $roles = $this->role->all();
         $rolesOfUser = $user->roles;
-        return view('admin.user.edit' , compact('user' , 'roles' , 'rolesOfUser'));
+        return view('administrator.user.edit' , compact('user' , 'roles' , 'rolesOfUser'));
     }
 
-    public function update($id , Request $request){
+    public function update($id , UserEditRequest $request){
         try {
             DB::beginTransaction();
-            $this->user->find($id)->update([
+            $updatetem = [
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'password'=> Hash::make($request->password),
-            ]);
+            ];
+
+            if(!empty($request->password)){
+                $updatetem['password'] = Hash::make($request->password);
+            }
+
+            $this->user->find($id)->update($updatetem);
 
             $user = $this->user->find($id);
             $user->roles()->sync($request->role_id);
@@ -81,6 +88,5 @@ class UserAdminController extends Controller
 
     public function delete($id){
         return $this->deleteModelTrait($id, $this->user);
-
     }
 }
