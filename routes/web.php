@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/admin', 'App\Http\Controllers\AdminController@loginAdmin');
 Route::post('/admin', 'App\Http\Controllers\AdminController@postLoginAdmin');
 
-Route::get('/home', function () {
-    return view('home');
-});
-
 Route::prefix('admin')->group(function () {
 
     Route::prefix('menus')->group(function () {
@@ -59,9 +55,6 @@ Route::prefix('admin')->group(function () {
     });
 
 
-
-
-
     Route::prefix('roles')->group(function () {
         Route::get('/', [
             'as'=>'roles.index',
@@ -93,10 +86,35 @@ Route::prefix('admin')->group(function () {
 
 });
 
+Route::prefix('user')->group(function () {
+    Route::get('/my-sources', [
+        'as'=>'user.sources',
+        'uses'=>'App\Http\Controllers\UserController@sources',
+    ])->middleware('verified');
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::get('/payment/{id}', [
+        'as'=>'user.payment',
+        'uses'=>'App\Http\Controllers\UserController@payment',
+    ])->middleware('verified');
 });
+
+Route::prefix('/')->group(function () {
+    Route::get('/', [
+        'as'=>'welcome.index',
+        'uses'=>'App\Http\Controllers\WelcomeController@index',
+    ]);
+
+    Route::get('/source/{id}', [
+        'as'=>'welcome.source',
+        'uses'=>'App\Http\Controllers\WelcomeController@source',
+    ]);
+
+    Route::get('/invoice/{id}', [
+        'as'=>'welcome.invoice',
+        'uses'=>'App\Http\Controllers\WelcomeController@invoice',
+    ]);
+});
+
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -105,7 +123,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
@@ -116,8 +134,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::get('/profile', function () {
     // Only verified users may access this route...
+    return view('user.profile.index');
 })->middleware('verified');
 
-Auth::routes(['verify'=>true]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();

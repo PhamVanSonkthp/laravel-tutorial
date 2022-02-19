@@ -10,7 +10,7 @@
 
 
                 <li>
-                    <a href="#" class="waves-effect">
+                    <a href="{{route('welcome.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Trang chủ </span>
                     </a>
@@ -19,10 +19,25 @@
                 <li>
                     <a href="#" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
-                        <span> Khóa học </span>
+                        <span> Các khóa học </span>
                     </a>
                 </li>
 
+                <li>
+                    <a href="#" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Trading </span>
+                    </a>
+                </li>
+
+                @auth
+                <li>
+                    <a href="{{route('user.sources')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Khóa học của tôi </span>
+                    </a>
+                </li>
+                @endauth
             </ul>
         </div>
         <!-- Sidebar -->

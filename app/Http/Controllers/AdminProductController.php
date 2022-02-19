@@ -108,8 +108,6 @@ class AdminProductController extends Controller
             DB::commit();
         }catch (\Exception $exception){
             DB::rollBack();
-
-            dd($exception->getMessage() );
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
         return redirect()->route('products.index');
