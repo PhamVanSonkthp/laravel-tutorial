@@ -10,6 +10,8 @@ use App\Models\ProductTag;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -30,19 +32,38 @@ class UserController extends Controller
     }
 
     public function sources(){
-        $products = $this->product->latest()->paginate(10);
+        $products = $this->invoice->select('products.*')
+            ->join('products', 'products.id', '=', 'invoices.product_id')
+            ->where('invoices.user_id', auth()->id())
+            ->latest('invoices.id')
+            ->paginate(10);
+
         return view('user.my_sources.index', compact('products'));
     }
 
     public function payment($id){
-        $this->invoice->create([
-            'user_id'=> auth()->id(),
-            'product_id'=> $id,
-        ]);
-        return view('user.my_sources.index');
+
+        try {
+            DB::beginTransaction();
+
+            $product = $this->product->find($id);
+
+            $this->invoice->create([
+                'user_id'=> auth()->id(),
+                'product_id'=> $id,
+                'price'=> $product->price,
+            ]);
+
+            $user = $this->user->find(auth()->id());
+            $user->increment('point' , $product->point);
+            $user->save();
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
+        }
+
+        return redirect()->route('user.sources' );
     }
 
-    public function register(){
-        return view('user.authention.register');
-    }
 }

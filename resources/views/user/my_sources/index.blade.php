@@ -18,41 +18,29 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="col-md-12">
-                    <a href="{{route('products.create')}}" class="btn btn-success float-end m-2">Add</a>
-                </div>
-                <div class="clearfix"></div>
-
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Tên khóa học</th>
                             <th scope="col">Hình ảnh</th>
-                            <th scope="col">Danh mục</th>
-                            <th class="text-center" style="width: 100px;">Action</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Ngày kích hoạt</th>
+                            <th class="text-center" style="width: 50px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         @foreach($products as $productItem)
                             <tr>
-                                <th scope="row">{{ $productItem->id }}</th>
                                 <td>{{$productItem->name}}</td>
                                 <td><img class="product_image_150_100" src="{{$productItem->feature_image_path}}"></td>
-                                <td>{{ optional($productItem->category)->name }}</td>
-
+                                <td>{{ ( $productItem->time_payment_again == 0 || (new DateTime($productItem->updated_at))->diff(new DateTime())->m  == 0 )? 'Hoạt động' : 'Hết hạn' }}</td>
+                                <td>{{$productItem->created_at}}</td>
                                 <td>
                                     <a href="{{route('products.edit' , ['id'=> $productItem->id])}}"
-                                       class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                       class="btn btn-outline-secondary btn-sm edit" title="Learning">
                                         <i class="fas fa-pencil-alt"></i>
-                                    </a>
-
-                                    <a href="{{route('products.delete' , ['id'=> $productItem->id])}}"
-                                       data-url="{{route('products.delete' , ['id'=> $productItem->id])}}"
-                                       class="btn btn-danger btn-sm delete action_delete" title="Delete">
-                                        <i class="mdi mdi-close"></i>
                                     </a>
                                 </td>
 

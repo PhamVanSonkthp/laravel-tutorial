@@ -30,6 +30,8 @@ class ProductAddRequest extends FormRequest
             'contents'=>'required',
             'sources_name'=>'required',
             'sources_link'=>'required',
+            'point'=>'required|numeric|min:0',
+            'time_payment_again'=>'required|numeric|min:0',
         ];
     }
 

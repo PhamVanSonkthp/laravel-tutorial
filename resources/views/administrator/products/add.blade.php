@@ -34,6 +34,36 @@
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
+
+            <div class="form-group mt-3">
+                <label>Điểm nhận được khi mua khóa học</label>
+                <input type="text" name="point" class="form-control @error('point') is-invalid @enderror"
+                       placeholder="Nhập điểm" value="{{old('point')}}">
+                @error('point')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+
+
+            <div class="form-group mt-3">
+                <label>Thời gian đóng học lại (tháng). Nhập 0 nếu là khóa học không gia hạn</label>
+
+                <input type="text" name="time_payment_again" class="form-control @error('time_payment_again') is-invalid @enderror"
+                       placeholder="Nhập thời gian" value="{{old('time_payment_again')}}">
+                @error('time_payment_again')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+
+            <div class="form-group mt-3">
+                <label>
+                    <input name="end_video_to_next" class="checkbox_wrapper" type="checkbox">
+                </label>
+                <label>
+                    Bắt buộc xem hết video mới được học bài tiếp theo
+                </label>
+            </div>
+
             <div class="form-group mt-3">
                 <label>Ảnh đại diện</label>
                 <input type="file" name="feature_image_path" class="form-control-file">

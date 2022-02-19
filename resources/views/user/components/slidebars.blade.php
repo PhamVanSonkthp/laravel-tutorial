@@ -23,6 +23,10 @@
                     </a>
                 </li>
 
+
+
+                @auth
+
                 <li>
                     <a href="#" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
@@ -30,11 +34,24 @@
                     </a>
                 </li>
 
-                @auth
                 <li>
                     <a href="{{route('user.sources')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Khóa học của tôi </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('user.sources')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Thông báo </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('user.sources')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Hóa đơn </span>
                     </a>
                 </li>
                 @endauth

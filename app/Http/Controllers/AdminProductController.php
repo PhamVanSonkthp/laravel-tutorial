@@ -53,7 +53,6 @@ class AdminProductController extends Controller
 
     public function store(ProductAddRequest $request){
         try {
-
             DB::beginTransaction();
             $dataProductCreate = [
                 'name'=> $request->name,
@@ -61,6 +60,9 @@ class AdminProductController extends Controller
                 'content'=> $request->contents,
                 'user_id'=> auth()->id(),
                 'category_id'=> $request->category_id,
+                'point'=> $request->point,
+                'time_payment_again'=> $request->time_payment_again,
+                'end_video_to_next'=> $request->end_video_to_next == true ? 1 : 0,
             ];
             $dataUploadFeatureImage = $this->storageTraitUpload($request , 'feature_image_path' , 'product');
 
@@ -108,7 +110,6 @@ class AdminProductController extends Controller
             DB::commit();
         }catch (\Exception $exception){
             DB::rollBack();
-            dd($exception->getMessage());
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
         return redirect()->route('products.index');

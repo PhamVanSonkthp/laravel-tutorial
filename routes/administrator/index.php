@@ -143,7 +143,6 @@ Route::prefix('administrator')->group(function () {
 
     });
 
-
     Route::prefix('permissions')->group(function () {
         Route::get('/create', [
             'as'=>'permissions.create',
@@ -156,6 +155,25 @@ Route::prefix('administrator')->group(function () {
         ]);
 
     });
+
+    Route::prefix('invoices')->group(function () {
+        Route::get('/', [
+            'as' => 'invoices.index',
+            'uses' => 'App\Http\Controllers\AdminInvoiceController@index',
+//            'middleware'=>'can:product-list',
+        ]);
+
+    });
+
+    Route::prefix('levels')->group(function () {
+        Route::get('/', [
+            'as' => 'administrator.levels.index',
+            'uses' => 'App\Http\Controllers\AdminLevelController@index',
+//            'middleware'=>'can:product-list',
+        ]);
+
+    });
+
 
 });
 
