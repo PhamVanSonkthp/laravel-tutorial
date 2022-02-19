@@ -137,4 +137,4 @@ Route::get('/profile', function () {
     return view('user.profile.index');
 })->middleware('verified');
 
-Auth::routes();
+Auth::routes(['verify' => true]);

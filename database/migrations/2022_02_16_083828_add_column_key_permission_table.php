@@ -14,7 +14,7 @@ class AddColumnKeyPermissionTable extends Migration
     public function up()
     {
         Schema::table('permissions', function (Blueprint $table) {
-            $table->string('key_code');
+            $table->string('key_code')->nullable();
         });
     }
 

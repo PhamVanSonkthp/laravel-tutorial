@@ -14,7 +14,7 @@ class AddColumnViewsProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('views_count');
+            $table->integer('views_count')->default(0);
         });
     }
 

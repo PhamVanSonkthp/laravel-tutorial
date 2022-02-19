@@ -12,8 +12,6 @@ class AdminPermissionController extends Controller
     }
 
     public function store(Request $request){
-
-        //dd($request->module_parent);
         $permision = Permission::create([
             'name'=>$request->module_parent,
             'display_name'=>$request->module_parent,
@@ -28,5 +26,7 @@ class AdminPermissionController extends Controller
                 'key_code'=>$request->module_parent . '_' . $value,
             ]);
         }
+
+        return view('administrator.permission.add');
     }
 }
