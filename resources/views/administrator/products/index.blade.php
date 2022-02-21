@@ -19,7 +19,7 @@
             <div class="card-body">
 
                 <div class="col-md-12">
-                    <a href="{{route('products.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    <a href="{{route('administrator.products.create')}}" class="btn btn-success float-end m-2">Add</a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -46,13 +46,13 @@
                                 <td>{{ optional($productItem->category)->name }}</td>
 
                                 <td>
-                                    <a href="{{route('products.edit' , ['id'=> $productItem->id])}}"
+                                    <a href="{{route('administrator.products.edit' , ['id'=> $productItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
 
-                                    <a href="{{route('products.delete' , ['id'=> $productItem->id])}}"
-                                       data-url="{{route('products.delete' , ['id'=> $productItem->id])}}"
+                                    <a href="{{route('administrator.products.delete' , ['id'=> $productItem->id])}}"
+                                       data-url="{{route('administrator.products.delete' , ['id'=> $productItem->id])}}"
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>

@@ -28,13 +28,13 @@
 
             <div class="form-group mt-3">
                 <label>Chủ đề thuộc khóa học</label>
-                <select name="product_id" class="form-control select2_init @error('product_id') is-invalid @enderror">
+                <select name="topic_id" class="form-control select2_init @error('topic_id') is-invalid @enderror">
                     <option value=""></option>
                     @foreach($products as $productsItem)
                         <option value="{{$productsItem->id}}">{{$productsItem->name}}</option>
                     @endforeach
                 </select>
-                @error('product_id')
+                @error('topic_id')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>

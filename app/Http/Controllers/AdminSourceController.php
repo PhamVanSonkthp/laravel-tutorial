@@ -44,6 +44,7 @@ class AdminSourceController extends Controller
         try {
             DB::beginTransaction();
             $source = $this->source->create([
+                'topic_id' => $request->topic_id ?? 0,
                 'name' => $request->name,
                 'link' => $request->name,
             ]);
@@ -51,40 +52,54 @@ class AdminSourceController extends Controller
             $soucesName = $request->sources_name;
             $soucesLink = $request->sources_link;
 
-//            for ($i = 0; $i < $soucesName; $i++) {
-//                $this->source->create([
-//                    'parent_id' => $source->id,
-//                    'name' => $soucesName[$i],
-//                    'link' => $soucesLink[$i],
-//                ]);
-//            }
+            for ($i = 0; $i < count($soucesName) ; $i++) {
+                $this->source->create([
+                    'parent_id' => $source->id,
+                    'name' => $soucesName[$i],
+                    'link' => $soucesLink[$i],
+                ]);
+            }
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
-        return redirect()->route('administrator.topics.index');
+        return redirect()->route('administrator.sources.index');
     }
 
     public function edit($id)
     {
-        $levels = $this->level->all();
-        $gift = $this->gift->find($id);
-        return view('administrator.topics.edit', compact('levels', 'gift'));
+        $source = $this->source->find($id);
+        $topics = $this->topic->all();
+        return view('administrator.sources.edit', compact('source' , 'topics'));
     }
 
     public function update($id, GiftEditRequest $request)
     {
-        $this->gift->find($id)->update([
-            'level_id' => $request->level_id,
+        $this->source->find($id)->update([
+            'topic_id' => $request->topic_id ?? 0,
             'name' => $request->name,
-            'content' => $request->contents,
+            'link' => $request->name,
         ]);
-        return redirect()->route('administrator.topics.index');
+
+        $source = $this->source->find($id);
+
+        $soucesName = $request->sources_name;
+        $soucesLink = $request->sources_link;
+
+        for ($i = 0; $i < count($soucesName) ; $i++) {
+            $this->source->firstOrCreate([
+                'parent_id' => $source->id,
+                'name' => $soucesName[$i],
+                'link' => $soucesLink[$i],
+            ]);
+        }
+
+        return redirect()->route('administrator.sources.index');
     }
 
     public function delete($id)
     {
-        return $this->deleteModelTrait($id, $this->gift);
+        return $this->deleteModelTrait($id, $this->source);
     }
 }

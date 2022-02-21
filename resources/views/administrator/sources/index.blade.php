@@ -38,15 +38,15 @@
                             <tr>
                                 <th scope="row">{{ $sourceItem->name }}</th>
                                 <th scope="row">{{ $sourceItem->sourceChildren->count() }}</th>
-                                <th scope="row">{{ $sourceItem->sourceChildren->count() }}</th>
+                                <th scope="row">{{ optional($sourceItem->topic)->name }}</th>
                                 <td>
-                                    <a href="{{route('administrator.gifts.edit' , ['id'=> $sourceItem->id])}}"
+                                    <a href="{{route('administrator.sources.edit' , ['id'=> $sourceItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
 
-                                    <a href="{{route('administrator.gifts.delete' , ['id'=> $sourceItem->id])}}"
-                                       data-url="{{route('administrator.gifts.delete' , ['id'=> $sourceItem->id])}}"
+                                    <a href="{{route('administrator.sources.delete' , ['id'=> $sourceItem->id])}}"
+                                       data-url="{{route('administrator.sources.delete' , ['id'=> $sourceItem->id])}}"
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>

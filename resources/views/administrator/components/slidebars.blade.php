@@ -24,7 +24,7 @@
                 </li>
 
                 <li>
-                    <a href="{{route('products.index')}}" class="waves-effect">
+                    <a href="{{route('administrator.products.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Khóa học </span>
                     </a>

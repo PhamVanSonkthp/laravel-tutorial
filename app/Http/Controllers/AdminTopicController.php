@@ -36,7 +36,7 @@ class AdminTopicController extends Controller
 
     public function store(Request $request){
         $this->topic->create([
-            'product_id'=>$request->product_id,
+            'product_id'=>$request->product_id ?? 0,
             'name'=>$request->name,
         ]);
 

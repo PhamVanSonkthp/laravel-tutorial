@@ -19,7 +19,7 @@
             <div class="card-body">
 
                 <div class="col-md-12">
-                    <a href="{{route('administrator.sources.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    <a href="{{route('administrator.topics.create')}}" class="btn btn-success float-end m-2">Add</a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -36,15 +36,15 @@
                         @foreach($topics as $topicItem)
                             <tr>
                                 <th scope="row">{{ $topicItem->name }}</th>
-                                <th scope="row">{{ $topicItem->product->name }}</th>
+                                <th scope="row">{{ optional($topicItem->product)->name }}</th>
                                 <td>
-                                    <a href="{{route('administrator.gifts.edit' , ['id'=> $topicItem->id])}}"
+                                    <a href="{{route('administrator.topics.edit' , ['id'=> $topicItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
 
-                                    <a href="{{route('administrator.gifts.delete' , ['id'=> $topicItem->id])}}"
-                                       data-url="{{route('administrator.gifts.delete' , ['id'=> $topicItem->id])}}"
+                                    <a href="{{route('administrator.topics.delete' , ['id'=> $topicItem->id])}}"
+                                       data-url="{{route('administrator.topics.delete' , ['id'=> $topicItem->id])}}"
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>

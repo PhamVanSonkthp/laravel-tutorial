@@ -60,8 +60,8 @@ class AdminProductController extends Controller
                 'name'=> $request->name,
                 'price'=> $request->price,
                 'content'=> $request->contents,
-                'user_id'=> auth()->id(),
-                'category_id'=> $request->category_id,
+                'user_id'=> auth()->id() ?? 0,
+                'category_id'=> $request->category_id ?? 0,
                 'point'=> $request->point,
                 'time_payment_again'=> $request->time_payment_again,
                 'end_video_to_next'=> $request->end_video_to_next == true ? 1 : 0,
@@ -83,19 +83,6 @@ class AdminProductController extends Controller
                 }
             }
 
-            if($request->has('sources_name')){
-
-                $sourceNames = $request->sources_name;
-                $sourceLinks = $request->sources_link;
-
-                for($i = 0 ; $i < count($sourceNames) ; $i++){
-                    $product->sources()->create([
-                        'name'=>$sourceNames[$i],
-                        'link'=>$sourceLinks[$i],
-                    ]);
-                }
-            }
-
             // insert tag for product
             $tagsIds = [];
             if(!empty($request->tags)){
@@ -112,6 +99,7 @@ class AdminProductController extends Controller
             DB::commit();
         }catch (\Exception $exception){
             DB::rollBack();
+            dd($exception->getMessage());
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
         return redirect()->route('administrator.products.index');

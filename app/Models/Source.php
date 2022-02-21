@@ -14,4 +14,8 @@ class Source extends Model
     public function sourceChildren(){
         return $this->hasMany(Source::class, 'parent_id' );
     }
+
+    public function topic(){
+        return $this->hasOne(Topic::class, 'id', 'topic_id');
+    }
 }

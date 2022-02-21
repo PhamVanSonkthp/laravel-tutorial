@@ -16,70 +16,70 @@ Route::prefix('administrator')->group(function () {
         Route::get('/', [
             'as'=>'categories.index',
             'uses'=>'App\Http\Controllers\CategoryController@index',
-            'middleware'=>'can:category-list',
+//            'middleware'=>'can:category-list',
         ]);
 
         Route::get('/create', [
             'as'=>'categories.create',
             'uses'=>'App\Http\Controllers\CategoryController@create',
-            'middleware'=>'can:category-add',
+//            'middleware'=>'can:category-add',
         ]);
 
         Route::post('/store', [
             'as'=>'categories.store',
             'uses'=>'App\Http\Controllers\CategoryController@store',
-            'middleware'=>'can:category-add',
+//            'middleware'=>'can:category-add',
         ]);
 
         Route::get('/edit/{id}', [
             'as'=>'categories.edit',
             'uses'=>'App\Http\Controllers\CategoryController@edit',
-            'middleware'=>'can:category-edit',
+//            'middleware'=>'can:category-edit',
         ]);
 
         Route::put('/update/{id}', [
             'as'=>'categories.update',
             'uses'=>'App\Http\Controllers\CategoryController@update',
-            'middleware'=>'can:category-edit',
+//            'middleware'=>'can:category-edit',
         ]);
 
         Route::get('/delete/{id}', [
             'as'=>'categories.delete',
             'uses'=>'App\Http\Controllers\CategoryController@delete',
-            'middleware'=>'can:category-delete',
+//            'middleware'=>'can:category-delete',
         ]);
     });
 
     Route::prefix('products')->group(function () {
         Route::get('/', [
-            'as'=>'products.index',
+            'as'=>'administrator.products.index',
             'uses'=>'App\Http\Controllers\AdminProductController@index',
 //            'middleware'=>'can:product-list',
         ]);
 
         Route::get('/create', [
-            'as'=>'products.create',
+            'as'=>'administrator.products.create',
             'uses'=>'App\Http\Controllers\AdminProductController@create',
         ]);
 
         Route::get('/edit/{id}', [
-            'as'=>'products.edit',
+            'as'=>'administrator.products.edit',
             'uses'=>'App\Http\Controllers\AdminProductController@edit',
 //            'middleware'=>'can:product-edit',
         ]);
 
         Route::post('/store', [
-            'as'=>'products.store',
+            'as'=>'administrator.products.store',
             'uses'=>'App\Http\Controllers\AdminProductController@store',
         ]);
 
         Route::put('/update/{id}', [
-            'as'=>'products.update',
+            'as'=>'administrator.products.update',
             'uses'=>'App\Http\Controllers\AdminProductController@update',
         ]);
 
         Route::get('/delete/{id}', [
-            'as'=>'products.delete',
+            'as'=>'administrator.products.delete',
             'uses'=>'App\Http\Controllers\AdminProductController@delete',
         ]);
 

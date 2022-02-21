@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Người dùng</h4>
+    <h4 class="page-title">Bài học</h4>
 @endsection
 @section('css')
     <link href="{{asset('vendor/select2/select2.min.css') }}" rel="stylesheet"/>
@@ -14,48 +14,146 @@
 
 @section('content')
 
-    <form action="{{route('administrator.gifts.update', ['id'=> $gift->id]) }}" method="post" enctype="multipart/form-data">
-        @method('PUT')
+    <form action="{{route('administrator.sources.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
 
             <div class="form-group">
-                <label>Nhập tên rương quà</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nhập tên" value="{{$gift->name}}">
+                <label>Nhập tên bài học</label>
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                       placeholder="Nhập tên" value="{{$source->name}}">
                 @error('name')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
 
             <div class="form-group mt-3">
-                <label>Nhập nội dung rương quà</label>
-                <input type="text" name="contents" class="form-control @error('contents') is-invalid @enderror" placeholder="Nhập nội dung" value="{{$gift->content}}">
-                @error('contents')
-                <div class="alert alert-danger">{{$message}}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Chọn cấp độ để đạt được rương quà</label>
-                <select class="form-control select2_init @error('level_id') is-invalid @enderror" name="level_id">
+                <label>Bài học thuộc chủ đề</label>
+                <select name="topic_id" class="form-control select2_init @error('topic_id') is-invalid @enderror">
                     <option value=""></option>
-                    @foreach($levels as $levelItem)
-                        <option value="{{$levelItem->id}}" {{ $gift->level_id == $levelItem->id ? 'selected' : '' }}>{{$levelItem->level}}</option>
+                    @foreach($topics as $topicItem)
+                        <option
+                            value="{{$topicItem->id}}" {{$source->topic_id == $topicItem->id ? 'selected' : ''}}>{{$topicItem->name}}</option>
                     @endforeach
                 </select>
-                @error('level_id')
+                @error('topic_id')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+        <div class="col-md-12 mt-3">
+            <label>Nhập các bài học</label>
+            <div class="container_sources">
+                @foreach($source->sourceChildren as $sourceItem)
+                    <div class="row">
+                        <div class="col-md-6 mt-1">
+                            <div class="form-group">
+                                <input name="sources_name[]" type="text"
+                                       class="name form-control @error('sources_name') is-invalid @enderror"
+                                       placeholder="Tên bài học" value="{{$sourceItem->name}}">
+                                @error('sources_name')
+                                <div class="alert alert-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mt-1">
+                            <div class="row">
+                                <div class="col-11">
+                                    <div class="form-group">
+                                        <input name="sources_link[]" type="text"
+                                               class="link form-control @error('sources_link') is-invalid @enderror"
+                                               placeholder="Link video" value="{{$sourceItem->link}}">
+                                        @error('sources_link')
+                                        <div class="alert alert-danger">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-1">
+                                    <button type="button"
+                                            class="btn btn-danger waves-effect waves-light action_delete_source">
+                                        x
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
         </div>
+
+        <div class="col-md-12">
+            <button type="button"
+                    class="btn btn-success waves-effect waves-light action_add_source float-end mt-1">
+                (+)
+            </button>
+        </div>
+
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </div>
+
     </form>
 
 @endsection
 
+
 @section('js')
     <script src="{{asset('vendor/select2/select2.min.js') }}"></script>
     <script src="{{asset('admins/products/add/add.js') }}"></script>
+
+    <script>
+
+        function actionAddSource(event) {
+            event.preventDefault()
+            $(this).parent().parent().children('div').children('.container_sources').append(`<div class="row">
+                                <div class="col-md-6 mt-1">
+                                    <div class="form-group">
+                                        <input name="sources_name[]" type="text"
+                                               class="form-control @error('sources_name') is-invalid @enderror"
+                                               placeholder="Tên bài học">
+                                        @error('sources_name')
+            <div class="alert alert-danger">{{$message}}</div>
+                                        @enderror
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-1">
+            <div class="row">
+                <div class="col-11">
+                    <div class="form-group">
+                        <input name="sources_link[]" type="text"
+                               class="form-control @error('sources_link') is-invalid @enderror"
+                                                       placeholder="Link video">
+                                                @error('sources_link')
+            <div class="alert alert-danger">{{$message}}</div>
+                                                @enderror
+            </div>
+        </div>
+
+        <div class="col-1">
+            <button type="button"
+                    class="btn btn-danger waves-effect waves-light action_delete_source">x
+            </button>
+        </div>
+    </div>
+</div>
+</div>`)
+        }
+
+        function actionDeleteSource(event) {
+            event.preventDefault()
+
+            $(this).parent().parent().parent().parent().remove()
+        }
+
+        $(function () {
+            $(document).on('click', '.action_add_source', actionAddSource);
+            $(document).on('click', '.action_delete_source', actionDeleteSource);
+        })
+    </script>
 @endsection
