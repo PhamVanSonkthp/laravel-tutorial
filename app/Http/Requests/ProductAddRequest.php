@@ -26,7 +26,6 @@ class ProductAddRequest extends FormRequest
         return [
             'name'=>'required|unique:products|max:255|min:10',
             'price'=>'required|numeric|min:0',
-            'category_id'=>'required',
             'contents'=>'required',
             'sources_name'=>'required',
             'sources_link'=>'required',

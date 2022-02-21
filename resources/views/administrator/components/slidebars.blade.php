@@ -10,7 +10,7 @@
 
 
                 <li>
-                    <a href="{{route('categories.index')}}" class="waves-effect">
+                    <a href="{{route('administrator.dashboard.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Tổng quan </span>
                     </a>
@@ -31,6 +31,20 @@
                 </li>
 
                 <li>
+                    <a href="{{route('administrator.topics.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Chủ đề khóa học </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('administrator.sources.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Danh sách bài học </span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="{{route('slider.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Slider </span>
@@ -38,14 +52,14 @@
                 </li>
 
                 <li>
-                    <a href="#" class="waves-effect">
+                    <a href="{{route('administrator.menus.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Menu </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#" class="waves-effect">
+                    <a href="{{route('administrator.gifts.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Rương quà </span>
                     </a>
@@ -70,7 +84,7 @@
                 <li class="menu-title">Quản lý Trading</li>
 
                 <li>
-                    <a href="{{route('users.index')}}" class="waves-effect">
+                    <a href="{{route('administrator.tradings.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Danh sách trading </span>
                     </a>

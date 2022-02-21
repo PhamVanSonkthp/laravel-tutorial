@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SliderAddRequest extends FormRequest
+class LevelAddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class SliderAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255',
-            'decription'=>'required',
-            'image_path'=>'required',
+            'level'=>'required|min:1|unique:levels',
+            'point_require'=>'required|min:1|unique:levels',
         ];
     }
 

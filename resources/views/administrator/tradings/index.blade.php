@@ -28,7 +28,7 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Tên khóa học</th>
+                            <th scope="col">Tên trading</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">Danh mục</th>
@@ -37,26 +37,26 @@
                         </thead>
                         <tbody>
 
-                        @foreach($products as $productItem)
+                        @foreach($tradings as $tradingItem)
                             <tr>
-                                <th scope="row">{{ $productItem->id }}</th>
+                                <th scope="row">{{ $tradingItem->id }}</th>
                                 <td>{{$productItem->name}}</td>
-                                <td>{{ number_format($productItem->price) }}</td>
-                                <td><img class="product_image_150_100" src="{{$productItem->feature_image_path}}"></td>
-                                <td>{{ optional($productItem->category)->name }}</td>
+                                <td>{{ number_format($tradingItem->price) }}</td>
+                                <td><img class="product_image_150_100" src="{{$tradingItem->feature_image_path}}"></td>
+                                <td>{{ optional($tradingItem->category)->name }}</td>
 
-                                <td>
-                                    <a href="{{route('products.edit' , ['id'=> $productItem->id])}}"
-                                       class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
+{{--                                <td>--}}
+{{--                                    <a href="{{route('products.edit' , ['id'=> $productItem->id])}}"--}}
+{{--                                       class="btn btn-outline-secondary btn-sm edit" title="Edit">--}}
+{{--                                        <i class="fas fa-pencil-alt"></i>--}}
+{{--                                    </a>--}}
 
-                                    <a href="{{route('products.delete' , ['id'=> $productItem->id])}}"
-                                       data-url="{{route('products.delete' , ['id'=> $productItem->id])}}"
-                                       class="btn btn-danger btn-sm delete action_delete" title="Delete">
-                                        <i class="mdi mdi-close"></i>
-                                    </a>
-                                </td>
+{{--                                    <a href="{{route('products.delete' , ['id'=> $productItem->id])}}"--}}
+{{--                                       data-url="{{route('products.delete' , ['id'=> $productItem->id])}}"--}}
+{{--                                       class="btn btn-danger btn-sm delete action_delete" title="Delete">--}}
+{{--                                        <i class="mdi mdi-close"></i>--}}
+{{--                                    </a>--}}
+{{--                                </td>--}}
 
                             </tr>
                         @endforeach
@@ -71,7 +71,7 @@
     </div>
 
     <div class="col-md-12">
-        {{ $products->links('pagination::bootstrap-4') }}
+        {{ $tradings->links('pagination::bootstrap-4') }}
     </div>
 
 @endsection

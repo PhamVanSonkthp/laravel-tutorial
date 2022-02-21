@@ -26,7 +26,6 @@ class ProductEditRequest extends FormRequest
         return [
             'name'=>'required|max:255|min:10',
             'price'=>'required|numeric|min:0',
-            'category_id'=>'required',
             'contents'=>'required',
         ];
     }

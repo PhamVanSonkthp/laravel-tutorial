@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Components\MenuRecusive;
+use App\Http\Requests\MenuAddRequest;
+use App\Http\Requests\MenuEditRequest;
 use App\Models\Menu;
+use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class MenuController extends Controller
 
 {
+    use DeleteModelTrait;
     private $menuRecusive;
     private $menu;
 
@@ -21,43 +25,42 @@ class MenuController extends Controller
 
     public function index(){
         $menus = $this->menu->paginate(10);
-        return view('admin.menus.index' , compact('menus'));
+        return view('administrator.menus.index' , compact('menus'));
     }
 
     public function create(){
         $optionSelect = $this->menuRecusive->menuRecusiveAdd();
-        return view('admin.menus.add' , compact('optionSelect'));
+        return view('administrator.menus.add' , compact('optionSelect'));
     }
 
     public function edit($id){
         $menuFollowIdEdit = $this->menu->find($id);
         $optionSelect = $this->menuRecusive->menuRecusiveAdd($menuFollowIdEdit->parent_id);
-        return view('admin.menus.edit' , compact('optionSelect' , 'menuFollowIdEdit'));
+        return view('administrator.menus.edit' , compact('optionSelect' , 'menuFollowIdEdit'));
     }
 
     public function delete($id){
-        $this->menu->find($id)->delete();
-        return redirect()->route('menus.index');
+        return $this->deleteModelTrait($id, $this->menu);
     }
 
-    public function store(Request $request){
+    public function store(MenuAddRequest $request){
         $this->menu->create([
             'name'=> $request->name,
             'parent_id'=> $request->parent_id,
             'slug'=> Str::slug($request->name),
         ]);
 
-        return redirect()->route('menus.index');
+        return redirect()->route('administrator.menus.index');
     }
 
-    public function update($id , Request $request){
+    public function update($id , MenuEditRequest $request){
         $this->menu->find($id)->update([
             'name'=> $request->name,
             'parent_id'=> $request->parent_id,
             'slug'=> Str::slug($request->name),
         ]);
 
-        return redirect()->route('menus.index');
+        return redirect()->route('administrator.menus.index');
     }
 
 }

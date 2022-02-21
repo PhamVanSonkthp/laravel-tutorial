@@ -19,7 +19,7 @@
             <div class="card-body">
 
                 <div class="col-md-12">
-                    <a href="{{route('administrator.levels.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    <a href="{{route('administrator.menus.create')}}" class="btn btn-success float-end m-2">Add</a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -27,24 +27,23 @@
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
-                            <th>Cấp độ</th>
-                            <th>Điểm cần</th>
+                            <th>Tên menu</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($levels as $levelItem)
+                        @foreach($menus as $menu)
                             <tr>
-                                <th scope="row">{{ $levelItem->level }}</th>
-                                <th scope="row">{{ $levelItem->point_require }}</th>
+                                <td>{{$menu->name}}</td>
                                 <td>
-                                    <a href="{{route('administrator.levels.edit' , ['id'=> $levelItem->id])}}"
+
+                                    <a href="{{route('administrator.menus.edit' , ['id'=> $menu->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
 
-                                    <a href="{{route('users.delete' , ['id'=> $levelItem->id])}}"
-                                       data-url="{{route('users.delete' , ['id'=> $levelItem->id])}}"
+                                    <a href="{{route('administrator.menus.delete' , ['id'=> $menu->id])}}"
+                                       data-url="{{route('administrator.menus.delete' , ['id'=> $menu->id])}}"
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>
@@ -62,7 +61,7 @@
     </div>
 
     <div class="col-md-12">
-        {{ $levels->links('pagination::bootstrap-4') }}
+        {{ $menus->links('pagination::bootstrap-4') }}
     </div>
 
 @endsection

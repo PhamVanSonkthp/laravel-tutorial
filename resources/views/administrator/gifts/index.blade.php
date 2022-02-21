@@ -19,7 +19,7 @@
             <div class="card-body">
 
                 <div class="col-md-12">
-                    <a href="{{route('administrator.levels.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    <a href="{{route('administrator.gifts.create')}}" class="btn btn-success float-end m-2">Add</a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -27,24 +27,28 @@
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
+                            <th>Tên rương quà</th>
+                            <th>Nội dung</th>
                             <th>Cấp độ</th>
                             <th>Điểm cần</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($levels as $levelItem)
+                        @foreach($gifts as $giftItem)
                             <tr>
-                                <th scope="row">{{ $levelItem->level }}</th>
-                                <th scope="row">{{ $levelItem->point_require }}</th>
+                                <th scope="row">{{ $giftItem->name }}</th>
+                                <th scope="row">{{ $giftItem->content }}</th>
+                                <th scope="row">{{ $giftItem->level_id }}</th>
+                                <th scope="row">{{ $giftItem->level_id }}</th>
                                 <td>
-                                    <a href="{{route('administrator.levels.edit' , ['id'=> $levelItem->id])}}"
+                                    <a href="{{route('administrator.gifts.edit' , ['id'=> $giftItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
 
-                                    <a href="{{route('users.delete' , ['id'=> $levelItem->id])}}"
-                                       data-url="{{route('users.delete' , ['id'=> $levelItem->id])}}"
+                                    <a href="{{route('administrator.gifts.delete' , ['id'=> $giftItem->id])}}"
+                                       data-url="{{route('administrator.gifts.delete' , ['id'=> $giftItem->id])}}"
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>
@@ -62,7 +66,7 @@
     </div>
 
     <div class="col-md-12">
-        {{ $levels->links('pagination::bootstrap-4') }}
+        {{ $gifts->links('pagination::bootstrap-4') }}
     </div>
 
 @endsection

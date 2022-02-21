@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
 use App\Models\Tag;
+use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Log;
 
 class AdminProductController extends Controller
 {
+    use DeleteModelTrait;
     use StorageImageTrait;
     private $category;
     private $product;
@@ -112,7 +114,7 @@ class AdminProductController extends Controller
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
-        return redirect()->route('products.index');
+        return redirect()->route('administrator.products.index');
     }
 
     public function edit($id){
@@ -168,26 +170,11 @@ class AdminProductController extends Controller
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
-        return redirect()->route('products.index');
+        return redirect()->route('administrator.products.index');
     }
 
     public function delete($id){
-
-        try {
-            DB::beginTransaction();
-            $this->product->find($id)->delete();
-            return response()->json([
-                'code'=>200,
-                'messsage'=>'success!',
-            ], 200);
-        }catch (\Exception $exception){
-            DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
-            return response()->json([
-                'code'=>500,
-                'messsage'=>'fail!',
-            ], 500);
-        }
+        return $this->deleteModelTrait($id, $this->product);
     }
 
 }

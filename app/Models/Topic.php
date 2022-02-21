@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Source extends Model
+class Topic extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function sourceChildren(){
-        return $this->hasMany(Source::class, 'parent_id' );
+    public function product(){
+        return $this->hasOne(Product::class , 'id' , 'product_id');
     }
 }
