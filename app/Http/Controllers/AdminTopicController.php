@@ -11,22 +11,38 @@ use App\Models\Source;
 use App\Models\Topic;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
+use function Sodium\add;
 
 class AdminTopicController extends Controller
 {
     use DeleteModelTrait;
     private $topic;
     private $product;
+    private $source;
 
-    public function __construct(Topic $topic, Product $product)
+    public function __construct(Topic $topic, Product $product, Source $source)
     {
         $this->topic = $topic;
         $this->product = $product;
+        $this->source = $source;
     }
 
     public function index(){
         $topics = $this->topic->latest()->paginate(10);
-        return view('administrator.topics.index' , compact('topics'));
+
+        $counters = [];
+        foreach ($topics as $topicItem){
+            $counter = 0;
+            $sourcesBelongTopics = $this->source->where('topic_id', $topicItem->id)->get();
+
+            foreach ($sourcesBelongTopics as $sourcesBelongTopicItem){
+                $counter += $sourcesBelongTopicItem->sourceChildren->count();
+            }
+            $counters[] = $counter;
+        }
+
+
+        return view('administrator.topics.index' , compact('topics', 'counters'));
     }
 
     public function create(){
@@ -44,21 +60,20 @@ class AdminTopicController extends Controller
     }
 
     public function edit($id){
-        $levels = $this->level->all();
-        $gift = $this->gift->find($id);
-        return view('administrator.topics.edit' , compact('levels' , 'gift'));
+        $topic = $this->topic->find($id);
+        $products = $this->product->all();
+        return view('administrator.topics.edit' , compact('topic' , 'products'));
     }
 
-    public function update($id, GiftEditRequest $request){
-        $this->gift->find($id)->update([
-            'level_id'=>$request->level_id,
+    public function update($id, Request $request){
+        $this->topic->find($id)->update([
+            'product_id'=>$request->product_id ?? 0,
             'name'=>$request->name,
-            'content'=>$request->contents,
         ]);
         return redirect()->route('administrator.topics.index');
     }
 
     public function delete($id){
-        return $this->deleteModelTrait($id, $this->gift);
+        return $this->deleteModelTrait($id, $this->topic);
     }
 }

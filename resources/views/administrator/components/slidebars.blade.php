@@ -40,7 +40,7 @@
                 <li>
                     <a href="{{route('administrator.sources.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
-                        <span> Danh sách bài học </span>
+                        <span> Danh sách chương bài học </span>
                     </a>
                 </li>
 

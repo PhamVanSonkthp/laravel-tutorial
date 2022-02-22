@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Người dùng</h4>
+    <h4 class="page-title">Chủ đề</h4>
 @endsection
 @section('css')
     <link href="{{asset('vendor/select2/select2.min.css') }}" rel="stylesheet"/>
@@ -14,36 +14,28 @@
 
 @section('content')
 
-    <form action="{{route('administrator.gifts.update', ['id'=> $gift->id]) }}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.topics.update', ['id'=> $topic->id]) }}" method="post" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="col-md-6">
 
             <div class="form-group">
-                <label>Nhập tên rương quà</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nhập tên" value="{{$gift->name}}">
+                <label>Nhập tên chủ đề</label>
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nhập tên" value="{{$topic->name}}">
                 @error('name')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
 
             <div class="form-group mt-3">
-                <label>Nhập nội dung rương quà</label>
-                <input type="text" name="contents" class="form-control @error('contents') is-invalid @enderror" placeholder="Nhập nội dung" value="{{$gift->content}}">
-                @error('contents')
-                <div class="alert alert-danger">{{$message}}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label>Chọn cấp độ để đạt được rương quà</label>
-                <select class="form-control select2_init @error('level_id') is-invalid @enderror" name="level_id">
+                <label>Chủ đề thuộc khóa học</label>
+                <select name="product_id" class="form-control select2_init @error('product_id') is-invalid @enderror">
                     <option value=""></option>
-                    @foreach($levels as $levelItem)
-                        <option value="{{$levelItem->id}}" {{ $gift->level_id == $levelItem->id ? 'selected' : '' }}>{{$levelItem->level}}</option>
+                    @foreach($products as $productsItem)
+                        <option value="{{$productsItem->id}}" {{$productsItem->id == $topic->product_id ? 'selected' : ''}}>{{$productsItem->name}}</option>
                     @endforeach
                 </select>
-                @error('level_id')
+                @error('product_id')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>

@@ -14,4 +14,9 @@ class Topic extends Model
     public function product(){
         return $this->hasOne(Product::class , 'id' , 'product_id');
     }
+
+    public function sourceChildren(){
+        return $this->hasMany(Source::class , 'topic_id');
+    }
+
 }

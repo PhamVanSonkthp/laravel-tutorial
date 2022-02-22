@@ -14,28 +14,31 @@
 
 @section('content')
 
-    <form action="{{route('products.update', ['id'=> $product->id]) }}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.products.update', ['id'=> $product->id]) }}" method="post"
+          enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="col-md-6">
 
             <div class="form-group">
                 <label>Tên sản phẩm</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nhập tên sản phẩm"
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                       placeholder="Nhập tên sản phẩm"
                        value="{{$product->name}}">
                 @error('name')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label>Giá sản phẩm</label>
-                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Nhập giá sản phẩm"
+                <input type="text" name="price" class="form-control @error('price') is-invalid @enderror"
+                       placeholder="Nhập giá sản phẩm"
                        value="{{$product->price}}">
                 @error('price')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label>Ảnh đại diện</label>
                 <input type="file" name="feature_image_path" class="form-control-file">
                 <div class="col-md-4 container_feature_image">
@@ -45,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label>Ảnh chi tiết</label>
                 <input type="file" multiple name="image_path[]" class="form-control-file">
                 <div class="col-md-12 container_image_detail">
@@ -70,7 +73,7 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label>Nhập tags cho sản phẩm</label>
                 <select name="tags[]" class="form-control tags_select_choose" multiple>
                     @foreach($product->tags as $tagItem)
@@ -82,9 +85,67 @@
         </div>
 
         <div class="col-md-12">
-            <div class="form-group">
+            <div class="col-md-12 mt-3 container-list-source">
+                <div class="col-md-12 row ">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Chủ đề khóa học</label>
+                            <select name="topic_id"
+                                    class="form-control select2_init @error('topic_id') is-invalid @enderror">
+                                <option value=""></option>
+                                @foreach($topics as $topicItem)
+                                    <option
+                                        value="{{$topicItem->id}}" {{$topicItem->product_id == $product->id ? 'selected' : ''}}>{{$topicItem->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('topic_id')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="container_sources">
+                            @foreach($sourceParents as $sourceParentItem)
+                                <div class="mt-3">
+                                    {{$sourceParentItem->name}}
+                                </div>
+                                @foreach($sourceParentItem->sourceChildren as $sourceChildItem)
+                                    <div class="row">
+                                        <div class="col-md-6 mt-1">
+                                            <div class="form-group">
+                                                <input name="sources_name[]" type="text"
+                                                       class="name form-control @error('sources_name') is-invalid @enderror"
+                                                       placeholder="Tên bài học" disabled value="{{$sourceChildItem->name}}">
+                                                @error('sources_name')
+                                                <div class="alert alert-danger">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mt-1">
+                                            <div class="form-group">
+                                                <input name="sources_link[]" type="text"
+                                                       class="link form-control @error('sources_link') is-invalid @enderror"
+                                                       placeholder="Link video" disabled value="{{$sourceChildItem->link}}">
+                                                @error('sources_link')
+                                                <div class="alert alert-danger">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
                 <label>Nhập nội dung</label>
-                <textarea style="min-height: 400px;" name="contents" class="form-control tinymce_editor_init @error('contents') is-invalid @enderror"
+                <textarea style="min-height: 400px;" name="contents"
+                          class="form-control tinymce_editor_init @error('contents') is-invalid @enderror"
                           rows="8">{{$product->content}}</textarea>
                 @error('contents')
                 <div class="alert alert-danger">{{$message}}</div>

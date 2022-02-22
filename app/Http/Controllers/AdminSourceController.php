@@ -74,7 +74,7 @@ class AdminSourceController extends Controller
         return view('administrator.sources.edit', compact('source' , 'topics'));
     }
 
-    public function update($id, GiftEditRequest $request)
+    public function update($id, Request $request)
     {
         $this->source->find($id)->update([
             'topic_id' => $request->topic_id ?? 0,
@@ -87,8 +87,10 @@ class AdminSourceController extends Controller
         $soucesName = $request->sources_name;
         $soucesLink = $request->sources_link;
 
+        $this->source->where('parent_id' , $source->id)->delete();
+
         for ($i = 0; $i < count($soucesName) ; $i++) {
-            $this->source->firstOrCreate([
+            $this->source->create([
                 'parent_id' => $source->id,
                 'name' => $soucesName[$i],
                 'link' => $soucesLink[$i],

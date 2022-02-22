@@ -29,14 +29,19 @@
                         <tr>
                             <th>Tên chủ đề</th>
                             <th>Chủ đề thuộc khóa học</th>
+                            <th>Tổng chương</th>
+                            <th>Tổng bài học</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($topics as $topicItem)
+
+                        @foreach($topics as $index => $topicItem)
                             <tr>
                                 <th scope="row">{{ $topicItem->name }}</th>
                                 <th scope="row">{{ optional($topicItem->product)->name }}</th>
+                                <th scope="row">{{ optional($topicItem->sourceChildren)->where('parent_id',0)->count() }}</th>
+                                <th scope="row">{{ $counters[$index] }}</th>
                                 <td>
                                     <a href="{{route('administrator.topics.edit' , ['id'=> $topicItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">

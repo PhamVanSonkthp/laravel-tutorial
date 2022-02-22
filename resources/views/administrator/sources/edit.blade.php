@@ -14,7 +14,8 @@
 
 @section('content')
 
-    <form action="{{route('administrator.sources.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.sources.update' , ['id' =>$source->id])}}" method="post" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="col-md-6">
 

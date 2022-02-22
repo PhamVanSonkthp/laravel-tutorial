@@ -76,7 +76,7 @@
             </div>
 
             <div class="form-group mt-3">
-                <label>Chọn danh mục</label>
+                <label>Chọn danh mục khóa học</label>
                 <select class="form-control select2_init @error('category_id') is-invalid @enderror" name="category_id">
                     <option value="">Chọn danh mục</option>
                     {!! $htmlOption !!}
@@ -96,22 +96,19 @@
         </div>
 
         <div class="col-md-12">
-
             <div class="row">
-
-                <div class="col-md-12 mt-3">
-                    <label>Thêm bài học</label>
-                </div>
-
                 <div class="col-md-12 mt-3 container-list-source">
-                    <div class="col-md-12 mt-3 row ">
+                    <div class="col-md-12 row ">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Chủ đề bài học</label>
-                                <input name="sources_name[]" type="text"
-                                       class="header form-control @error('sources_name') is-invalid @enderror"
-                                       placeholder="Chủ đề bài học">
-                                @error('sources_name')
+                                <label>Chủ đề khóa học</label>
+                                <select name="topic_id" class="form-control select2_init @error('topic_id') is-invalid @enderror">
+                                    <option value=""></option>
+                                    @foreach($topics as $topicItem)
+                                        <option value="{{$topicItem->id}}">{{$topicItem->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('topic_id')
                                 <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
                             </div>
