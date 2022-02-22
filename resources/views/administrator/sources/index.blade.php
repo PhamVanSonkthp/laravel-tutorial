@@ -27,9 +27,9 @@
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
-                            <th>Tên chương</th>
-                            <th>Tổng cộng bài học thuộc chương này</th>
-                            <th>Chương học thuộc chủ đề</th>
+                            <th>Tên bài học ( Chương 1,2,... )</th>
+                            <th>Tổng số bài học</th>
+                            <th>Chủ đề</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>

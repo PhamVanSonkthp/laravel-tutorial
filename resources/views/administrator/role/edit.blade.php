@@ -14,7 +14,7 @@
 
 @section('content')
 
-    <form action="{{route('roles.update', ['id'=> $role->id]) }}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.roles.update', ['id'=> $role->id]) }}" method="post" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="col-md-6">

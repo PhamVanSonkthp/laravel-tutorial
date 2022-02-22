@@ -14,7 +14,7 @@
 
 @section('content')
 
-    <form action="{{route('roles.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.roles.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
 

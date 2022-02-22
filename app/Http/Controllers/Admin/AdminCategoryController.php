@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Components\Recusive;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryAddRequest;
 use App\Http\Requests\CategoryEditRequest;
 use App\Models\Category;
 use App\Traits\DeleteModelTrait;
-use Illuminate\Http\Request;
-use App\Components\Recusive;
 use Illuminate\Support\Str;
+use function redirect;
+use function view;
 
-class CategoryController extends Controller
+class AdminCategoryController extends Controller
 {
     use DeleteModelTrait;
     private $category;

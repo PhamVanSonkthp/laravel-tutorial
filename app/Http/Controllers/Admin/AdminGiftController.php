@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\GiftAddRequest;
 use App\Http\Requests\GiftEditRequest;
 use App\Models\Gift;
 use App\Models\Level;
 use App\Traits\DeleteModelTrait;
+use function redirect;
+use function view;
 
 class AdminGiftController extends Controller
 {

@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\LevelAddRequest;
 use App\Http\Requests\LevelEditRequest;
-use App\Http\Requests\UserAddRequest;
-use App\Models\Invoice;
 use App\Models\Level;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use function redirect;
+use function view;
 
 class AdminLevelController extends Controller
 {

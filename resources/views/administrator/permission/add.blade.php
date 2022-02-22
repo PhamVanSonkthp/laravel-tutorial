@@ -14,7 +14,7 @@
 
 @section('content')
 
-    <form action="{{route('permissions.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.permissions.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label>Chọn phân module</label>

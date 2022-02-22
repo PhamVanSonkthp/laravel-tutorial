@@ -16,8 +16,14 @@ class CreateTradingsTable extends Migration
         Schema::create('tradings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('time_payment_again');
-            $table->string('link');
+            $table->string('slug')->unique();
+            $table->integer('price')->default(0);
+            $table->string('feature_image_path')->nullable();
+            $table->string('feature_image_name')->nullable();
+            $table->text('content');
+            $table->integer('time_payment_again')->default(0);
+            $table->string('link')->nullable();
+            $table->integer('point')->default(0);
             $table->timestamps();
         });
     }

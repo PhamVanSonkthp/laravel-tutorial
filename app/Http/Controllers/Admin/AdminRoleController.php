@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
+use function redirect;
+use function view;
 
 class AdminRoleController extends Controller
 {
@@ -35,7 +38,7 @@ class AdminRoleController extends Controller
             'display_name' => $request->display_name,
         ]);
         $role->permissions()->attach($request->permission_id);
-        return redirect()->route('roles.index');
+        return redirect()->route('administrator.roles.index');
     }
 
     public function edit($id){
@@ -54,7 +57,7 @@ class AdminRoleController extends Controller
         $role = $this->role->find($id);
 
         $role->permissions()->sync($request->permission_id);
-        return redirect()->route('roles.index');
+        return redirect()->route('administrator.roles.index');
     }
 
     public function delete($id){

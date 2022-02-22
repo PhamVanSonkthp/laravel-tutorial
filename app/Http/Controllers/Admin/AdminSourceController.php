@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\GiftAddRequest;
-use App\Http\Requests\GiftEditRequest;
-use App\Models\Gift;
-use App\Models\Level;
-use App\Models\Product;
+use App\Http\Controllers\Controller;
 use App\Models\Source;
 use App\Models\Topic;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use function redirect;
+use function view;
 
 class AdminSourceController extends Controller
 {
@@ -46,17 +44,19 @@ class AdminSourceController extends Controller
             $source = $this->source->create([
                 'topic_id' => $request->topic_id ?? 0,
                 'name' => $request->name,
-                'link' => $request->name,
+                'link' => $request->link,
             ]);
 
-            $soucesName = $request->sources_name;
             $soucesLink = $request->sources_link;
+            $soucesName = $request->sources_name;
+            $soucesDoc = $request->sources_doc;
 
             for ($i = 0; $i < count($soucesName) ; $i++) {
                 $this->source->create([
                     'parent_id' => $source->id,
                     'name' => $soucesName[$i],
                     'link' => $soucesLink[$i],
+                    'doc' => $soucesDoc[$i],
                 ]);
             }
             DB::commit();
@@ -86,6 +86,7 @@ class AdminSourceController extends Controller
 
         $soucesName = $request->sources_name;
         $soucesLink = $request->sources_link;
+        $soucesDoc = $request->sources_doc;
 
         $this->source->where('parent_id' , $source->id)->delete();
 
@@ -94,6 +95,7 @@ class AdminSourceController extends Controller
                 'parent_id' => $source->id,
                 'name' => $soucesName[$i],
                 'link' => $soucesLink[$i],
+                'doc' => $soucesDoc[$i],
             ]);
         }
 

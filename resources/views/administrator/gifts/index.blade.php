@@ -29,8 +29,7 @@
                         <tr>
                             <th>Tên rương quà</th>
                             <th>Nội dung</th>
-                            <th>Cấp độ</th>
-                            <th>Điểm cần</th>
+                            <th>Cấp độ yêu cầu</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
@@ -39,7 +38,6 @@
                             <tr>
                                 <th scope="row">{{ $giftItem->name }}</th>
                                 <th scope="row">{{ $giftItem->content }}</th>
-                                <th scope="row">{{ $giftItem->level_id }}</th>
                                 <th scope="row">{{ $giftItem->level_id }}</th>
                                 <td>
                                     <a href="{{route('administrator.gifts.edit' , ['id'=> $giftItem->id])}}"

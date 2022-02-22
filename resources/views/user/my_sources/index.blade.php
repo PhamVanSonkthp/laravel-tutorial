@@ -38,10 +38,10 @@
                                 <td>{{ ( $productItem->time_payment_again == 0 || (new DateTime($productItem->updated_at))->diff(new DateTime())->m  == 0 )? 'Hoạt động' : 'Hết hạn' }}</td>
                                 <td>{{$productItem->created_at}}</td>
                                 <td>
-                                    <a href="{{route('products.edit' , ['id'=> $productItem->id])}}"
-                                       class="btn btn-outline-secondary btn-sm edit" title="Learning">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
+{{--                                    <a href="{{route('products.edit' , ['id'=> $productItem->id])}}"--}}
+{{--                                       class="btn btn-outline-secondary btn-sm edit" title="Learning">--}}
+{{--                                        <i class="fas fa-pencil-alt"></i>--}}
+{{--                                    </a>--}}
                                 </td>
 
                             </tr>

@@ -65,13 +65,7 @@
                          src="{{asset('administrator/assets/images/users/avatar-1.jpg')}}" alt="Header Avatar">
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <!-- item-->
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">My Wallet</a>
-                    <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span>Settings</a>
-                    <a class="dropdown-item" href="#">Lock screen</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">Logout</a>
+                    <a class="dropdown-item text-danger" href="{{route('administrator.logout')}}">Logout</a>
                 </div>
             </div>
 

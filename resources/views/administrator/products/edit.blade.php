@@ -112,7 +112,7 @@
                                 </div>
                                 @foreach($sourceParentItem->sourceChildren as $sourceChildItem)
                                     <div class="row">
-                                        <div class="col-md-6 mt-1">
+                                        <div class="col-md-4 mt-1">
                                             <div class="form-group">
                                                 <input name="sources_name[]" type="text"
                                                        class="name form-control @error('sources_name') is-invalid @enderror"
@@ -123,12 +123,23 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 mt-1">
+                                        <div class="col-md-4 mt-1">
                                             <div class="form-group">
                                                 <input name="sources_link[]" type="text"
                                                        class="link form-control @error('sources_link') is-invalid @enderror"
                                                        placeholder="Link video" disabled value="{{$sourceChildItem->link}}">
                                                 @error('sources_link')
+                                                <div class="alert alert-danger">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mt-1">
+                                            <div class="form-group">
+                                                <input name="sources_doc[]" type="text"
+                                                       class="link form-control @error('sources_doc') is-invalid @enderror"
+                                                       placeholder="Link video" disabled value="{{$sourceChildItem->doc}}">
+                                                @error('sources_doc')
                                                 <div class="alert alert-danger">{{$message}}</div>
                                                 @enderror
                                             </div>

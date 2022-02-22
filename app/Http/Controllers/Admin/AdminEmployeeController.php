@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAddRequest;
 use App\Http\Requests\UserEditRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Traits\DeleteModelTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use function redirect;
+use function view;
 
-class UserAdminController extends Controller
+class AdminEmployeeController extends Controller
 {
 
     use DeleteModelTrait;
@@ -26,13 +28,13 @@ class UserAdminController extends Controller
     }
 
     public function index(){
-        $users = $this->user->paginate(10);
-        return view('administrator.user.index' , compact('users'));
+        $users = $this->user->where('is_admin' , 1)->paginate(10);
+        return view('administrator.employees.index' , compact('users'));
     }
 
     public function create(){
         $roles = $this->role->all();
-        return view('administrator.user.add' , compact('roles'));
+        return view('administrator.employees.add' , compact('roles'));
     }
 
     public function store(UserAddRequest $request){
@@ -41,7 +43,9 @@ class UserAdminController extends Controller
             $user = $this->user->create([
                 'name'=>$request->name,
                 'email'=>$request->email,
+                'phone'=>$request->phone,
                 'password'=> Hash::make($request->password),
+                'is_admin'=> 1,
             ]);
 
             $user->roles()->attach($request->role_id);
@@ -51,14 +55,14 @@ class UserAdminController extends Controller
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
 
-        return redirect()->route('users.index');
+        return redirect()->route('administrator.employees.index');
     }
 
     public function edit($id){
         $user = $this->user->find($id);
         $roles = $this->role->all();
         $rolesOfUser = $user->roles;
-        return view('administrator.user.edit' , compact('user' , 'roles' , 'rolesOfUser'));
+        return view('administrator.employees.edit' , compact('user' , 'roles' , 'rolesOfUser'));
     }
 
     public function update($id , UserEditRequest $request){
@@ -67,6 +71,7 @@ class UserAdminController extends Controller
             $updatetem = [
                 'name'=>$request->name,
                 'email'=>$request->email,
+                'phone'=>$request->phone,
             ];
 
             if(!empty($request->password)){
@@ -83,7 +88,7 @@ class UserAdminController extends Controller
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
 
-        return redirect()->route('users.index');
+        return redirect()->route('administrator.employees.index');
     }
 
     public function delete($id){

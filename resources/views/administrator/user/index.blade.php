@@ -26,19 +26,27 @@
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
-                        <tr style="cursor: pointer;">
-                            <th>#</th>
+                        <tr>
                             <th>Tên</th>
                             <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Điểm</th>
+                            <th>Cấp độ</th>
+                            <th>Số lượng khóa học</th>
+                            <th>Số lượng trading</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($users as $userItem)
                             <tr>
-                                <th scope="row">{{ $userItem->id }}</th>
                                 <td>{{$userItem->name}}</td>
                                 <td>{{$userItem->email}}</td>
+                                <td>{{$userItem->phone}}</td>
+                                <td>{{ number_format($userItem->point)}}</td>
+                                <td>{{number_format($userItem->getUserLevel($userItem->id))}}</td>
+                                <td><a href="#">--{{number_format($userItem->getUserNumberProduct($userItem->id))}}--</a></td>
+                                <td><a href="#">--{{number_format($userItem->getUserNumberProduct($userItem->id))}}--</a></td>
                                 <td>
                                     <a href="{{route('users.edit' , ['id'=> $userItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">

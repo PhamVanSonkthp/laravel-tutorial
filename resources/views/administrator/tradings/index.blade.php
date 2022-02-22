@@ -19,7 +19,7 @@
             <div class="card-body">
 
                 <div class="col-md-12">
-                    <a href="{{route('products.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    <a href="{{route('administrator.tradings.create')}}" class="btn btn-success float-end m-2">Add</a>
                 </div>
                 <div class="clearfix"></div>
 
@@ -31,7 +31,7 @@
                             <th scope="col">Tên trading</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Hình ảnh</th>
-                            <th scope="col">Danh mục</th>
+                            <th scope="col">Link học</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
@@ -40,23 +40,23 @@
                         @foreach($tradings as $tradingItem)
                             <tr>
                                 <th scope="row">{{ $tradingItem->id }}</th>
-                                <td>{{$productItem->name}}</td>
+                                <td>{{$tradingItem->name}}</td>
                                 <td>{{ number_format($tradingItem->price) }}</td>
                                 <td><img class="product_image_150_100" src="{{$tradingItem->feature_image_path}}"></td>
-                                <td>{{ optional($tradingItem->category)->name }}</td>
+                                <td> <a href="{{$tradingItem->link}}">{{ $tradingItem->link }}</a></td>
 
-{{--                                <td>--}}
-{{--                                    <a href="{{route('products.edit' , ['id'=> $productItem->id])}}"--}}
-{{--                                       class="btn btn-outline-secondary btn-sm edit" title="Edit">--}}
-{{--                                        <i class="fas fa-pencil-alt"></i>--}}
-{{--                                    </a>--}}
+                                <td>
+                                    <a href="{{route('administrator.tradings.edit' , ['id'=> $tradingItem->id])}}"
+                                       class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
 
-{{--                                    <a href="{{route('products.delete' , ['id'=> $productItem->id])}}"--}}
-{{--                                       data-url="{{route('products.delete' , ['id'=> $productItem->id])}}"--}}
-{{--                                       class="btn btn-danger btn-sm delete action_delete" title="Delete">--}}
-{{--                                        <i class="mdi mdi-close"></i>--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
+                                    <a href="{{route('administrator.tradings.delete' , ['id'=> $tradingItem->id])}}"
+                                       data-url="{{route('administrator.tradings.delete' , ['id'=> $tradingItem->id])}}"
+                                       class="btn btn-danger btn-sm delete action_delete" title="Delete">
+                                        <i class="mdi mdi-close"></i>
+                                    </a>
+                                </td>
 
                             </tr>
                         @endforeach

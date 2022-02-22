@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', 'App\Http\Controllers\AdminController@loginAdmin');
-Route::post('/admin', 'App\Http\Controllers\AdminController@postLoginAdmin');
+Route::get('/admin', 'App\Http\Controllers\Admin\AdminController@loginAdmin');
+Route::post('/admin', 'App\Http\Controllers\Admin\AdminController@postLoginAdmin');
+Route::get('/admin/logout', [
+    'as' => 'administrator.logout',
+    'uses'=>'\App\Http\Controllers\Admin\AdminController@logout'
+]);
 
 Route::prefix('/')->group(function () {
     Route::get('/', [

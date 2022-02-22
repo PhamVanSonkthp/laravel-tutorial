@@ -16,6 +16,8 @@
                     </a>
                 </li>
 
+                <li class="menu-title">Quản lý khóa học</li>
+
                 <li>
                     <a href="{{route('categories.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
@@ -33,16 +35,27 @@
                 <li>
                     <a href="{{route('administrator.topics.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
-                        <span> Chủ đề khóa học </span>
+                        <span> Chủ đề </span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{route('administrator.sources.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
-                        <span> Danh sách chương bài học </span>
+                        <span> Danh sách bài học </span>
                     </a>
                 </li>
+
+                <li class="menu-title">Quản lý Trading</li>
+
+                <li>
+                    <a href="{{route('administrator.tradings.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Danh sách trading </span>
+                    </a>
+                </li>
+
+                <li class="menu-title">Quản lý trang</li>
 
                 <li>
                     <a href="{{route('slider.index')}}" class="waves-effect">
@@ -55,13 +68,6 @@
                     <a href="{{route('administrator.menus.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Menu </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{route('administrator.gifts.index')}}" class="waves-effect">
-                        <i class="mdi mdi-cube-outline"></i>
-                        <span> Rương quà </span>
                     </a>
                 </li>
 
@@ -81,12 +87,10 @@
                     </a>
                 </li>
 
-                <li class="menu-title">Quản lý Trading</li>
-
                 <li>
-                    <a href="{{route('administrator.tradings.index')}}" class="waves-effect">
+                    <a href="{{route('administrator.gifts.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
-                        <span> Danh sách trading </span>
+                        <span> Rương quà </span>
                     </a>
                 </li>
 
@@ -99,10 +103,24 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{route('invoices.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Danh sách thông báo </span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Phân quyền</li>
 
                 <li>
-                    <a href="{{route('roles.index')}}" class="waves-effect">
+                    <a href="{{route('administrator.employees.index')}}" class="waves-effect">
+                        <i class="mdi mdi-calendar-check"></i>
+                        <span>Danh sách nhân viên</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('administrator.roles.index')}}" class="waves-effect">
                         <i class="mdi mdi-calendar-check"></i>
                         <span>Danh sách vai trò</span>
                     </a>

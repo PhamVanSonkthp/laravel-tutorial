@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Components\Recusive;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductAddRequest;
 use App\Http\Requests\ProductEditRequest;
 use App\Models\Category;
@@ -14,9 +15,11 @@ use App\Models\Tag;
 use App\Models\Topic;
 use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use function auth;
+use function redirect;
+use function view;
 
 class AdminProductController extends Controller
 {

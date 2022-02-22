@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Components\MenuRecusive;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MenuAddRequest;
 use App\Http\Requests\MenuEditRequest;
 use App\Models\Menu;
 use App\Traits\DeleteModelTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use function redirect;
+use function view;
 
-class MenuController extends Controller
+class AdminMenuController extends Controller
 
 {
     use DeleteModelTrait;

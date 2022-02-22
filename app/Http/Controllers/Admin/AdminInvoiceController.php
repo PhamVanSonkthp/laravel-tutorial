@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Invoice;
-use Illuminate\Http\Request;
+use function view;
 
 class AdminInvoiceController extends Controller
 {

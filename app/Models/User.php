@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\UserTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use UserTrait;
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
@@ -22,6 +24,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'point',
+        'phone',
+        'is_admin',
     ];
 
     /**
@@ -56,5 +61,17 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         }
         return false;
+    }
+
+    public function getUserLevel($id){
+        return $this->getUserLevelTrait($id);
+    }
+
+    public function getUserNumberProduct($id){
+        return $this->getUserNumberProductTrait($id);
+    }
+
+    public function getUserNumberTrading($id){
+        return $this->getUserNumberTradingTrait($id);
     }
 }

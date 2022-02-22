@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Vai trò</h4>
+    <h4 class="page-title">Nhân viên</h4>
 @endsection
 
 @section('css')
@@ -19,50 +19,58 @@
             <div class="card-body">
 
                 <div class="col-md-12">
-                    <a href="{{route('administrator.roles.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    <a href="{{route('administrator.employees.create')}}" class="btn btn-success float-end m-2">Add</a>
                 </div>
                 <div class="clearfix"></div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
-                        <tr style="cursor: pointer;">
-                            <th>#</th>
+                        <tr>
                             <th>Tên</th>
-                            <th>Mô tả</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Vai trò</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-
-                        @foreach($roles as $roleItem)
+                        @foreach($users as $userItem)
                             <tr>
-                                <th scope="row">{{ $roleItem->id }}</th>
-                                <td>{{$roleItem->name}}</td>
-                                <td>{{$roleItem->display_name}}</td>
+                                <td>{{$userItem->name}}</td>
+                                <td>{{$userItem->email}}</td>
+                                <td>{{$userItem->phone}}</td>
                                 <td>
-                                    <a href="{{route('administrator.roles.edit' , ['id'=> $roleItem->id])}}"
+                                    @foreach($userItem->roles as $role)
+                                        <span>{{$role->name}}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <a href="{{route('administrator.employees.edit' , ['id'=> $userItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
 
-                                    <a href="{{route('administrator.roles.delete' , ['id'=> $roleItem->id])}}"
-                                       data-url="{{route('administrator.roles.delete' , ['id'=> $roleItem->id])}}"
+                                    <a href="{{route('administrator.employees.delete' , ['id'=> $userItem->id])}}"
+                                       data-url="{{route('administrator.employees.delete' , ['id'=> $userItem->id])}}"
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>
                                 </td>
                             </tr>
                         @endforeach
+
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
+
     </div>
 
     <div class="col-md-12">
-        {{ $roles->links('pagination::bootstrap-4') }}
+        {{ $users->links('pagination::bootstrap-4') }}
     </div>
 
 @endsection

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SliderAddRequest;
 use App\Http\Requests\SliderEditRequest;
 use App\Models\Slider;
 use App\Traits\DeleteModelTrait;
-use Illuminate\Http\Request;
+use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Traits\StorageImageTrait;
-use Illuminate\Support\Str;
+use function redirect;
+use function view;
 
-class SliderAdminController extends Controller
+class AdminSliderController extends Controller
 {
     use DeleteModelTrait;
     use StorageImageTrait;

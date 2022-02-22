@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Người dùng</h4>
+    <h4 class="page-title">Nhân viên</h4>
 @endsection
 @section('css')
     <link href="{{asset('vendor/select2/select2.min.css') }}" rel="stylesheet"/>
@@ -14,12 +14,12 @@
 
 @section('content')
 
-    <form action="{{route('users.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.employees.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
 
             <div class="form-group">
-                <label>Tên</label>
+                <label>Tên nhân viên</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nhập tên" value="{{old('name')}}">
                 @error('name')
                 <div class="alert alert-danger">{{$message}}</div>
@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group mt-3">
-                <label>Số điện thoại</label>
+                <label>số điện thoại</label>
                 <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Nhập số điện thoại" value="{{old('phone')}}">
                 @error('phone')
                 <div class="alert alert-danger">{{$message}}</div>
@@ -48,6 +48,16 @@
                 @error('password')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
+            </div>
+
+            <div class="form-group mt-3">
+                <label>Chọn vai trò</label>
+                <select name="role_id[]" class="form-control select2_init" multiple>
+                    <option value=""></option>
+                    @foreach($roles as $roleItem)
+                        <option value="{{$roleItem->id}}">{{$roleItem->name}}</option>
+                    @endforeach
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Submit</button>

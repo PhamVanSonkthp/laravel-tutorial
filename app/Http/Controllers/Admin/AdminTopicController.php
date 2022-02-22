@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\GiftAddRequest;
-use App\Http\Requests\GiftEditRequest;
-use App\Models\Gift;
-use App\Models\Level;
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Source;
 use App\Models\Topic;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
-use function Sodium\add;
+use function redirect;
+use function view;
 
 class AdminTopicController extends Controller
 {
