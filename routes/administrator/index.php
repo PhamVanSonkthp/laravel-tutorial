@@ -277,6 +277,12 @@ Route::prefix('administrator')->group(function () {
 //            'middleware'=>'can:product-list',
         ]);
 
+        Route::get('/delete/{id}', [
+            'as' => 'administrator.levels.delete',
+            'uses' => 'App\Http\Controllers\Admin\AdminLevelController@delete',
+//            'middleware'=>'can:product-list',
+        ]);
+
     });
 
     Route::prefix('gifts')->group(function () {
@@ -393,9 +399,19 @@ Route::prefix('administrator')->group(function () {
                 'uses'=>'App\Http\Controllers\Admin\AdminTradingController@createRegister',
             ]);
 
+            Route::post('/store', [
+                'as'=>'administrator.tradings.register.store',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@storeRegister',
+            ]);
+
             Route::get('/confirm/{id}', [
                 'as'=>'administrator.tradings.register.confirm',
                 'uses'=>'App\Http\Controllers\Admin\AdminTradingController@confirmRegister',
+            ]);
+
+            Route::get('/delete/{id}', [
+                'as'=>'administrator.tradings.register.delete',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@deleteRegister',
             ]);
 
         });

@@ -29,6 +29,7 @@
                         <tr>
                             <th>Tên rương quà</th>
                             <th>Nội dung</th>
+                            <th>Phần quà - Xác xuất ( % )</th>
                             <th>Cấp độ yêu cầu</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
@@ -38,6 +39,15 @@
                             <tr>
                                 <th scope="row">{{ $giftItem->name }}</th>
                                 <th scope="row">{{ $giftItem->content }}</th>
+                                <th scope="row">
+                                    <ul>
+                                        @foreach($giftItem->giftChildren as $giftChildItem)
+                                            <li>
+                                                {{$giftChildItem->content}} - {{$giftChildItem->probability}}%
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </th>
                                 <th scope="row">{{ $giftItem->level_id }}</th>
                                 <td>
                                     <a href="{{route('administrator.gifts.edit' , ['id'=> $giftItem->id])}}"

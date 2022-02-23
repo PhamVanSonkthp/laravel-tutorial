@@ -10,4 +10,9 @@ class Level extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function gift(){
+        return $this->hasOne(Gift::class);
+    }
+
 }

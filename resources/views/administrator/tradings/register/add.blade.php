@@ -14,34 +14,47 @@
 
 @section('content')
 
-    <form action="{{route('administrator.tradings.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.tradings.register.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
 
             <div class="form-group">
                 <label>Chọn học viên</label>
-                <select name="level_id" class="form-control select2_init @error('level_id') is-invalid @enderror">
+                <select name="user_id" class="form-control select2_init @error('user_id') is-invalid @enderror">
                     <option value=""></option>
                     @foreach($users as $userItem)
-                        <option value="{{$userItem->id}}">{{$userItem->name}}</option>
+                        <option value="{{$userItem->id}}">{{$userItem->name}} - {{$userItem->email}}</option>
                     @endforeach
                 </select>
-                @error('level_id')
+                @error('user_id')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
 
             <div class="form-group mt-3">
                 <label>Chọn trading</label>
-                <select name="level_id" class="form-control select2_init @error('level_id') is-invalid @enderror">
+                <select name="trading_id" class="form-control select2_init @error('trading_id') is-invalid @enderror">
                     <option value=""></option>
                     @foreach($tradings as $tradingItem)
                         <option value="{{$tradingItem->id}}">{{$tradingItem->name}}</option>
                     @endforeach
                 </select>
-                @error('level_id')
+                @error('trading_id')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
+            </div>
+
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="radio" name="status" value="1" id="flexRadioDefault1" checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Đã thanh toán
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="status" value="0" id="flexRadioDefault2" >
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Chưa thanh toán
+                </label>
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Submit</button>

@@ -26,6 +26,7 @@ class LevelAddRequest extends FormRequest
         return [
             'level'=>'required|min:1|unique:levels',
             'point_require'=>'required|min:1|unique:levels',
+            'contents'=>'required',
         ];
     }
 

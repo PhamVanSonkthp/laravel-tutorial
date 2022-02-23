@@ -25,7 +25,7 @@ class GiftEditRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'contents'=>'required',
+            'contents_parent'=>'required',
             'level_id'=>'required|min:1',
         ];
     }

@@ -33,6 +33,7 @@
                             <th scope="col">Giá</th>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">Link học</th>
+                            <th scope="col">Ngày đăng ký</th>
                             <th scope="col">Trạng thái</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
@@ -47,15 +48,16 @@
                                 <td>{{ optional($registerTradingItem->trading)->price }}</td>
                                 <td><img class="product_image_150_100" src="{{ optional($registerTradingItem->trading)->feature_image_path }}"></td>
                                 <td><a href="{{ optional($registerTradingItem->trading)->link }}">{{ optional($registerTradingItem->trading)->link }}</a></td>
-                                <td>{{ $registerTradingItem->status == 0 ?'Chờ xác nhận' : 'Đã xác nhận' }}</td>
+                                <td>{{ $registerTradingItem->created_at }}</td>
+                                <td>{{ $registerTradingItem->status == 0 ?'Chờ thanh toán' : 'Đã thanh toán' }}</td>
                                 <td>
                                     <a href="{{route('administrator.tradings.register.confirm' , ['id'=> $registerTradingItem->id])}}"
                                        class="btn btn-outline-success btn-sm edit" title="Xác nhận">
                                         <i class="ion ion-md-checkmark"></i>
                                     </a>
 
-                                    <a href="{{route('administrator.tradings.delete' , ['id'=> $registerTradingItem->id])}}"
-                                       data-url="{{route('administrator.tradings.delete' , ['id'=> $registerTradingItem->id])}}"
+                                    <a href="{{route('administrator.tradings.register.delete' , ['id'=> $registerTradingItem->id])}}"
+                                       data-url="{{route('administrator.tradings.register.delete' , ['id'=> $registerTradingItem->id])}}"
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>
@@ -67,7 +69,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
 

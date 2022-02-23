@@ -29,22 +29,26 @@
                         <tr>
                             <th>Cấp độ</th>
                             <th>Điểm cần</th>
+                            <th>Nội dung (Nhận ngay khi lên cấp)</th>
+                            <th>Mở rương</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($levels as $levelItem)
                             <tr>
-                                <th scope="row">{{ $levelItem->level }}</th>
-                                <th scope="row">{{ $levelItem->point_require }}</th>
+                                <td>{{ $levelItem->level }}</td>
+                                <td>{{ $levelItem->point_require }}</td>
+                                <td>{{ $levelItem->content }}</td>
+                                <td>{{ optional( $levelItem->gift)->content }}</td>
                                 <td>
                                     <a href="{{route('administrator.levels.edit' , ['id'=> $levelItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
 
-                                    <a href="{{route('users.delete' , ['id'=> $levelItem->id])}}"
-                                       data-url="{{route('users.delete' , ['id'=> $levelItem->id])}}"
+                                    <a href="{{route('administrator.levels.delete' , ['id'=> $levelItem->id])}}"
+                                       data-url="{{route('administrator.levels.delete' , ['id'=> $levelItem->id])}}"
                                        class="btn btn-danger btn-sm delete action_delete" title="Delete">
                                         <i class="mdi mdi-close"></i>
                                     </a>

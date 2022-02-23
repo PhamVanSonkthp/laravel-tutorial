@@ -13,6 +13,6 @@ class InvoiceTrading extends Model
     protected $guarded = [];
 
     public function trading(){
-        return $this->hasOne(Product::class , 'id' , 'trading_id');
+        return $this->hasOne(Trading::class , 'id' , 'trading_id');
     }
 }

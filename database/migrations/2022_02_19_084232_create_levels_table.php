@@ -17,6 +17,7 @@ class CreateLevelsTable extends Migration
             $table->id();
             $table->integer('level');
             $table->integer('point_require');
+            $table->text('content');
             $table->timestamps();
         });
     }

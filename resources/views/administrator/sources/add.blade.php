@@ -183,7 +183,6 @@
 
         function actionDeleteSource(event) {
             event.preventDefault()
-
             $(this).parent().parent().remove()
         }
 

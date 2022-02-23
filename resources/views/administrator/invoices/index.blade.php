@@ -16,18 +16,19 @@
     <div class="col-12">
 
         <div class="card">
-            <div class="card-body">
 
-                <div class="col-md-12">
-{{--                    <a href="{{route('users.create')}}" class="btn btn-success float-end m-2">Add</a>--}}
-                </div>
-                <div class="clearfix"></div>
+            <div class="card-header">
+                Hóa đơn khóa học
+            </div>
+
+            <div class="card-body">
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>Tên khóa học</th>
                             <th>Giá trị</th>
                             <th>Ngày tạo</th>
                         </tr>
@@ -35,7 +36,8 @@
                         <tbody>
                         @foreach($invoices as $invoiceItem)
                             <tr>
-                                <th scope="row">{{ $invoiceItem->id }}</th>
+                                <td>{{ $invoiceItem->id }}</td>
+                                <td>{{ optional($invoiceItem->product)->name }}</td>
                                 <td>{{ number_format($invoiceItem->price) }}</td>
                                 <td>{{ $invoiceItem->created_at }}</td>
                             </tr>
@@ -48,10 +50,53 @@
             </div>
         </div>
 
+        <div>
+            {{ $invoices->links('pagination::bootstrap-4') }}
+        </div>
+
     </div>
 
-    <div class="col-md-12">
-        {{ $invoices->links('pagination::bootstrap-4') }}
+    <div class="col-12">
+
+        <div class="card">
+
+            <div class="card-header">
+                Hóa đơn trading
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table class="table table-editable table-nowrap align-middle table-edits">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên trading</th>
+                            <th>Giá trị</th>
+                            <th>Ngày tạo</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($invoiceTradings as $invoiceTradingItem)
+                            <tr>
+                                <td>{{ $invoiceTradingItem->id }}</td>
+                                <td>{{ optional($invoiceTradingItem->trading)->name }}</td>
+                                <td>{{ number_format($invoiceTradingItem->price) }}</td>
+                                <td>{{ $invoiceTradingItem->created_at }}</td>
+                            </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            {{ $invoiceTradings->links('pagination::bootstrap-4') }}
+        </div>
+
     </div>
 
 @endsection

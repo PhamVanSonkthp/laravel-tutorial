@@ -26,6 +26,7 @@ class LevelEditRequest extends FormRequest
         return [
             'level'=>'required|min:1',
             'point_require'=>'required|min:1',
+            'contents'=>'required',
         ];
     }
 

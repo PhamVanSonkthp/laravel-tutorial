@@ -14,8 +14,8 @@ class AddNameAndContentGiftsTable extends Migration
     public function up()
     {
         Schema::table('gifts', function (Blueprint $table) {
-            $table->string('name');
-            $table->string('content');
+            $table->string('name')->nullable();
+            $table->string('content')->nullable();
         });
     }
 

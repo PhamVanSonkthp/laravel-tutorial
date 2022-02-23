@@ -35,6 +35,27 @@
                 @enderror
             </div>
 
+            <div class="form-group mt-3">
+                <label>Phần quả khi lên cấp: Nhận ngay ( option: 1 )</label>
+                <textarea name="contents" class="form-control @error('contents') is-invalid @enderror" placeholder="Nhập nội dung" rows="8">{{$level->content}}</textarea>
+                @error('contents')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+
+            <div class="form-group mt-3">
+                <label>Phần quả khi lên cấp: Mở rương quà ( option: 2 )</label>
+                <select class="form-control select2_init @error('gift_id') is-invalid @enderror" name="gift_id">
+                    <option value=""></option>
+                    @foreach($gifts as $giftItem)
+                        <option value="{{$giftItem->id}}" {{$giftItem->level_id == $level->id ? 'selected' : ''}}>{{$giftItem->name}}</option>
+                    @endforeach
+                </select>
+                @error('gift_id')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
 
         </div>
