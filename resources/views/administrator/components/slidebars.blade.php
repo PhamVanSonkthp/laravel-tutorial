@@ -55,6 +55,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{route('administrator.tradings.register.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Danh sách đăng ký trading </span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Quản lý trang</li>
 
                 <li>

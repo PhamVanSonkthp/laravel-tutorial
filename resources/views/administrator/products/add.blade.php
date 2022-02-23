@@ -44,10 +44,8 @@
                 @enderror
             </div>
 
-
             <div class="form-group mt-3">
                 <label>Thời gian đóng học lại (tháng). Nhập 0 nếu là khóa học không gia hạn</label>
-
                 <input type="text" name="time_payment_again"
                        class="form-control @error('time_payment_again') is-invalid @enderror"
                        placeholder="Nhập thời gian" value="{{old('time_payment_again')}}">

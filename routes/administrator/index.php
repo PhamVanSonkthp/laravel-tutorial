@@ -149,6 +149,11 @@ Route::prefix('administrator')->group(function () {
             'uses'=>'App\Http\Controllers\Admin\AdminUserController@delete',
         ]);
 
+        Route::get('/sources/{id}', [
+            'as'=>'administrator.users.sources.index',
+            'uses'=>'App\Http\Controllers\Admin\AdminUserController@sourcesIndex',
+        ]);
+
     });
 
     Route::prefix('employees')->group(function () {
@@ -376,6 +381,24 @@ Route::prefix('administrator')->group(function () {
             'as'=>'administrator.tradings.delete',
             'uses'=>'App\Http\Controllers\Admin\AdminTradingController@delete',
         ]);
+
+        Route::prefix('register')->group(function () {
+            Route::get('/', [
+                'as'=>'administrator.tradings.register.index',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@indexRegister',
+            ]);
+
+            Route::get('/create', [
+                'as'=>'administrator.tradings.register.createRegister',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@createRegister',
+            ]);
+
+            Route::get('/confirm/{id}', [
+                'as'=>'administrator.tradings.register.confirm',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@confirmRegister',
+            ]);
+
+        });
 
     });
 

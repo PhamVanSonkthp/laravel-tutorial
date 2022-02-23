@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Invoice;
+use App\Models\InvoiceTrading;
 use App\Models\Level;
 use App\Models\Trading;
 use App\Models\User;
@@ -29,6 +30,6 @@ trait UserTrait{
     }
 
     public function getUserNumberTradingTrait($id){
-        return Trading::where('user_id' , $id)->get()->count();
+        return InvoiceTrading::where('user_id' , $id)->get()->count();
     }
 }

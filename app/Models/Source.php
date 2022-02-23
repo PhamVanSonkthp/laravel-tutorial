@@ -18,4 +18,8 @@ class Source extends Model
     public function topic(){
         return $this->hasOne(Topic::class, 'id', 'topic_id');
     }
+
+    public function process(){
+        return $this->hasOne(Process::class , 'source_id');
+    }
 }

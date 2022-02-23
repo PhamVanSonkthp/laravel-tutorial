@@ -46,8 +46,14 @@
                                 <td>{{ number_format($userItem->point)}}</td>
                                 <td>{{number_format($userItem->getUserLevel($userItem->id))}}</td>
                                 <td><a href="#">--{{number_format($userItem->getUserNumberProduct($userItem->id))}}--</a></td>
-                                <td><a href="#">--{{number_format($userItem->getUserNumberProduct($userItem->id))}}--</a></td>
+                                <td><a href="#">--{{number_format($userItem->getUserNumberTrading($userItem->id))}}--</a></td>
                                 <td>
+
+                                    <a href="{{route('administrator.users.sources.index' , ['id'=> $userItem->id])}}"
+                                       class="btn btn-outline-secondary btn-sm edit" title="View">
+                                        <i class="ion ion-md-eye"></i>
+                                    </a>
+
                                     <a href="{{route('users.edit' , ['id'=> $userItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">
                                         <i class="fas fa-pencil-alt"></i>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductAddRequest;
 use App\Http\Requests\ProductEditRequest;
+use App\Models\RegisterTrading;
 use App\Models\Trading;
+use App\Models\User;
 use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
@@ -17,11 +19,16 @@ class AdminTradingController extends Controller
 {
     use DeleteModelTrait;
     use StorageImageTrait;
-    private $trading;
 
-    public function __construct(Trading $trading)
+    private $trading;
+    private $registerTrading;
+    private $user;
+
+    public function __construct(Trading $trading, RegisterTrading $registerTrading, User $user)
     {
         $this->trading = $trading;
+        $this->registerTrading = $registerTrading;
+        $this->user = $user;
     }
 
     public function index(){
@@ -29,12 +36,22 @@ class AdminTradingController extends Controller
         return view('administrator.tradings.index' , compact('tradings'));
     }
 
+    public function indexRegister(){
+        $registerTradings = $this->registerTrading->latest()->paginate(10);
+        return view('administrator.tradings.register.index' , compact('registerTradings'));
+    }
+
     public function create(){
         return view('administrator.tradings.add');
     }
 
-    public function store(Request $request){
+    public function createRegister(){
+        $users = $this->user->where('is_admin' , 0)->get();
+        $tradings = $this->trading->get();
+        return view('administrator.tradings.register.add' , compact('users', 'tradings'));
+    }
 
+    public function store(Request $request){
         $dataTradingCreate = [
             'name'=> $request->name,
             'slug'=> Str::slug($request->name),
@@ -78,6 +95,13 @@ class AdminTradingController extends Controller
         }
         $this->trading->find($id)->update($dataTradingUpdate);
         return redirect()->route('administrator.tradings.index');
+    }
+
+    public function confirmRegister($id, Request $request){
+        $this->registerTrading->find($id)->update([
+            'status'=> 1,
+        ]);
+        return redirect()->route('administrator.tradings.register.index');
     }
 
     public function delete($id){
