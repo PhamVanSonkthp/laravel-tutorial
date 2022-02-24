@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Người dùng</h4>
+    <h4 class="page-title">Cấp độ</h4>
 @endsection
 @section('css')
     <link href="{{asset('vendor/select2/select2.min.css') }}" rel="stylesheet"/>

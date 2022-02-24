@@ -78,19 +78,19 @@
                     </a>
                 </li>
 
-                <li class="menu-title">Quản lý khách hàng</li>
+                <li class="menu-title">Quản lý học viên</li>
 
                 <li>
                     <a href="{{route('users.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
-                        <span> Danh sách khách hàng </span>
+                        <span> Danh sách học viên </span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{route('administrator.levels.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
-                        <span> Quản lý cấp độ </span>
+                        <span> Cấp độ </span>
                     </a>
                 </li>
 

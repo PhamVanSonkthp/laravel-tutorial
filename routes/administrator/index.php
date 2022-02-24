@@ -404,9 +404,14 @@ Route::prefix('administrator')->group(function () {
                 'uses'=>'App\Http\Controllers\Admin\AdminTradingController@storeRegister',
             ]);
 
-            Route::get('/confirm/{id}', [
-                'as'=>'administrator.tradings.register.confirm',
-                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@confirmRegister',
+            Route::get('/edit/{id}', [
+                'as'=>'administrator.tradings.register.edit',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@editRegister',
+            ]);
+
+            Route::put('/update/{id}', [
+                'as'=>'administrator.tradings.register.update',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@updateRegister',
             ]);
 
             Route::get('/delete/{id}', [

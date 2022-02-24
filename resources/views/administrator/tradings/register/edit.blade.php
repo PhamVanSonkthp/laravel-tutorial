@@ -14,21 +14,16 @@
 
 @section('content')
 
-    <form action="{{route('administrator.tradings.register.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('administrator.tradings.register.update' , ['id' => $registerTrading->id])}}" method="post" enctype="multipart/form-data">
+        @method('PUT')
         @csrf
         <div class="col-md-6">
-
-            <div class="form-group">
-                <label>Thêm mới học viên</label>
-                <a href="{{route('users.create')}}" class="btn btn-success ml-2">Add</a>
-            </div>
-
             <div class="form-group mt-3">
                 <label>Chọn học viên</label>
                 <select name="user_id" class="form-control select2_init @error('user_id') is-invalid @enderror">
                     <option value=""></option>
                     @foreach($users as $userItem)
-                        <option value="{{$userItem->id}}">{{$userItem->name}} - {{$userItem->email}}</option>
+                        <option value="{{$userItem->id}}" {{$registerTrading->user_id == $userItem->id ? 'selected' : ''}}>{{$userItem->name}} - {{$userItem->email}}</option>
                     @endforeach
                 </select>
                 @error('user_id')
@@ -41,7 +36,7 @@
                 <select name="trading_id" class="form-control select2_init @error('trading_id') is-invalid @enderror">
                     <option value=""></option>
                     @foreach($tradings as $tradingItem)
-                        <option value="{{$tradingItem->id}}">{{$tradingItem->name}}</option>
+                        <option value="{{$tradingItem->id}}" {{$registerTrading->trading_id == $tradingItem->id ? 'selected' : ''}}>{{$tradingItem->name}}</option>
                     @endforeach
                 </select>
                 @error('trading_id')

@@ -16,7 +16,7 @@ class CreateRegisterTradingsTable extends Migration
         Schema::create('register_tradings', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->index();
-            $table->tinyInteger('status')->default(0);
+            $table->string('status');
             $table->integer('trading_id')->index();
             $table->timestamps();
         });

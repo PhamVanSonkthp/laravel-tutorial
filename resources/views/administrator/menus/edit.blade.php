@@ -1,38 +1,45 @@
-@extends('layouts.admin')
+@extends('administrator.layouts.master')
 
 @section('title')
-    <title>Trang chu</title>
+    <title>Home page</title>
+@endsection
+
+@section('name')
+    <h4 class="page-title">Menu</h4>
+@endsection
+@section('css')
+    <link href="{{asset('vendor/select2/select2.min.css') }}" rel="stylesheet"/>
+    <link href="{{asset('admins/products/add/add.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
-    <div class="content-wrapper">
-    @include('partials.content-header' , ['name'=> 'menus', 'key'=> 'Edit'])
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form action="{{route('menus.update' , ['id'=> $menuFollowIdEdit->id])}}" method="post">
-                            @method('PUT')
-                            @csrf
-                            <div class="form-group">
-                                <label>Tên menu</label>
-                                <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục" value="{{$menuFollowIdEdit->name}}">
-                            </div>
 
-                            <div class="form-group">
-                                <label>Chọn menu cha</label>
-                                <select class="form-control" name="parent_id">
-                                    <option value="0">Chọn danh mục cha</option>
-                                    {!! $optionSelect !!}
-                                </select>
-                            </div>
+    <form action="{{route('administrator.menus.update', ['id'=> $menuFollowIdEdit->id])}}" method="post" enctype="multipart/form-data">
+        @method('PUT')
+        @csrf
+        <div class="col-md-6">
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-
-                </div>
+            <div class="form-group">
+                <label>Tên menu</label>
+                <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục" value="{{$menuFollowIdEdit->name}}">
             </div>
+
+            <div class="form-group">
+                <label>Chọn menu cha</label>
+                <select class="form-control select2_init" name="parent_id">
+                    <option value="0">Chọn danh mục cha</option>
+                    {!! $optionSelect !!}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </div>
-    </div>
+    </form>
+
+@endsection
+
+
+@section('js')
+    <script src="{{asset('vendor/select2/select2.min.js') }}"></script>
+    <script src="{{asset('admins/products/add/add.js') }}"></script>
 @endsection

@@ -87,7 +87,7 @@ class AdminTradingController extends Controller
         $this->registerTrading->create([
             'user_id' => $request->user_id,
             'trading_id' => $request->trading_id,
-            'status' => $request->status ? 1 : 0,
+            'status' => $request->status,
         ]);
 
         return redirect()->route('administrator.tradings.register.index');
@@ -97,6 +97,15 @@ class AdminTradingController extends Controller
     {
         $trading = $this->trading->find($id);
         return view('administrator.tradings.edit', compact('trading'));
+    }
+
+    public function editRegister($id)
+    {
+        $users = $this->user->where('is_admin', 0)->get();
+        $tradings = $this->trading->get();
+        $registerTrading = $this->registerTrading->find($id);
+
+        return view('administrator.tradings.register.edit', compact('registerTrading', 'users' , 'tradings'));
     }
 
     public function update($id, Request $request)
@@ -120,28 +129,14 @@ class AdminTradingController extends Controller
         return redirect()->route('administrator.tradings.index');
     }
 
-    public function confirmRegister($id, Request $request)
+    public function updateRegister($id, Request $request)
     {
-        try {
-            DB::beginTransaction();
-            $registerTrading = $this->registerTrading->find($id);
+        $this->registerTrading->find($id)->update([
+            'trading_id' => $request->trading_id,
+            'user_id' => $request->user_id,
+            'status' => $request->status,
+        ]);
 
-            if ($registerTrading->status != 1) {
-                $this->invoiceTrading->create([
-                    'trading_id' => $registerTrading->trading_id,
-                    'user_id' => $registerTrading->user_id,
-                    'price' => $registerTrading->trading->price,
-                ]);
-
-                $registerTrading->update([
-                    'status' => 1,
-                ]);
-            }
-            DB::commit();
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
-        }
         return redirect()->route('administrator.tradings.register.index');
     }
 

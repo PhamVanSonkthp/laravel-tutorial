@@ -65,15 +65,11 @@ class AdminLevelController extends Controller
                 'content' => $request->contents,
             ]);
 
-            $level = $this->level->find($id);
-
-
-            $this->gift->find('level_id' , $id)->update([
+            optional($this->gift->where('level_id' , $id)->first())->update([
                 'level_id' => 0 ,
             ]);
 
             if(!empty($request->gift_id)){
-                dd($request->gift_id);
                 $this->gift->find($request->gift_id)->update([
                     'level_id' => $id ,
                 ]);
@@ -82,8 +78,6 @@ class AdminLevelController extends Controller
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
-
-            dd($exception->getMessage());
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
 

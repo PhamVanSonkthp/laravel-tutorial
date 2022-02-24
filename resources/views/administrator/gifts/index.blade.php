@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Cấp độ</h4>
+    <h4 class="page-title">Rương quà</h4>
 @endsection
 
 @section('css')
@@ -48,7 +48,7 @@
                                         @endforeach
                                     </ul>
                                 </th>
-                                <th scope="row">{{ $giftItem->level_id }}</th>
+                                <th scope="row">{{ $giftItem->level_id == 0 ? '' : $giftItem->level_id }}</th>
                                 <td>
                                     <a href="{{route('administrator.gifts.edit' , ['id'=> $giftItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">

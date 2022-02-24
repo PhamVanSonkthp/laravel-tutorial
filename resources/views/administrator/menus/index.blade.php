@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Cấp độ</h4>
+    <h4 class="page-title">Menu</h4>
 @endsection
 
 @section('css')

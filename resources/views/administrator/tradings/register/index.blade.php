@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Khóa học</h4>
+    <h4 class="page-title">Trading</h4>
 @endsection
 
 @section('css')
@@ -49,11 +49,11 @@
                                 <td><img class="product_image_150_100" src="{{ optional($registerTradingItem->trading)->feature_image_path }}"></td>
                                 <td><a href="{{ optional($registerTradingItem->trading)->link }}">{{ optional($registerTradingItem->trading)->link }}</a></td>
                                 <td>{{ $registerTradingItem->created_at }}</td>
-                                <td>{{ $registerTradingItem->status == 0 ?'Chờ thanh toán' : 'Đã thanh toán' }}</td>
+                                <td>{{ $registerTradingItem->status}}</td>
                                 <td>
-                                    <a href="{{route('administrator.tradings.register.confirm' , ['id'=> $registerTradingItem->id])}}"
-                                       class="btn btn-outline-success btn-sm edit" title="Xác nhận">
-                                        <i class="ion ion-md-checkmark"></i>
+                                    <a href="{{route('administrator.tradings.register.edit' , ['id'=> $registerTradingItem->id])}}"
+                                       class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                        <i class="fas fa-pencil-alt"></i>
                                     </a>
 
                                     <a href="{{route('administrator.tradings.register.delete' , ['id'=> $registerTradingItem->id])}}"

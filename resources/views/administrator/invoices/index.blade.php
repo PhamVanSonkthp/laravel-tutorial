@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Người dùng</h4>
+    <h4 class="page-title">Hóa đơn</h4>
 @endsection
 
 @section('css')
