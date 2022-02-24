@@ -23,8 +23,6 @@
                     </a>
                 </li>
 
-
-
                 @auth
 
                 <li>
@@ -40,6 +38,13 @@
                         <span> Khóa học của tôi </span>
                     </a>
                 </li>
+
+                    <li>
+                        <a href="{{route('user.tradings')}}" class="waves-effect">
+                            <i class="mdi mdi-cube-outline"></i>
+                            <span> Trading của tôi </span>
+                        </a>
+                    </li>
 
                 <li>
                     <a href="{{route('user.sources')}}" class="waves-effect">

@@ -43,7 +43,7 @@ class AdminUserController extends Controller
     }
 
     public function sourcesIndex($id){
-        $invoices = $this->invoice->where('user_id' , $id)->paginate(1000);
+        $invoices = $this->invoice->where('user_id' , $id)->paginate(10);
 
         $processes = [];
         $processesd = $this->process->where('user_id' , $id)->get();
@@ -74,7 +74,7 @@ class AdminUserController extends Controller
             $counterProcessesd[] = $counterProcessed;
         }
 
-        $tradings = $this->invoiceTrading->where('user_id' , $id)->paginate(1000);
+        $tradings = $this->invoiceTrading->where('user_id' , $id)->paginate(10);
 
         return view('administrator.user.sources.index' , compact('invoices', 'processes' , 'counterProcessesd', 'tradings'));
     }

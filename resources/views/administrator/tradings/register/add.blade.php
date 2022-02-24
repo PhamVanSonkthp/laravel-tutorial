@@ -60,6 +60,13 @@
                 @enderror
             </div>
 
+            <div class="form-group mt-3">
+                <label>
+                    <input type="checkbox" name="is_add_trading">
+                    Thêm học viên vào trading
+                </label>
+            </div>
+
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
 
         </div>

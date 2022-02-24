@@ -25,7 +25,6 @@
                             <th scope="col">Tên khóa học</th>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">Trạng thái</th>
-                            <th scope="col">Tiến độ</th>
                             <th scope="col">Ngày học</th>
                             <th scope="col">Ngày gia hạn</th>
                             <th class="text-center" style="width: 50px;">Action</th>
@@ -33,19 +32,20 @@
                         </thead>
                         <tbody>
 
-                        @foreach($products as $index=> $productItem)
+                        @foreach($tradings as $tradingItem)
                             <tr>
-                                <td>{{$productItem->name}}</td>
-                                <td><img class="product_image_150_100" src="{{$productItem->feature_image_path}}"></td>
-                                <td>{{ ( $productItem->time_payment_again == 0 || (new DateTime($productItem->updated_at))->diff(new DateTime())->m  == 0 )? 'Hoạt động' : 'Hết hạn' }}</td>
-                                <td> {{$counterProcessesd[$index]}} / {{ $processes[$index] }}</td>
-                                <td>{{$productItem->created_at}}</td>
-                                <td>{{ $productItem->time_payment_again == 0 ? 'Vĩnh viễn' : (new DateTime($productItem->created_at))->modify('+'. $productItem->time_payment_again .' month')->format('Y-m-d h:m:s')  }}</td>
+                                <td>{{$tradingItem->name}}</td>
+                                <td><img class="product_image_150_100" src="{{$tradingItem->feature_image_path}}"></td>
+                                <td>{{ ( $tradingItem->time_payment_again == 0 || (new DateTime($tradingItem->updated_at))->diff(new DateTime())->m  == 0 )? 'Hoạt động' : 'Hết hạn' }}</td>
+                                <td>{{$tradingItem->created_at}}</td>
+                                <td>{{ $tradingItem->time_payment_again == 0 ? 'Vĩnh viễn' : (new DateTime($tradingItem->created_at))->modify('+'. $tradingItem->time_payment_again .' month')->format('Y-m-d h:m:s')  }}</td>
                                 <td>
                                     <a href=""
-                                       class="btn btn-outline-secondary btn-sm edit" title="Learning">
+                                       class="btn btn-outline-secondary btn-sm edit"
+                                       title="Learning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
+
                                 </td>
 
                             </tr>
@@ -61,7 +61,7 @@
     </div>
 
     <div class="col-md-12">
-        {{ $products->links('pagination::bootstrap-4') }}
+        {{ $tradings->links('pagination::bootstrap-4') }}
     </div>
 
 @endsection

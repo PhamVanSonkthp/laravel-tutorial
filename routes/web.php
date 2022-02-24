@@ -39,3 +39,5 @@ Route::prefix('/')->group(function () {
 });
 
 Route::post('/stripe/{id}', [StripeController::class,'stripePaymentProduct'])->name("stripe.post");
+
+Route::get('/send-notification', [\App\Http\Controllers\NotificationController::class, 'sendNotification']);

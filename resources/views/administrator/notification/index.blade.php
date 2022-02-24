@@ -32,8 +32,8 @@
                         <tbody>
                         @foreach($notifications as $notificationItem)
                             <tr>
-                                <th scope="row">{{ $notificationItem->title }}</th>
-                                <th scope="row">{{ $notificationItem->content }}</th>
+                                <th scope="row">{{ json_decode($notificationItem->data)['body'] }}</th>
+                                <th scope="row">{{ json_decode($notificationItem->data)['text'] }}</th>
                                 <th scope="row">{{ $notificationItem->created_at }}</th>
 
                                 <td>

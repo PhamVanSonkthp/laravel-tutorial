@@ -8,17 +8,22 @@ use Illuminate\Support\Facades\Auth;
 Route::prefix('user')->group(function () {
     Route::get('/my-sources', [
         'as'=>'user.sources',
-        'uses'=>'App\Http\Controllers\UserController@sources',
+        'uses'=>'App\Http\Controllers\User\UserController@sources',
+    ])->middleware('verified');
+
+    Route::get('/my-tradings', [
+        'as'=>'user.tradings',
+        'uses'=>'App\Http\Controllers\User\TradingController@index',
     ])->middleware('verified');
 
     Route::get('/payment-product/{id}', [
         'as'=>'user.paymentProduct',
-        'uses'=>'App\Http\Controllers\UserController@paymentProduct',
+        'uses'=>'App\Http\Controllers\User\UserController@paymentProduct',
     ])->middleware('verified');
 
     Route::get('/payment-trading/{id}', [
         'as'=>'user.paymentTrading',
-        'uses'=>'App\Http\Controllers\UserController@paymentTrading',
+        'uses'=>'App\Http\Controllers\User\UserController@paymentTrading',
     ])->middleware('verified');
 
 });

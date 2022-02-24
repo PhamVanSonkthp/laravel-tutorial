@@ -84,12 +84,28 @@ class AdminTradingController extends Controller
 
     public function storeRegister(Request $request)
     {
-        $this->registerTrading->create([
-            'user_id' => $request->user_id,
-            'trading_id' => $request->trading_id,
-            'status' => $request->status,
-        ]);
+        try {
+            DB::beginTransaction();
+            $this->registerTrading->create([
+                'user_id' => $request->user_id,
+                'trading_id' => $request->trading_id,
+                'status' => $request->status,
+            ]);
 
+            if (!empty($request->is_add_trading)) {
+                $trading = $this->trading->find($request->trading_id);
+
+                $this->invoiceTrading->firstOrCreate([
+                    "trading_id" => $request->trading_id,
+                    "user_id" => $request->user_id,
+                    "price" => $trading->price,
+                ]);
+            }
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
+        }
         return redirect()->route('administrator.tradings.register.index');
     }
 
@@ -105,7 +121,7 @@ class AdminTradingController extends Controller
         $tradings = $this->trading->get();
         $registerTrading = $this->registerTrading->find($id);
 
-        return view('administrator.tradings.register.edit', compact('registerTrading', 'users' , 'tradings'));
+        return view('administrator.tradings.register.edit', compact('registerTrading', 'users', 'tradings'));
     }
 
     public function update($id, Request $request)

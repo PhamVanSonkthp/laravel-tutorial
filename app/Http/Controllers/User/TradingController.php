@@ -1,37 +1,37 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Models\Category;
+use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\InvoiceTrading;
 use App\Models\Product;
-use App\Models\ProductImage;
-use App\Models\ProductTag;
-use App\Models\Tag;
 use App\Models\Trading;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use function auth;
+use function view;
 
-class UserController extends Controller
+class TradingController extends Controller
 {
 
     private $user;
-    private $product;
     private $trading;
-    private $invoice;
+    private $invoiceTrading;
 
-    public function __construct(User $user, Product $product, Trading $trading, Invoice $invoice)
+    public function __construct(User $user, Trading $trading, InvoiceTrading $invoiceTrading)
     {
         $this->user = $user;
-        $this->product = $product;
-        $this->invoice = $invoice;
+        $this->invoiceTrading = $invoiceTrading;
         $this->trading = $trading;
     }
 
     public function index(){
-        return view('user.home.index');
+        $tradings = $this->trading->select('tradings.*')
+            ->join('invoice_tradings', 'tradings.id', '=', 'invoice_tradings.trading_id')
+            ->where('invoice_tradings.user_id', auth()->id())
+            ->latest('invoice_tradings.id')
+            ->paginate(10);
+        return view('user.trading.index', compact('tradings'));
     }
 
     public function sources(){
