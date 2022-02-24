@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\PaymentStripe;
 use App\Models\Process;
 use App\Models\Product;
 use App\Models\Trading;
@@ -19,14 +20,16 @@ class UserController extends Controller
     private $trading;
     private $invoice;
     private $process;
+    private $paymentStripe;
 
-    public function __construct(User $user, Product $product, Trading $trading, Invoice $invoice, Process $process)
+    public function __construct(User $user, Product $product, Trading $trading, Invoice $invoice, Process $process, PaymentStripe $paymentStripe)
     {
         $this->user = $user;
         $this->product = $product;
         $this->invoice = $invoice;
         $this->trading = $trading;
         $this->process = $process;
+        $this->paymentStripe = $paymentStripe;
     }
 
     public function index(){
@@ -75,12 +78,14 @@ class UserController extends Controller
 
     public function paymentProduct($id){
         $product = $this->product->find($id);
-        return view('payment.product', compact('product'));
+        $paymentStripe = $this->paymentStripe->first();
+        return view('payment.product', compact('product','paymentStripe'));
     }
 
     public function paymentTrading($id){
         $product = $this->trading->find($id);
-        return view('payment.trading', compact('product'));
+        $paymentStripe = $this->paymentStripe->first();
+        return view('payment.trading', compact('product', 'paymentStripe'));
     }
 
 }

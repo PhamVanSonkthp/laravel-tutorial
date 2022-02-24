@@ -15,4 +15,9 @@ class InvoiceTrading extends Model
     public function trading(){
         return $this->hasOne(Trading::class , 'id' , 'trading_id');
     }
+
+    public function user(){
+        return $this->hasOne(User::class , 'id' , 'user_id');
+    }
+
 }

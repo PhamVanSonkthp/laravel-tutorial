@@ -53,11 +53,11 @@
 
                 <form
                     role="form"
-                    action="{{ route('stripe.post' , ['id'=>$product->id]) }}"
+                    action="{{ route('stripe_product.post' , ['id'=>$product->id]) }}"
                     method="post"
                     class="require-validation"
                     data-cc-on-file="false"
-                    data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
+                    data-stripe-publishable-key="{{ $paymentStripe->public_key }}"
                     id="payment-form">
                     @csrf
 

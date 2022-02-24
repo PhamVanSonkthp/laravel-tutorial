@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Payment;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\InvoiceTrading;
+use App\Models\PaymentStripe;
 use App\Models\Product;
 use App\Models\Trading;
 use App\Models\User;
@@ -23,27 +24,32 @@ class StripeController extends Controller
     private $invoice;
     private $invoiceTrading;
     private $user;
+    private $paymentStripe;
 
-    public function __construct(Product $product, User $user, Invoice $invoice, Trading $trading, InvoiceTrading $invoiceTrading)
+    public function __construct(Product $product, User $user, Invoice $invoice, Trading $trading, InvoiceTrading $invoiceTrading, PaymentStripe $paymentStripe)
     {
         $this->product = $product;
         $this->trading = $trading;
         $this->invoice = $invoice;
         $this->invoiceTrading = $invoiceTrading;
         $this->user = $user;
+        $this->paymentStripe = $paymentStripe;
     }
-
 
     public function stripePaymentProduct($id, Request $req){
         $product = $this->product->find($id);
 
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $paymentStripe = $this->paymentStripe->first();
+        Stripe\Stripe::setApiKey($paymentStripe->secret_key);
         $data = Stripe\Charge::create([
             "amount" => $product->price * 100,
             "currency" => "usd",
             "source" => $req->stripeToken,
             "description" => optional(Auth::user())->name . " Buy " . $product->name
         ]);
+
+
+
 
         if ($data->created) {
             try {
@@ -54,6 +60,7 @@ class StripeController extends Controller
                     'product_id' => $id,
                     'price' => $product->price,
                 ]);
+
 
                 $user = $this->user->find(auth()->id());
                 $user->increment('point', $product->point);
@@ -72,7 +79,8 @@ class StripeController extends Controller
     public function stripePaymentTrading($id, Request $req){
         $trading = $this->trading->find($id);
 
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $paymentStripe = $this->paymentStripe->first();
+        Stripe\Stripe::setApiKey($paymentStripe->secret_key);
         $data = Stripe\Charge::create([
             "amount" => $trading->price * 100,
             "currency" => "usd",

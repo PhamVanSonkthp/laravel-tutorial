@@ -31,6 +31,8 @@
                             <th>Tên khóa học</th>
                             <th>Giá trị</th>
                             <th>Ngày tạo</th>
+                            <th>Học viên mua</th>
+                            <th>Email</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,6 +42,8 @@
                                 <td>{{ optional($invoiceItem->product)->name }}</td>
                                 <td>{{ number_format($invoiceItem->price) }}</td>
                                 <td>{{ $invoiceItem->created_at }}</td>
+                                <td>{{ $invoiceItem->user->name }}</td>
+                                <td>{{ $invoiceItem->user->email }}</td>
                             </tr>
                         @endforeach
 
@@ -74,6 +78,8 @@
                             <th>Tên trading</th>
                             <th>Giá trị</th>
                             <th>Ngày tạo</th>
+                            <th>Học viên mua</th>
+                            <th>Email</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,6 +89,8 @@
                                 <td>{{ optional($invoiceTradingItem->trading)->name }}</td>
                                 <td>{{ number_format($invoiceTradingItem->price) }}</td>
                                 <td>{{ $invoiceTradingItem->created_at }}</td>
+                                <td>{{ $invoiceTradingItem->user->name }}</td>
+                                <td>{{ $invoiceTradingItem->user->email }}</td>
                             </tr>
                         @endforeach
 

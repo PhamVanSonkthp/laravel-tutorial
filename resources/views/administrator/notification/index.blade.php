@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Rương quà</h4>
+    <h4 class="page-title">Thông báo</h4>
 @endsection
 
 @section('css')
@@ -25,25 +25,19 @@
                         <tr>
                             <th>Tiêu đề</th>
                             <th>Nội dung</th>
+                            <th>Học viên</th>
+                            <th>Email</th>
                             <th>Thời gian</th>
-                            <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($notifications as $notificationItem)
                             <tr>
-                                <th scope="row">{{ json_decode($notificationItem->data)['body'] }}</th>
-                                <th scope="row">{{ json_decode($notificationItem->data)['text'] }}</th>
-                                <th scope="row">{{ $notificationItem->created_at }}</th>
-
-                                <td>
-
-                                    <a href="{{route('administrator.notification.delete' , ['id'=> $notificationItem->id])}}"
-                                       data-url="{{route('administrator.notification.delete' , ['id'=> $notificationItem->id])}}"
-                                       class="btn btn-danger btn-sm delete action_delete" title="Delete">
-                                        <i class="mdi mdi-close"></i>
-                                    </a>
-                                </td>
+                                <td>{{ json_decode($notificationItem->data, true)['body'] }}</td>
+                                <td>{{ json_decode($notificationItem->data, true)['text'] }}</td>
+                                <td>{{ $notificationItem->user->name }}</td>
+                                <td>{{ $notificationItem->user->email }}</td>
+                                <td>{{ $notificationItem->created_at }}</td>
                             </tr>
                         @endforeach
 
