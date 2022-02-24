@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <a href="{{route('welcome.invoice' , ['id'=> $product->id ])}}" type="button" class="btn btn-success waves-effect waves-light mb-3">Payment</a>
+        <a href="{{route('welcome.invoiceProduct' , ['id'=> $product->id ])}}" type="button" class="btn btn-success waves-effect waves-light mb-3">Payment</a>
     </div>
 @endsection
 

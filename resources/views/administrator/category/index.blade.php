@@ -18,10 +18,19 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="col-md-12">
-                    <a href="{{route('categories.create')}}" class="btn btn-success float-end m-2">Add</a>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="datatable_filter" class="dataTables_filter">
+                            <label>Search:
+                                <input type="search" class="form-control form-control-sm" placeholder="Entering..." aria-controls="datatable">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 text-end">
+                        <a href="{{route('categories.create')}}" class="btn btn-success m-2">Add</a>
+                    </div>
                 </div>
-                <div class="clearfix"></div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">

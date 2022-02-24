@@ -11,6 +11,10 @@
                     <span class="logo-lg">
                                     <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="36">
                                 </span>
+                    <span class="ms-2">
+                        {{ optional(\Illuminate\Support\Facades\Auth::user())->name  }}
+                    </span>
+
                 </a>
             </div>
 
@@ -36,18 +40,18 @@
 
         <div class="d-flex">
 
-            <div class="dropdown d-none d-lg-inline-block me-2">
-                <button type="button" class="btn header-item toggle-search noti-icon waves-effect"
-                        data-target="#search-wrap">
-                    <i class="mdi mdi-magnify"></i>
-                </button>
-            </div>
+{{--            <div class="dropdown d-none d-lg-inline-block me-2">--}}
+{{--                <button type="button" class="btn header-item toggle-search noti-icon waves-effect"--}}
+{{--                        data-target="#search-wrap">--}}
+{{--                    <i class="mdi mdi-magnify"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
-            <div class="dropdown d-none d-lg-inline-block me-2">
-                <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
-                    <i class="mdi mdi-fullscreen"></i>
-                </button>
-            </div>
+{{--            <div class="dropdown d-none d-lg-inline-block me-2">--}}
+{{--                <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">--}}
+{{--                    <i class="mdi mdi-fullscreen"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
 
             <div class="dropdown d-inline-block">

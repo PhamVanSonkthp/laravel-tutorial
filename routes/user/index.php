@@ -11,10 +11,16 @@ Route::prefix('user')->group(function () {
         'uses'=>'App\Http\Controllers\UserController@sources',
     ])->middleware('verified');
 
-    Route::get('/payment/{id}', [
-        'as'=>'user.payment',
-        'uses'=>'App\Http\Controllers\UserController@payment',
+    Route::get('/payment-product/{id}', [
+        'as'=>'user.paymentProduct',
+        'uses'=>'App\Http\Controllers\UserController@paymentProduct',
     ])->middleware('verified');
+
+    Route::get('/payment-trading/{id}', [
+        'as'=>'user.paymentTrading',
+        'uses'=>'App\Http\Controllers\UserController@paymentTrading',
+    ])->middleware('verified');
+
 });
 
 Route::get('/email/verify', function () {

@@ -78,7 +78,7 @@
                                 <div class="d-print-none">
                                     <div class="float-end">
                                         <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
-                                        <a href="{{route('user.payment' , ['id' => $product->id])}}" class="btn btn-primary waves-effect waves-light">Pay</a>
+                                        <a href="{{route('user.paymentProduct' , ['id' => $product->id])}}" class="btn btn-primary waves-effect waves-light">Pay</a>
                                     </div>
                                 </div>
                             </div>

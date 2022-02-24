@@ -19,13 +19,13 @@ class WelcomeController extends Controller
         return view('user.home.index' , compact('products'));
     }
 
-    public function source($id){
+    public function product($id){
         $product = $this->product->find($id);
-        return view('user.home.source', compact('product'));
+        return view('user.home.product', compact('product'));
     }
 
-    public function invoice($id){
+    public function invoiceProduct($id){
         $product = $this->product->find($id);
-        return view('user.home.invoice', compact('product'));
+        return view('user.home.invoice-product', compact('product'));
     }
 }

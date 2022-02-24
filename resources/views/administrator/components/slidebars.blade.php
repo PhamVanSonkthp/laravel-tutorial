@@ -111,9 +111,16 @@
                 </li>
 
                 <li>
-                    <a href="{{route('invoices.index')}}" class="waves-effect">
+                    <a href="{{route('administrator.notification.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Danh sách thông báo </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('administrator.payment_stripe.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Payment stripe </span>
                     </a>
                 </li>
 

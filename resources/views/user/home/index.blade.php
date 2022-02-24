@@ -12,7 +12,7 @@
 
     @foreach($products as $productItem)
         <div class="col-lg-3 col-md-6">
-            <a href="  {{ route('welcome.source', ['id' => $productItem->id]) }}" class="gallery-popup" title="Open Imagination">
+            <a href="  {{ route('welcome.product', ['id' => $productItem->id]) }}" class="gallery-popup" title="Open Imagination">
                 <div class="project-item">
                     <div class="overlay-container">
                         <img src="assets/images/gallery/work-1.jpg" alt="img" class="gallery-thumb-img">

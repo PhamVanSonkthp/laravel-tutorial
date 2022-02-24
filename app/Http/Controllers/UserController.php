@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
 use App\Models\Tag;
+use App\Models\Trading;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,13 +19,15 @@ class UserController extends Controller
 
     private $user;
     private $product;
+    private $trading;
     private $invoice;
 
-    public function __construct(User $user, Product $product, Invoice $invoice)
+    public function __construct(User $user, Product $product, Trading $trading, Invoice $invoice)
     {
         $this->user = $user;
         $this->product = $product;
         $this->invoice = $invoice;
+        $this->trading = $trading;
     }
 
     public function index(){
@@ -41,29 +44,14 @@ class UserController extends Controller
         return view('user.my_sources.index', compact('products'));
     }
 
-    public function payment($id){
+    public function paymentProduct($id){
+        $product = $this->product->find($id);
+        return view('payment.product', compact('product'));
+    }
 
-        try {
-            DB::beginTransaction();
-
-            $product = $this->product->find($id);
-
-            $this->invoice->create([
-                'user_id'=> auth()->id(),
-                'product_id'=> $id,
-                'price'=> $product->price,
-            ]);
-
-            $user = $this->user->find(auth()->id());
-            $user->increment('point' , $product->point);
-            $user->save();
-            DB::commit();
-        }catch (\Exception $exception){
-            DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
-        }
-
-        return redirect()->route('user.sources' );
+    public function paymentTrading($id){
+        $product = $this->trading->find($id);
+        return view('payment.trading', compact('product'));
     }
 
 }

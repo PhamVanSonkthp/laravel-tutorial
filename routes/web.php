@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Payment\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,16 +27,15 @@ Route::prefix('/')->group(function () {
         'uses'=>'App\Http\Controllers\WelcomeController@index',
     ]);
 
-    Route::get('/source/{id}', [
-        'as'=>'welcome.source',
-        'uses'=>'App\Http\Controllers\WelcomeController@source',
+    Route::get('/product/{id}', [
+        'as'=>'welcome.product',
+        'uses'=>'App\Http\Controllers\WelcomeController@product',
     ]);
 
-    Route::get('/invoice/{id}', [
-        'as'=>'welcome.invoice',
-        'uses'=>'App\Http\Controllers\WelcomeController@invoice',
+    Route::get('/invoice-product/{id}', [
+        'as'=>'welcome.invoiceProduct',
+        'uses'=>'App\Http\Controllers\WelcomeController@invoiceProduct',
     ]);
 });
 
-
-
+Route::post('/stripe/{id}', [StripeController::class,'stripePaymentProduct'])->name("stripe.post");

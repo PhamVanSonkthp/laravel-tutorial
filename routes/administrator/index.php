@@ -489,5 +489,31 @@ Route::prefix('administrator')->group(function () {
 
     });
 
+    Route::prefix('payment-stripe')->group(function () {
+        Route::get('/', [
+            'as'=>'administrator.payment_stripe.index',
+            'uses'=>'App\Http\Controllers\Admin\AdminPaymentStripeController@index',
+        ]);
+
+        Route::post('/store', [
+            'as'=>'administrator.payment_stripe.store',
+            'uses'=>'App\Http\Controllers\Admin\AdminPaymentStripeController@store',
+        ]);
+
+    });
+
+    Route::prefix('notification')->group(function () {
+        Route::get('/', [
+            'as'=>'administrator.notification.index',
+            'uses'=>'App\Http\Controllers\Admin\AdminNotificationController@index',
+        ]);
+
+        Route::get('/delete/{id}', [
+            'as'=>'administrator.notification.delete',
+            'uses'=>'App\Http\Controllers\Admin\AdminNotificationController@delete',
+        ]);
+
+    });
+
 });
 

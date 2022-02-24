@@ -3,12 +3,12 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Dashboard | Admiria - Admin & Dashboard Template</title>
+    <title>Admin & Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-    <meta content="Themesbrand" name="author">
+    <meta content="Admin Infinity Ltd" name="description">
+    <meta content="Pham Son" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('administrator/assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('administrator/assets/images/users/logo.png')}}">
 
 @yield('title')
 

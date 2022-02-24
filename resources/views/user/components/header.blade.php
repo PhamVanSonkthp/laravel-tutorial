@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="d-flex">
+        <div class="d-flex header-right">
 
             <div class="dropdown d-none d-lg-inline-block me-2">
                 <button type="button" class="btn header-item toggle-search noti-icon waves-effect"
