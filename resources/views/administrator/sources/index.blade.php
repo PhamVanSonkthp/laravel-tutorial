@@ -12,6 +12,8 @@
     <link href="{{asset('admins/products/index/list.css')}}" rel="stylesheet"/>
 @endsection
 
+@include('administrator.sources.active_slidebar')
+
 @section('content')
     <div class="col-12">
 

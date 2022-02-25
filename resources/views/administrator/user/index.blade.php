@@ -12,6 +12,8 @@
     <link href="{{asset('admins/products/index/list.css')}}" rel="stylesheet"/>
 @endsection
 
+@include('administrator.user.active_slidebar')
+
 @section('content')
     <div class="col-12">
 
@@ -48,7 +50,10 @@
                                 <td><a href="#">--{{number_format($userItem->getUserNumberProduct($userItem->id))}}--</a></td>
                                 <td><a href="#">--{{number_format($userItem->getUserNumberTrading($userItem->id))}}--</a></td>
                                 <td>
-
+                                    <a href="{{route('administrator.users.gift.index' , ['id'=> $userItem->id])}}"
+                                       class="btn btn-outline-secondary btn-sm edit" title="Gift">
+                                        <i class="mdi mdi-gift-outline"></i>
+                                    </a>
                                     <a href="{{route('administrator.users.sources.index' , ['id'=> $userItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="View">
                                         <i class="ion ion-md-eye"></i>

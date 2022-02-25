@@ -16,7 +16,7 @@ class NotificationController extends Controller
 
 
     public function sendNotification(){
-        $user = $this->user->latest()->first();
+        $user = $this->user->first();
 
         $notificationData = [
             'body'=>'a',

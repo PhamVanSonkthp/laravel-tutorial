@@ -12,6 +12,8 @@
     <link href="{{asset('admins/products/add/add.css') }}" rel="stylesheet"/>
 @endsection
 
+@include('administrator.role.active_slidebar')
+
 @section('content')
 
     <form action="{{route('administrator.roles.store')}}" method="post" enctype="multipart/form-data">

@@ -47,14 +47,14 @@
                     </li>
 
                 <li>
-                    <a href="{{route('user.sources')}}" class="waves-effect">
+                    <a href="{{route('user.notifications')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Thông báo </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{route('user.sources')}}" class="waves-effect">
+                    <a href="{{route('user.invoices')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Hóa đơn </span>
                     </a>

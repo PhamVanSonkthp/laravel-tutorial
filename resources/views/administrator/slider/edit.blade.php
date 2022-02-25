@@ -11,6 +11,8 @@
     <link href="{{asset('admins/products/add/add.css') }}" rel="stylesheet"/>
 @endsection
 
+@include('administrator.slider.active_slidebar')
+
 @section('content')
 
     <form action="{{route('slider.update', ['id'=> $slider->id]) }}" method="post" enctype="multipart/form-data">

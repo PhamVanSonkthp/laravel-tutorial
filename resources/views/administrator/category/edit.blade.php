@@ -13,6 +13,8 @@
     <link href="{{asset('admins/products/add/add.css') }}" rel="stylesheet"/>
 @endsection
 
+@include('administrator.category.active_slidebar')
+
 @section('content')
 
     <form action="{{route('categories.update' , ['id'=>$category->id])}}" method="post" enctype="multipart/form-data">

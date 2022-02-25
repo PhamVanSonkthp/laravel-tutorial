@@ -154,6 +154,16 @@ Route::prefix('administrator')->group(function () {
             'uses'=>'App\Http\Controllers\Admin\AdminUserController@sourcesIndex',
         ]);
 
+        Route::get('/gift/{id}', [
+            'as'=>'administrator.users.gift.index',
+            'uses'=>'App\Http\Controllers\Admin\AdminUserController@indexGift',
+        ]);
+
+        Route::get('/update/{id}', [
+            'as'=>'administrator.users.gift.update',
+            'uses'=>'App\Http\Controllers\Admin\AdminUserController@updateGift',
+        ]);
+
     });
 
     Route::prefix('employees')->group(function () {

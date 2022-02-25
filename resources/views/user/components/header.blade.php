@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="{{asset('administrator/assets/images/logo.png')}}" alt="" height="22">
+                                    <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="22">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="{{asset('administrator/assets/images/logo-dark.png')}}" alt="" height="17">
+                                    <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="17">
                                 </span>
                 </a>
 
                 <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="{{asset('administrator/assets/images/logo-light.png')}}" alt="" height="22">
+                                    <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="22">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="{{asset('administrator/assets/images/logo-light.png')}}" alt="" height="36">
+                                    <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="36">
                                 </span>
                 </a>
             </div>
@@ -44,12 +44,12 @@
 
         <div class="d-flex header-right">
 
-            <div class="dropdown d-none d-lg-inline-block me-2">
-                <button type="button" class="btn header-item toggle-search noti-icon waves-effect"
-                        data-target="#search-wrap">
-                    <i class="mdi mdi-magnify"></i>
-                </button>
-            </div>
+{{--            <div class="dropdown d-none d-lg-inline-block me-2">--}}
+{{--                <button type="button" class="btn header-item toggle-search noti-icon waves-effect"--}}
+{{--                        data-target="#search-wrap">--}}
+{{--                    <i class="mdi mdi-magnify"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
             <div class="dropdown d-none d-lg-inline-block me-2">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
@@ -62,7 +62,7 @@
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user"
-                         src="{{asset('administrator/assets/images/users/avatar-1.jpg')}}" alt="Header Avatar">
+                         src="{{asset('administrator/assets/images/users/logo.png')}}" alt="Header Avatar">
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->

@@ -10,10 +10,13 @@ use App\Models\InvoiceTrading;
 use App\Models\Process;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UserGift;
 use App\Traits\DeleteModelTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Nette\Utils\DateTime;
 use function redirect;
 use function view;
@@ -27,19 +30,26 @@ class AdminUserController extends Controller
     private $invoice;
     private $process;
     private $invoiceTrading;
+    private $userGifts;
 
-    public function __construct(User $user, Role $role, Invoice $invoice, InvoiceTrading $invoiceTrading, Process $process)
+    public function __construct(User $user, Role $role, Invoice $invoice, InvoiceTrading $invoiceTrading, Process $process, UserGift $userGifts)
     {
         $this->user = $user;
         $this->role = $role;
         $this->invoice = $invoice;
         $this->process = $process;
         $this->invoiceTrading = $invoiceTrading;
+        $this->userGifts = $userGifts;
     }
 
     public function index(){
         $users = $this->user->where('is_admin' , 0)->paginate(10);
         return view('administrator.user.index' , compact('users'));
+    }
+
+    public function indexGift(){
+        $userGifts = $this->userGifts->paginate(10);
+        return view('administrator.user.gift.index' , compact('userGifts'));
     }
 
     public function sourcesIndex($id){
@@ -134,6 +144,13 @@ class AdminUserController extends Controller
         }
 
         return redirect()->route('users.index');
+    }
+
+    public function updateGift($id , Request $request){
+        $this->userGifts->find($id)->update([
+            "status" => 1
+        ]);
+        return Redirect::back();
     }
 
     public function delete($id){

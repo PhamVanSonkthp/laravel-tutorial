@@ -12,6 +12,8 @@
     <link href="{{asset('admins/products/add/add.css') }}" rel="stylesheet"/>
 @endsection
 
+@include('administrator.notification.active_slidebar')
+
 @section('content')
 
     <form action="{{route('administrator.gifts.update', ['id'=> $gift->id]) }}" method="post" enctype="multipart/form-data">

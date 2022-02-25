@@ -16,6 +16,16 @@ Route::prefix('user')->group(function () {
         'uses'=>'App\Http\Controllers\User\TradingController@index',
     ])->middleware('verified');
 
+    Route::get('/notifications', [
+        'as'=>'user.notifications',
+        'uses'=>'App\Http\Controllers\User\NotificationController@index',
+    ])->middleware('verified');
+
+    Route::get('/invoices', [
+        'as'=>'user.invoices',
+        'uses'=>'App\Http\Controllers\User\InvoiceController@index',
+    ])->middleware('verified');
+
     Route::get('/payment-product/{id}', [
         'as'=>'user.paymentProduct',
         'uses'=>'App\Http\Controllers\User\UserController@paymentProduct',
