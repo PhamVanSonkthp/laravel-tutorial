@@ -20,14 +20,14 @@ class AdminPermissionController extends Controller
     {
         try {
             DB::beginTransaction();
-            $permision = Permission::create([
+            $permision = Permission::firstOrCreate([
                 'name' => $request->module_parent,
                 'display_name' => $request->module_parent,
                 'parent_id' => 0,
             ]);
 
             foreach ($request->module_children as $value) {
-                Permission::create([
+                Permission::firstOrCreate([
                     'name' => $value,
                     'display_name' => $value,
                     'parent_id' => $permision->id,
@@ -40,6 +40,6 @@ class AdminPermissionController extends Controller
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
 
-        return redirect()->route('administrator.roles');
+        return redirect()->route('administrator.roles.index');
     }
 }

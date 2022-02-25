@@ -14,7 +14,6 @@
                     <span class="ms-2">
                         {{ optional(\Illuminate\Support\Facades\Auth::user())->name  }}
                     </span>
-
                 </a>
             </div>
 

@@ -48,30 +48,44 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
+    public function roles()
+    {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
 
-    public function checkPermissionAccess($permissionCheck){
-        $roles = auth()->user()->roles;
-        foreach ($roles as $role){
+    public function checkPermissionAccess($permissionCheck)
+    {
+
+        if (optional(auth()->user())->is_admin == 2) return true;
+        if (optional(auth()->user())->is_admin != 1) return false;
+
+        $roles = optional(auth()->user())->roles;
+        foreach ($roles as $role) {
             $permissions = $role->permissions;
-            if($permissions->contains('key_code' , $permissionCheck)){
+            if ($permissions->contains('key_code', $permissionCheck)) {
                 return true;
             }
         }
         return false;
     }
 
-    public function getUserLevel($id){
+    public function getUserLevel($id)
+    {
         return $this->getUserLevelTrait($id);
     }
 
-    public function getUserNumberProduct($id){
+    public function getUserNumberProduct($id)
+    {
         return $this->getUserNumberProductTrait($id);
     }
 
-    public function getUserNumberTrading($id){
+    public function getUserNumberTrading($id)
+    {
         return $this->getUserNumberTradingTrait($id);
+    }
+
+    public function checkHasProduct($id)
+    {
+        return Invoice::where('user_id', auth()->id())->where('product_id', $id)->first() != null;
     }
 }

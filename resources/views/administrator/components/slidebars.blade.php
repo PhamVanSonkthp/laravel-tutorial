@@ -10,7 +10,7 @@
 
                 <li>
                     <a href="{{route('administrator.dashboard.index')}}" class="waves-effect">
-                        <i class="mdi mdi-cube-outline"></i>
+                        <i class="mdi mdi-view-dashboard"></i>
                         <span> Tổng quan </span>
                     </a>
                 </li>
@@ -140,7 +140,7 @@
                 </li>
 
                 <li @yield('permission')>
-                    <a href="{{route('permissions.create')}}" class="waves-effect">
+                    <a href="{{route('administrator.permissions.create')}}" class="waves-effect">
                         <i class="mdi mdi-calendar-check"></i>
                         <span>Tạo dữ liệu phân quyền</span>
                     </a>

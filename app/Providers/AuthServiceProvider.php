@@ -27,18 +27,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         $permissionGateAndPolicy = new PermissionGateAndPolicyAccess();
-
         $permissionGateAndPolicy->setGateAndPolicyAccess();
-
-//        Gate::define('product-edit' , function ($user, $id){
-//            $product = Product::find($id);
-//            return $user->checkPermissionAccess('product_edit') && $user->id === $product->user_id;
-//        });
-//
-//        Gate::define('product-list' , function ($user){
-//
-//            return $user->checkPermissionAccess('product_list') ;
-//        });
     }
 
 

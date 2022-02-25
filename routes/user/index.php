@@ -36,6 +36,16 @@ Route::prefix('user')->group(function () {
         'uses'=>'App\Http\Controllers\User\UserController@paymentTrading',
     ])->middleware('verified');
 
+    Route::get('/learning-source/{id}', [
+        'as'=>'user.learningSource',
+        'uses'=>'App\Http\Controllers\User\UserController@learningSource',
+    ])->middleware('verified');
+
+    Route::get('/learning-source/{id}/{source_id}', [
+        'as'=>'user.learningSourceHasSource',
+        'uses'=>'App\Http\Controllers\User\UserController@learningSourceHasSource',
+    ])->middleware('verified');
+
 });
 
 Route::get('/email/verify', function () {

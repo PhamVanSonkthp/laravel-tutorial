@@ -39,7 +39,6 @@ class AdminTopicController extends Controller
             $counters[] = $counter;
         }
 
-
         return view('administrator.topics.index' , compact('topics', 'counters'));
     }
 

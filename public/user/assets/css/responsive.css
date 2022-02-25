@@ -1,0 +1,260 @@
+/* =================== PC BIG ===================*/
+@media only screen and (min-width: 1241px) {
+  .container {
+    max-width: 1270px;
+    margin: 0 auto;
+    /* padding: 0 15px */
+  }
+}
+
+/* ============= PC LOWER  min-1023px ===============*/
+@media only screen and (min-width: 63.9375em) and (max-width: 1240px) {
+  .hide-on-pc-Lose {
+    display: none;
+  }
+
+  .lecture__content-video {
+    padding: 0 1%;
+  }
+
+  .page-content .route .route__course .col-lg-3 {
+    width: 33.33333%;
+  }
+
+  .page-content .course .col-lg-8,
+  .page-content .course .col-lg-4 {
+    width: 100%;
+  }
+
+  .course__register {
+    margin: 28px 0;
+  }
+
+  .account {
+    width: 84%;
+  }
+
+}
+
+/* =============== Mobile & tablet ==============*/
+@media only screen and (max-width: 63.9375em) {
+  .hide-on-mobile-tablet {
+    display: none !important;
+  }
+
+  .lecture__content-video {
+    padding: 0;
+  }
+
+  .lecture__content-wrap {
+    min-height: auto;
+  }
+
+  .lecture__content-video {
+    height: 45vh;
+  }
+
+  .lecture__route-header>h3 {
+    font-size: 1.125rem;
+  }
+
+  .nav-item.hide {
+    display: block;
+  }
+
+  .course__register {
+    margin: 28px 0;
+  }
+
+  .course {
+    padding: 0px 4px;
+  }
+
+  .mission__progress {
+    width: 62%;
+  }
+
+}
+
+/* ==================== Tablet ===================*/
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+  .hide-on-tablet {
+    display: none !important;
+  }
+
+  .account {
+    width: 86%;
+  }
+
+  .mission {
+    width: 96%;
+  }
+
+  .account__progress-levelUp .progress {
+    width: 58%;
+  }
+
+
+
+  .mission .account__progress-levelUp .progress {
+    width: 100%;
+  }
+
+}
+
+/* =================== Mobile ===================*/
+@media only screen and (max-width: 46.1875em) {
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .lecture__content-video {
+    height: 24vh;
+  }
+
+  .lecture__content-tab {
+    margin: 14px 22px 0;
+  }
+
+  .route {
+    padding: 0 8px;
+  }
+
+  .course__content-item {
+    flex-basis: 100%;
+  }
+
+  .course__content-item>svg {
+    min-width: 16px;
+    margin-top: 6px;
+  }
+
+  .course__content-general {
+    line-height: 1.375rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .course__content-main {
+    flex-direction: column;
+  }
+
+  .course__content-allIn {
+    width: 100%;
+    margin: 14px 0px 10px;
+    text-align: right;
+  }
+
+  .course__accordion-lecture {
+    padding: 16px 20px;
+  }
+
+  .course__accordion-lecture-content {
+    max-width: 228px;
+  }
+
+  .account {
+    width: 100%;
+  }
+
+  .account__progress-levelUp img {
+    width: 54px;
+    height: 54px;
+  }
+
+  .account__progress-levelUp .progress {
+    width: 50%;
+  }
+
+  .account__progress-levelUp {
+    margin: 24px 0 18px;
+  }
+
+  .account__progress-heading {
+    font-size: 1rem;
+  }
+
+  .account__progress-currentLevel {
+    margin-top: 10px;
+    border: 2px solid #eef6ff;
+  }
+
+  .account__progress-currentLevel-text {
+    font-size: 0.6875rem;
+  }
+
+  .account__progress-currentLevel-number {
+    font-size: 1.5rem;
+  }
+
+  .mission__progress .progress {
+    width: 100%;
+  }
+
+  .mission .cont {
+    width: 130px;
+    height: 44px;
+  }
+
+  .mission .account__progress-levelUp {
+    padding: 12px 0px 22px;
+    align-items: flex-start;
+  }
+
+  .mission__reward {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mission__reward-box {
+    margin-top: 28px;
+  }
+
+  .mission__modal-info {
+    text-align: center;
+    width: 250px;
+  }
+}
+
+/* ================= Iphone X ===============*/
+@media only screen and (max-width: 24.4375em) {}
+
+@media only screen and (min-width: 63.9375em) {
+
+  /* 5 colum Bootstrap */
+  .col-xs-5ths,
+  .col-sm-5ths,
+  .col-md-5ths,
+  .col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .col-xs-5ths {
+    width: 20%;
+    float: left;
+  }
+
+  @media (min-width: 768px) {
+    .col-sm-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .col-md-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .col-lg-5ths {
+      width: 20%;
+      float: left;
+    }
+  }
+}

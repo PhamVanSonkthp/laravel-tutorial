@@ -25,6 +25,7 @@ class AdminProductController extends Controller
 {
     use DeleteModelTrait;
     use StorageImageTrait;
+
     private $category;
     private $product;
     private $productImage;
@@ -33,7 +34,7 @@ class AdminProductController extends Controller
     private $topic;
     private $source;
 
-    public function __construct(Category $category , Product $product, ProductImage $productImage, Tag $tag, ProductTag $productTag, Topic $topic, Source $source)
+    public function __construct(Category $category, Product $product, ProductImage $productImage, Tag $tag, ProductTag $productTag, Topic $topic, Source $source)
     {
         $this->category = $category;
         $this->product = $product;
@@ -44,18 +45,33 @@ class AdminProductController extends Controller
         $this->source = $source;
     }
 
-    public function index(){
+    public function index()
+    {
         $products = $this->product->latest()->paginate(10);
-        return view('administrator.products.index' , compact('products'));
+
+        $counters = [];
+        foreach ($products as $productItem) {
+            $counter = 0;
+            $sourcesBelongTopics = $this->source->where('topic_id', $productItem->topic->id)->get();
+
+            foreach ($sourcesBelongTopics as $sourcesBelongTopicItem) {
+                $counter += $sourcesBelongTopicItem->sourceChildren->count();
+            }
+            $counters[] = $counter;
+        }
+
+        return view('administrator.products.index', compact('products' , 'counters'));
     }
 
-    public function create(){
+    public function create()
+    {
         $htmlOption = $this->getCategory($parent_id = '');
         $topics = $this->topic->all();
-        return view('administrator.products.add' , compact('htmlOption', 'topics'));
+        return view('administrator.products.add', compact('htmlOption', 'topics'));
     }
 
-    public function getCategory($parent_id){
+    public function getCategory($parent_id)
+    {
         $data = $this->category->all();
         $recusive = new Recusive($data);
         $htmlOption = $recusive->categoryRecusive($parent_id);
@@ -63,40 +79,41 @@ class AdminProductController extends Controller
         return $htmlOption;
     }
 
-    public function store(ProductAddRequest $request){
+    public function store(ProductAddRequest $request)
+    {
         try {
             DB::beginTransaction();
             $dataProductCreate = [
-                'name'=> $request->name,
-                'price'=> $request->price,
-                'content'=> $request->contents,
-                'user_id'=> auth()->id() ?? 0,
-                'category_id'=> $request->category_id ?? 0,
-                'point'=> $request->point ?? 0,
-                'time_payment_again'=> $request->time_payment_again ?? 0,
-                'end_video_to_next'=> $request->end_video_to_next == true ? 1 : 0,
+                'name' => $request->name,
+                'price' => $request->price,
+                'content' => $request->contents,
+                'user_id' => auth()->id() ?? 0,
+                'category_id' => $request->category_id ?? 0,
+                'point' => $request->point ?? 0,
+                'time_payment_again' => $request->time_payment_again ?? 0,
+                'end_video_to_next' => $request->end_video_to_next == true ? 1 : 0,
             ];
-            $dataUploadFeatureImage = $this->storageTraitUpload($request , 'feature_image_path' , 'product');
+            $dataUploadFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'product');
 
-            if(!empty($dataUploadFeatureImage)){
+            if (!empty($dataUploadFeatureImage)) {
                 $dataProductCreate['feature_image_name'] = $dataUploadFeatureImage['file_name'];
                 $dataProductCreate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
             }
             $product = $this->product->create($dataProductCreate);
-            if($request->hasFile('image_path')){
-                foreach ($request->image_path as $fileItem){
-                    $dataProductImageDetail = $this->storageTraitUploadMultiple($fileItem , 'product');
+            if ($request->hasFile('image_path')) {
+                foreach ($request->image_path as $fileItem) {
+                    $dataProductImageDetail = $this->storageTraitUploadMultiple($fileItem, 'product');
                     $product->images()->create([
-                        'image_path'=>$dataProductImageDetail['file_path'],
-                        'image_name'=>$dataProductImageDetail['file_name'],
+                        'image_path' => $dataProductImageDetail['file_path'],
+                        'image_name' => $dataProductImageDetail['file_name'],
                     ]);
                 }
             }
 
             // insert tag for product
             $tagsIds = [];
-            if(!empty($request->tags)){
-                foreach ($request->tags as $tagItem){
+            if (!empty($request->tags)) {
+                foreach ($request->tags as $tagItem) {
                     $tagInstance = $this->tag->firstOrCreate([
                         'name' => $tagItem,
                     ]);
@@ -108,24 +125,25 @@ class AdminProductController extends Controller
             $product->tags()->attach($tagsIds);
 
             $this->topic->where('product_id', $product->id)->update([
-                'product_id'=>0
+                'product_id' => 0
             ]);
 
-            if(!empty($request->topic_id)){
+            if (!empty($request->topic_id)) {
                 $this->topic->find($request->topic_id)->update([
-                    'product_id'=>$product->id
+                    'product_id' => $product->id
                 ]);
             }
 
             DB::commit();
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
         return redirect()->route('administrator.products.index');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $product = $this->product->find($id);
         $topics = $this->topic->all();
 
@@ -133,49 +151,50 @@ class AdminProductController extends Controller
         $topicBelongProduct = $this->topic->where('product_id', $product->id)->first();
 
         $sourceParents = [];
-        if(!empty($topicBelongProduct)){
+        if (!empty($topicBelongProduct)) {
             $sourceParents = $this->source->where('topic_id', $topicBelongProduct->id)->get();
         }
 
-        return view('administrator.products.edit',compact('htmlOption' , 'product', 'topics', 'sourceParents'));
+        return view('administrator.products.edit', compact('htmlOption', 'product', 'topics', 'sourceParents'));
     }
 
-    public function update($id, ProductEditRequest $request){
+    public function update($id, ProductEditRequest $request)
+    {
         try {
             DB::beginTransaction();
             $dataProductUpdate = [
-                'name'=> $request->name,
-                'price'=> $request->price,
-                'content'=> $request->contents,
-                'user_id'=> auth()->id() ?? 0,
-                'category_id'=> $request->category_id ?? 0,
-                'point'=> $request->point ?? 0,
-                'time_payment_again'=> $request->time_payment_again ?? 0,
-                'end_video_to_next'=> $request->end_video_to_next == true ? 1 : 0,
+                'name' => $request->name,
+                'price' => $request->price,
+                'content' => $request->contents,
+                'user_id' => auth()->id() ?? 0,
+                'category_id' => $request->category_id ?? 0,
+                'point' => $request->point ?? 0,
+                'time_payment_again' => $request->time_payment_again ?? 0,
+                'end_video_to_next' => $request->end_video_to_next == true ? 1 : 0,
             ];
-            $dataUploadFeatureImage = $this->storageTraitUpload($request , 'feature_image_path' , 'product');
+            $dataUploadFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'product');
 
-            if(!empty($dataUploadFeatureImage)){
+            if (!empty($dataUploadFeatureImage)) {
                 $dataProductUpdate['feature_image_name'] = $dataUploadFeatureImage['file_name'];
                 $dataProductUpdate['feature_image_path'] = $dataUploadFeatureImage['file_path'];
             }
             $this->product->find($id)->update($dataProductUpdate);
             $product = $this->product->find($id);
-            if($request->hasFile('image_path')){
-                $this->productImage->where('product_id' , $id)->delete();
-                foreach ($request->image_path as $fileItem){
-                    $dataProductImageDetail = $this->storageTraitUploadMultiple($fileItem , 'product');
+            if ($request->hasFile('image_path')) {
+                $this->productImage->where('product_id', $id)->delete();
+                foreach ($request->image_path as $fileItem) {
+                    $dataProductImageDetail = $this->storageTraitUploadMultiple($fileItem, 'product');
                     $product->images()->create([
-                        'image_path'=>$dataProductImageDetail['file_path'],
-                        'image_name'=>$dataProductImageDetail['file_name'],
+                        'image_path' => $dataProductImageDetail['file_path'],
+                        'image_name' => $dataProductImageDetail['file_name'],
                     ]);
                 }
             }
 
             // insert tag for product
             $tagsIds = [];
-            if(!empty($request->tags)){
-                foreach ($request->tags as $tagItem){
+            if (!empty($request->tags)) {
+                foreach ($request->tags as $tagItem) {
                     $tagInstance = $this->tag->firstOrCreate([
                         'name' => $tagItem,
                     ]);
@@ -187,24 +206,25 @@ class AdminProductController extends Controller
             $product->tags()->sync($tagsIds);
 
             $this->topic->where('product_id', $product->id)->update([
-                'product_id'=>0
+                'product_id' => 0
             ]);
 
-            if(!empty($request->topic_id)){
+            if (!empty($request->topic_id)) {
                 $this->topic->find($request->topic_id)->update([
-                    'product_id'=>$product->id
+                    'product_id' => $product->id
                 ]);
             }
 
             DB::commit();
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
         }
         return redirect()->route('administrator.products.index');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         return $this->deleteModelTrait($id, $this->product);
     }
 

@@ -63,7 +63,7 @@ class AdminUserController extends Controller
         foreach ($invoices as $invoice){
             $counter = 0;
             $counterProcessed = 0;
-            $sourceChildren = optional($invoice->product->topic)->sourceChildren;
+            $sourceChildren = optional(optional(optional($invoice)->product)->topic)->sourceChildren;
             if(!empty($sourceChildren)){
                 foreach ($sourceChildren as $source){
                     $sources = $source->where('parent_id' , $source->id)->get();

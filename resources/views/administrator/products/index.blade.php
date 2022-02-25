@@ -34,18 +34,24 @@
                             <th scope="col">Giá</th>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">Danh mục</th>
+                            <th scope="col">Chủ đề</th>
+                            <th scope="col">Tổng chương</th>
+                            <th scope="col">Tổng bài học</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @foreach($products as $productItem)
+                        @foreach($products as $index=> $productItem)
                             <tr>
                                 <th scope="row">{{ $productItem->id }}</th>
                                 <td>{{$productItem->name}}</td>
                                 <td>{{ number_format($productItem->price) }}</td>
                                 <td><img class="product_image_150_100" src="{{$productItem->feature_image_path}}"></td>
                                 <td>{{ optional($productItem->category)->name }}</td>
+                                <td>{{ optional($productItem->topic)->name }}</td>
+                                <td>{{ optional($productItem->topic->sourceChildren)->where('parent_id',0)->count() }}</td>
+                                <td>{{ $counters[$index] }}</td>
 
                                 <td>
                                     <a href="{{route('administrator.products.edit' , ['id'=> $productItem->id])}}"

@@ -7,6 +7,8 @@ use App\Models\Invoice;
 use App\Models\PaymentStripe;
 use App\Models\Process;
 use App\Models\Product;
+use App\Models\Source;
+use App\Models\Topic;
 use App\Models\Trading;
 use App\Models\User;
 use function auth;
@@ -21,8 +23,10 @@ class UserController extends Controller
     private $invoice;
     private $process;
     private $paymentStripe;
+    private $source;
+    private $topic;
 
-    public function __construct(User $user, Product $product, Trading $trading, Invoice $invoice, Process $process, PaymentStripe $paymentStripe)
+    public function __construct(User $user, Product $product, Trading $trading, Invoice $invoice, Process $process, PaymentStripe $paymentStripe, Source $source, Topic $topic)
     {
         $this->user = $user;
         $this->product = $product;
@@ -30,10 +34,34 @@ class UserController extends Controller
         $this->trading = $trading;
         $this->process = $process;
         $this->paymentStripe = $paymentStripe;
+        $this->source = $source;
+        $this->topic = $topic;
     }
 
     public function index(){
         return view('user.home.index');
+    }
+
+    public function learningSource($id){
+
+        $product = $this->product->find($id);
+
+        //$source = null;
+        $source = $this->source->where('topic_id', $product->topic->id)->first()->sourceChildren->first();
+
+        $processesd = $this->process->where('user_id' , auth()->id())->get();
+
+        return view('user.learning_source.index', compact('processesd','product', 'source'));
+    }
+    public function learningSourceHasSource($id, $source_id){
+
+        $product = $this->product->find($id);
+
+        $source = $this->source->find($source_id);
+
+        $processesd = $this->process->where('user_id' , auth()->id())->get();
+
+        return view('user.learning_source.index', compact('processesd','product', 'source'));
     }
 
     public function sources(){
