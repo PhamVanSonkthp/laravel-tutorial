@@ -50,21 +50,21 @@
                 </div>
             </div>
 
-            <div class="form-group mt-3">
-                <label>Ảnh chi tiết</label>
-                <input type="file" multiple name="image_path[]" class="form-control-file">
-                <div class="col-md-12 container_image_detail">
-                    <div class="row">
-                        @foreach($product->productImages as $productImageItem)
-                            <div class="col-md-3">
-                                <img class="image_detail_product" src="{{$productImageItem->image_path}}" alt="">
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+{{--            <div class="form-group mt-3">--}}
+{{--                <label>Ảnh chi tiết</label>--}}
+{{--                <input type="file" multiple name="image_path[]" class="form-control-file">--}}
+{{--                <div class="col-md-12 container_image_detail">--}}
+{{--                    <div class="row">--}}
+{{--                        @foreach($product->productImages as $productImageItem)--}}
+{{--                            <div class="col-md-3">--}}
+{{--                                <img class="image_detail_product" src="{{$productImageItem->image_path}}" alt="">--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label>Chọn danh mục</label>
                 <select class="form-control select2_init @error('category_id') is-invalid @enderror" name="category_id">
                     <option value="">Chọn danh mục</option>

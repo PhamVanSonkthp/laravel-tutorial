@@ -28,13 +28,13 @@
                 @enderror
             </div>
 
-            <div class="form-group mt-3">
-                <label>Nhập nội dung rương quà</label>
-                <input type="text" name="contents_parent" class="form-control @error('contents_parent') is-invalid @enderror" placeholder="Nhập nội dung" value="{{old('contents')}}">
-                @error('contents_parent')
-                <div class="alert alert-danger">{{$message}}</div>
-                @enderror
-            </div>
+{{--            <div class="form-group mt-3">--}}
+{{--                <label>Nhập nội dung rương quà</label>--}}
+{{--                <input type="text" name="contents_parent" class="form-control @error('contents_parent') is-invalid @enderror" placeholder="Nhập nội dung" value="{{old('contents')}}">--}}
+{{--                @error('contents_parent')--}}
+{{--                <div class="alert alert-danger">{{$message}}</div>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
 
             <div class="container_sources mt-3">
                 <div class="row">

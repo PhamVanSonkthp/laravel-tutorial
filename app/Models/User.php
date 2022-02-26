@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -69,23 +70,40 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-    public function getUserLevel($id)
+    public function getUserLevel($id = null)
     {
+        if(empty($id)){
+            $id = Auth::id();
+        }
         return $this->getUserLevelTrait($id);
     }
 
-    public function getUserNumberProduct($id)
-    {
+    public function getUserNumberProduct($id){
         return $this->getUserNumberProductTrait($id);
     }
 
-    public function getUserNumberTrading($id)
-    {
+    public function getUserNumberTrading($id){
         return $this->getUserNumberTradingTrait($id);
     }
 
-    public function checkHasProduct($id)
-    {
+    public function getUserNotification($id = null){
+        if(empty($id)){
+            $id = Auth::id();
+        }
+
+        return $this->getUserNotificationTrait($id);
+    }
+
+    public function getUserHasGift($user_id = null, $level_id = null){
+        if(empty($user_id)){
+            $user_id = Auth::id();
+        }
+
+        if(empty($level_id)) return true;
+        return $this->getUserHasGiftTrait($user_id, $level_id);
+    }
+
+    public function checkHasProduct($id){
         return Invoice::where('user_id', auth()->id())->where('product_id', $id)->first() != null;
     }
 }

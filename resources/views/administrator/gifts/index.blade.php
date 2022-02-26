@@ -30,7 +30,7 @@
                         <thead>
                         <tr>
                             <th>Tên rương quà</th>
-                            <th>Nội dung</th>
+{{--                            <th>Nội dung</th>--}}
                             <th>Phần quà - Xác xuất ( % )</th>
                             <th>Cấp độ yêu cầu</th>
                             <th class="text-center" style="width: 100px;">Action</th>
@@ -40,7 +40,7 @@
                         @foreach($gifts as $giftItem)
                             <tr>
                                 <th scope="row">{{ $giftItem->name }}</th>
-                                <th scope="row">{{ $giftItem->content }}</th>
+{{--                                <th scope="row">{{ $giftItem->content }}</th>--}}
                                 <th scope="row">
                                     <ul>
                                         @foreach($giftItem->giftChildren as $giftChildItem)
@@ -50,7 +50,7 @@
                                         @endforeach
                                     </ul>
                                 </th>
-                                <th scope="row">{{ $giftItem->level_id == 0 ? '' : $giftItem->level_id }}</th>
+                                <th scope="row">{{ optional($giftItem->level)->level }}</th>
                                 <td>
                                     <a href="{{route('administrator.gifts.edit' , ['id'=> $giftItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">

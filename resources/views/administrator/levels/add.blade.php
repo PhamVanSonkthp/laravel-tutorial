@@ -36,6 +36,14 @@
                 @enderror
             </div>
 
+            <div class="form-group mt-3">
+                <label>Nội dung món quà</label>
+                <textarea name="contents" class="form-control @error('contents') is-invalid @enderror" placeholder="Nhập nội dung món quà" rows="8">{{old('contents')}}</textarea>
+                @error('contents')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </div>
     </form>

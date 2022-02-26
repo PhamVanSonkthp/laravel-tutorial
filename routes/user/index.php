@@ -46,6 +46,31 @@ Route::prefix('user')->group(function () {
         'uses'=>'App\Http\Controllers\User\UserController@learningSourceHasSource',
     ])->middleware('verified');
 
+    Route::get('/update-process/{id}', [
+        'as'=>'user.updateProcess',
+        'uses'=>'App\Http\Controllers\User\UserController@updateProcess',
+    ])->middleware('verified');
+
+    Route::get('/profile', [
+        'as'=>'user.profile',
+        'uses'=>'App\Http\Controllers\User\UserController@profile',
+    ])->middleware('verified');
+
+    Route::get('/gifts', [
+        'as'=>'user.gifts',
+        'uses'=>'App\Http\Controllers\User\UserController@gifts',
+    ])->middleware('verified');
+
+    Route::get('/open-gift/{level_id}', [
+        'as'=>'user.openGift',
+        'uses'=>'App\Http\Controllers\User\UserController@openGift',
+    ])->middleware('verified');
+
+    Route::put('/profile', [
+        'as'=>'user.updateProfile',
+        'uses'=>'App\Http\Controllers\User\UserController@updateProfile',
+    ])->middleware('verified');
+
 });
 
 Route::get('/email/verify', function () {
@@ -64,9 +89,9 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-Route::get('/profile', function () {
-    // Only verified users may access this route...
-    return view('user.profile.index');
-})->middleware('verified');
+//Route::get('/profile', function () {
+//    // Only verified users may access this route...
+//    return view('user.profile.index');
+//})->middleware('verified');
 
 Auth::routes(['verify' => true]);

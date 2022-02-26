@@ -15,6 +15,10 @@ class Gift extends Model
         return $this->hasOne(Level::class , 'id' , 'level_id');
     }
 
+    public function level(){
+        return $this->hasOne(Level::class , 'id' , 'level_id');
+    }
+
     public function giftChildren(){
         return $this->hasMany(Gift::class , 'parent_id');
     }

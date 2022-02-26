@@ -32,6 +32,8 @@
                             <th>Tên</th>
                             <th>Email</th>
                             <th>Số điện thoại</th>
+                            <th>Cấp độ nhận</th>
+                            <th>Món quà</th>
                             <th>Trạng thái</th>
                             <th>Ngày</th>
                             <th class="text-center" style="width: 50px;">Action</th>
@@ -43,6 +45,8 @@
                                 <td>{{ optional($userGiftItem->user)->name }}</td>
                                 <td>{{ optional($userGiftItem->user)->email }}</td>
                                 <td>{{ optional($userGiftItem->user)->phone }}</td>
+                                <td>{{ optional($userGiftItem->level)->level }}</td>
+                                <td>{{ $userGiftItem->content }}</td>
                                 <td>{{ $userGiftItem->status ? 'Đã nhận' : 'Chưa nhận' }}</td>
                                 <td>{{ $userGiftItem->created_at }}</td>
                                 <td>

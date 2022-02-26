@@ -44,19 +44,64 @@
 
         <div class="d-flex header-right">
 
-{{--            <div class="dropdown d-none d-lg-inline-block me-2">--}}
-{{--                <button type="button" class="btn header-item toggle-search noti-icon waves-effect"--}}
-{{--                        data-target="#search-wrap">--}}
-{{--                    <i class="mdi mdi-magnify"></i>--}}
-{{--                </button>--}}
-{{--            </div>--}}
+            <div class="dropdown d-none d-lg-inline-block">
+                <button type="button" class="btn header-item toggle-search noti-icon waves-effect"
+                        data-target="#search-wrap">
+                    <i class="mdi mdi-magnify"></i>
+                </button>
+            </div>
 
-            <div class="dropdown d-none d-lg-inline-block me-2">
+            <div class="dropdown d-none d-lg-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
                     <i class="mdi mdi-fullscreen"></i>
                 </button>
             </div>
 
+            @auth()
+                <div class="dropdown d-inline-block me-2">
+                    <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="ion ion-md-notifications"></i>
+                        <span class="badge bg-danger rounded-pill">{{\Illuminate\Support\Facades\Auth::user()->getUserNotification()->count()}}</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
+                        <div class="p-3">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h5 class="m-0 font-size-16"> Notification ({{\Illuminate\Support\Facades\Auth::user()->getUserNotification()->count()}}) </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-simplebar style="max-height: 230px;">
+
+                            @foreach(\Illuminate\Support\Facades\Auth::user()->getUserNotification() as $notificationItem)
+                                <a href="" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="avatar-xs me-3">
+                                                <span class="avatar-title bg-warning rounded-circle font-size-16">
+                                                    <i class="mdi mdi-message-text-outline"></i>
+                                                </span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h6 class="mt-0 font-size-15 mb-1">{{json_decode($notificationItem->data , true)['body']}}</h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1">{{json_decode($notificationItem->data , true)['text']}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+
+                        </div>
+                        <div class="p-2 border-top">
+                            <div class="d-grid">
+                                <a class="btn btn-sm btn-link font-size-14  text-center" href="javascript:void(0)">
+                                    View all
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endauth
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
@@ -93,7 +138,7 @@
                         @endif
                     @else
                         @auth
-                            <a href="{{ url('/profile') }}" class="dropdown-item">Profile</a>
+                            <a href="{{ route('user.profile') }}" class="dropdown-item">Profile</a>
                         @else
                             <a href="{{ route('login') }}" class="dropdown-item">Log in</a>
 

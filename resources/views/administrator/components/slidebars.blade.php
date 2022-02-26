@@ -77,6 +77,13 @@
                     </a>
                 </li>
 
+                <li @yield('menu')>
+                    <a href="{{route('administrator.menus.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Bài viết </span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Quản lý học viên</li>
 
                 <li @yield('user')>

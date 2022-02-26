@@ -42,7 +42,7 @@
                                 <td>{{$productItem->created_at}}</td>
                                 <td>{{ $productItem->time_payment_again == 0 ? 'Vĩnh viễn' : (new DateTime($productItem->created_at))->modify('+'. $productItem->time_payment_again .' month')->format('Y-m-d h:m:s')  }}</td>
                                 <td>
-                                    <a href=""
+                                    <a href="{{route('user.learningSource' , ['id' => $productItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Learning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>

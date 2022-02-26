@@ -52,10 +52,11 @@ class AdminProductController extends Controller
         $counters = [];
         foreach ($products as $productItem) {
             $counter = 0;
-            $sourcesBelongTopics = $this->source->where('topic_id', $productItem->topic->id)->get();
+            $sourcesBelongTopics = $this->source->where('topic_id', optional($productItem->topic)->id)->get();
+
 
             foreach ($sourcesBelongTopics as $sourcesBelongTopicItem) {
-                $counter += $sourcesBelongTopicItem->sourceChildren->count();
+                $counter += optional($sourcesBelongTopicItem->sourceChildren)->count();
             }
             $counters[] = $counter;
         }

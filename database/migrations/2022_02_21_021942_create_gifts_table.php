@@ -17,7 +17,7 @@ class CreateGiftsTable extends Migration
             $table->id();
             $table->integer('level_id')->default(0);
             $table->integer('parent_id')->default(0);
-            $table->integer('probability')->default(1);
+            $table->integer('probability')->default(0);
             $table->timestamps();
         });
     }

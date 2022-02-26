@@ -40,7 +40,7 @@
                         @foreach($levels as $levelItem)
                             <tr>
                                 <td>{{ $levelItem->level }}</td>
-                                <td>{{ $levelItem->point_require }}</td>
+                                <td>{{ number_format($levelItem->point_require) }}</td>
                                 <td>{{ $levelItem->content }}</td>
                                 <td>{{ optional( $levelItem->gift)->content }}</td>
                                 <td>

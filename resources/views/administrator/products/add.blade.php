@@ -70,10 +70,10 @@
                 <input type="file" name="feature_image_path" class="form-control-file">
             </div>
 
-            <div class="form-group mt-3">
-                <label>Ảnh chi tiết</label>
-                <input type="file" multiple name="image_path[]" class="form-control-file">
-            </div>
+{{--            <div class="form-group mt-3">--}}
+{{--                <label>Ảnh chi tiết</label>--}}
+{{--                <input type="file" multiple name="image_path[]" class="form-control-file">--}}
+{{--            </div>--}}
 
             <div class="form-group mt-3">
                 <label>Chọn danh mục khóa học</label>
@@ -113,66 +113,8 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="clearfix"></div>
-
-                        <div class="col-md-12">
-                            <div class="container_sources">
-                                <div class="row">
-                                    <div class="col-md-6 mt-1">
-                                        <div class="form-group">
-                                            <input name="sources_name[]" type="text"
-                                                   class="name form-control @error('sources_name') is-invalid @enderror"
-                                                   placeholder="Tên bài học">
-                                            @error('sources_name')
-                                            <div class="alert alert-danger">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mt-1">
-                                        <div class="row">
-                                            <div class="col-11">
-                                                <div class="form-group">
-                                                    <input name="sources_link[]" type="text"
-                                                           class="link form-control @error('sources_link') is-invalid @enderror"
-                                                           placeholder="Link bài học">
-                                                    @error('sources_link')
-                                                    <div class="alert alert-danger">{{$message}}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="col-1">
-                                                <button type="button"
-                                                        class="btn btn-danger waves-effect waves-light action_delete_source">
-                                                    x
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-12">
-                            <button type="button"
-                                    class="btn btn-success waves-effect waves-light action_add_source float-end mt-1">
-                                (+)
-                            </button>
-                        </div>
-
-                        <div class="clearfix"></div>
                     </div>
                 </div>
-
-
-                <div class="col-md-3 mt-3">
-                    <button type="button" class="btn btn-success waves-effect waves-light action_add_list_source">Thêm
-                    </button>
-                </div>
-
 
             </div>
 

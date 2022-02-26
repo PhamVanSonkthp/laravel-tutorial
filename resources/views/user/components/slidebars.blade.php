@@ -59,6 +59,13 @@
                         <span> Hóa đơn </span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{route('user.gifts')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Quà tặng </span>
+                    </a>
+                </li>
                 @endauth
             </ul>
         </div>

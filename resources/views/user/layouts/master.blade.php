@@ -24,7 +24,7 @@
 
 </head>
 
-<body data-sidebar="dark" class="sidebar-enable vertical-collpsed">
+<body id="body" data-sidebar="dark" class="">
 
 
 <!-- Loader -->
@@ -122,13 +122,35 @@
 <div class="rightbar-overlay"></div>
 
 
+
 <!-- JAVASCRIPT -->
 <script src="{{asset('administrator/assets/libs/jquery/jquery.min.js')}}"></script>
+
+<script>
+    function deviceTypeMobile(){
+        const ua = navigator.userAgent;
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+            return true
+        }
+        else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+            return true
+        }
+        return false
+    }
+
+    if(!deviceTypeMobile()){
+        $('#body').addClass('vertical-collpsed')
+    }
+</script>
+
 <script src="{{asset('administrator/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('administrator/assets/libs/metismenu/metisMenu.min.js')}}"></script>
 <script src="{{asset('administrator/assets/libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{asset('administrator/assets/libs/node-waves/waves.min.js')}}"></script>
 <script src="{{asset('administrator/assets/js/app.js')}}"></script>
+
+
+
 @yield('js')
 
 </body>
