@@ -40,9 +40,29 @@
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
+
+            <div class="form-group mt-3">
+                <label>Điểm nhận được khi mua khóa học</label>
+                <input type="number" name="point" class="form-control @error('point') is-invalid @enderror"
+                       placeholder="Nhập điểm" value="{{$product->point}}">
+                @error('point')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+
+            <div class="form-group mt-3">
+                <label>Thời gian đóng học lại (tháng). Nhập 0 nếu là khóa học không gia hạn</label>
+                <input type="text" name="time_payment_again"
+                       class="form-control @error('time_payment_again') is-invalid @enderror"
+                       placeholder="Nhập thời gian" value="{{$product->time_payment_again}}">
+                @error('time_payment_again')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+
             <div class="form-group mt-3">
                 <label>Ảnh đại diện</label>
-                <input type="file" name="feature_image_path" class="form-control-file">
+                <input type="file" name="feature_image_path" class="form-control-file" accept="image/*">
                 <div class="col-md-4 container_feature_image">
                     <div class="row">
                         <img class="feature_image" src="{{$product->feature_image_path}}" alt="">
@@ -75,14 +95,14 @@
                 @enderror
             </div>
 
-            <div class="form-group mt-3">
-                <label>Nhập tags cho sản phẩm</label>
-                <select name="tags[]" class="form-control tags_select_choose" multiple>
-                    @foreach($product->tags as $tagItem)
-                        <option value="{{$tagItem->name}}" selected>{{$tagItem->name}}</option>
-                    @endforeach
-                </select>
-            </div>
+{{--            <div class="form-group mt-3">--}}
+{{--                <label>Nhập tags cho sản phẩm</label>--}}
+{{--                <select name="tags[]" class="form-control tags_select_choose" multiple>--}}
+{{--                    @foreach($product->tags as $tagItem)--}}
+{{--                        <option value="{{$tagItem->name}}" selected>{{$tagItem->name}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
 
         </div>
 

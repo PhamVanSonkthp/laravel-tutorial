@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TopicAddRequest;
 use App\Models\Product;
 use App\Models\Source;
 use App\Models\Topic;
@@ -47,7 +48,7 @@ class AdminTopicController extends Controller
         return view('administrator.topics.add' , compact('products'));
     }
 
-    public function store(Request $request){
+    public function store(TopicAddRequest $request){
         $this->topic->create([
             'product_id'=>$request->product_id ?? 0,
             'name'=>$request->name,
@@ -62,7 +63,7 @@ class AdminTopicController extends Controller
         return view('administrator.topics.edit' , compact('topic' , 'products'));
     }
 
-    public function update($id, Request $request){
+    public function update($id, TopicAddRequest $request){
         $this->topic->find($id)->update([
             'product_id'=>$request->product_id ?? 0,
             'name'=>$request->name,

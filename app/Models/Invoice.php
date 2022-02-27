@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Invoice extends Model
 {
@@ -18,5 +19,12 @@ class Invoice extends Model
     public function user(){
         return $this->hasOne(User::class , 'id' , 'user_id');
     }
+
+    public function getTotalPrice() {
+        return $this->all()->sum(function ($detail) {
+            return $detail->price;
+        });
+    }
+
 
 }

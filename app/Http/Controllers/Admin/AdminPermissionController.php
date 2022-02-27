@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PermissionAddRequest;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,7 @@ class AdminPermissionController extends Controller
         return view('administrator.permission.add');
     }
 
-    public function store(Request $request)
+    public function store(PermissionAddRequest $request)
     {
         try {
             DB::beginTransaction();

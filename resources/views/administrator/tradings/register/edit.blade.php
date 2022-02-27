@@ -12,7 +12,7 @@
     <link href="{{asset('admins/products/add/add.css') }}" rel="stylesheet"/>
 @endsection
 
-@include('administrator.tradings.active_slidebar')
+@include('administrator.tradings.register.active_slidebar')
 
 @section('content')
 

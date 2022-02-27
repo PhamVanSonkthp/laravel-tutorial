@@ -43,7 +43,7 @@
                             <tr>
                                 <th scope="row">{{ $tradingItem->id }}</th>
                                 <td>{{$tradingItem->name}}</td>
-                                <td>{{ number_format($tradingItem->price) }}</td>
+                                <td>${{ number_format($tradingItem->price) }}</td>
                                 <td><img class="product_image_150_100" src="{{$tradingItem->feature_image_path}}"></td>
                                 <td> <a href="{{$tradingItem->link}}">{{ $tradingItem->link }}</a></td>
 

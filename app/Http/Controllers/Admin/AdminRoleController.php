@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoleAddRequest;
+use App\Http\Requests\RoleEditRequest;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Traits\DeleteModelTrait;
@@ -32,7 +34,7 @@ class AdminRoleController extends Controller
         return view('administrator.role.add' , compact('premissionsParent'));
     }
 
-    public function store(Request $request){
+    public function store(RoleAddRequest $request){
         $role = $this->role->create([
             'name' => $request->name,
             'display_name' => $request->display_name,
@@ -48,7 +50,7 @@ class AdminRoleController extends Controller
         return view('administrator.role.edit' , compact('premissionsParent'  , 'role' , 'permissionsChecked'));
     }
 
-    public function update($id , Request $request){
+    public function update($id , RoleEditRequest $request){
         $this->role->find($id)->update([
             'name' => $request->name,
             'display_name' => $request->display_name,

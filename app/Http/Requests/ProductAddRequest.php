@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductAddRequest extends FormRequest
 {
@@ -21,14 +22,12 @@ class ProductAddRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules($object)
     {
         return [
-            'name'=>'required|unique:products|max:255|min:10',
+            'name'=>'required|unique:products',
             'price'=>'required|numeric|min:0',
             'contents'=>'required',
-            'sources_name'=>'required',
-            'sources_link'=>'required',
             'point'=>'required|numeric|min:0',
             'time_payment_again'=>'required|numeric|min:0',
         ];

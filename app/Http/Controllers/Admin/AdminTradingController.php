@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductAddRequest;
 use App\Http\Requests\ProductEditRequest;
+use App\Http\Requests\RegisterTradingAddRequest;
+use App\Http\Requests\TradingAddRequest;
+use App\Http\Requests\TradingEditRequest;
 use App\Models\InvoiceTrading;
 use App\Models\RegisterTrading;
 use App\Models\Trading;
@@ -60,7 +63,7 @@ class AdminTradingController extends Controller
         return view('administrator.tradings.register.add', compact('users', 'tradings'));
     }
 
-    public function store(Request $request)
+    public function store(TradingAddRequest $request)
     {
         $dataTradingCreate = [
             'name' => $request->name,
@@ -82,7 +85,7 @@ class AdminTradingController extends Controller
         return redirect()->route('administrator.tradings.index');
     }
 
-    public function storeRegister(Request $request)
+    public function storeRegister(RegisterTradingAddRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -124,7 +127,7 @@ class AdminTradingController extends Controller
         return view('administrator.tradings.register.edit', compact('registerTrading', 'users', 'tradings'));
     }
 
-    public function update($id, Request $request)
+    public function update($id, TradingEditRequest $request)
     {
         $dataTradingUpdate = [
             'name' => $request->name,
@@ -145,7 +148,7 @@ class AdminTradingController extends Controller
         return redirect()->route('administrator.tradings.index');
     }
 
-    public function updateRegister($id, Request $request)
+    public function updateRegister($id, RegisterTradingAddRequest $request)
     {
         $this->registerTrading->find($id)->update([
             'trading_id' => $request->trading_id,

@@ -40,7 +40,7 @@
             <div class="form-group mt-3">
                 <label>Điểm nhận được khi đăng ký trading</label>
                 <input type="number" name="point" class="form-control @error('point') is-invalid @enderror"
-                       placeholder="Nhập điểm" value="{{old('point')}}">
+                       placeholder="Nhập điểm" value="{{old('point') ?? 0}}">
                 @error('point')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
@@ -52,7 +52,7 @@
 
                 <input type="number" name="time_payment_again"
                        class="form-control @error('time_payment_again') is-invalid @enderror"
-                       placeholder="Nhập thời gian" value="{{old('time_payment_again')}}">
+                       placeholder="Nhập thời gian" value="{{old('time_payment_again') ?? 0}}">
                 @error('time_payment_again')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
@@ -71,7 +71,7 @@
 
             <div class="form-group mt-3">
                 <label>Ảnh đại diện</label>
-                <input type="file" name="feature_image_path" class="form-control-file">
+                <input type="file" name="feature_image_path" class="form-control-file" accept="image/*">
             </div>
 
         </div>

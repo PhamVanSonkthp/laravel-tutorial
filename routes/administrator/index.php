@@ -404,6 +404,45 @@ Route::prefix('administrator')->group(function () {
 
     });
 
+    Route::prefix('post')->group(function () {
+        Route::get('/', [
+            'as'=>'administrator.post.index',
+            'uses'=>'App\Http\Controllers\Admin\AdminPostController@index',
+            'middleware'=>'can:post-list',
+        ]);
+
+        Route::get('/create', [
+            'as'=>'administrator.post.create',
+            'uses'=>'App\Http\Controllers\Admin\AdminPostController@create',
+            'middleware'=>'can:post-add',
+        ]);
+
+        Route::post('/store', [
+            'as'=>'administrator.post.store',
+            'uses'=>'App\Http\Controllers\Admin\AdminPostController@store',
+            'middleware'=>'can:post-add',
+        ]);
+
+        Route::get('/edit/{id}', [
+            'as'=>'administrator.post.edit',
+            'uses'=>'App\Http\Controllers\Admin\AdminPostController@edit',
+            'middleware'=>'can:post-edit',
+        ]);
+
+        Route::put('/update/{id}', [
+            'as'=>'administrator.post.update',
+            'uses'=>'App\Http\Controllers\Admin\AdminPostController@update',
+            'middleware'=>'can:post-edit',
+        ]);
+
+        Route::get('/delete/{id}', [
+            'as'=>'administrator.post.delete',
+            'uses'=>'App\Http\Controllers\Admin\AdminPostController@delete',
+            'middleware'=>'can:post-delete',
+        ]);
+
+    });
+
     Route::prefix('tradings')->group(function () {
         Route::get('/', [
             'as'=>'administrator.tradings.index',

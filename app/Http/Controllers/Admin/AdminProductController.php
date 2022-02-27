@@ -17,6 +17,7 @@ use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use function auth;
 use function redirect;
 use function view;
@@ -61,17 +62,17 @@ class AdminProductController extends Controller
             $counters[] = $counter;
         }
 
-        return view('administrator.products.index', compact('products' , 'counters'));
+        return view('administrator.products.index', compact('products', 'counters'));
     }
 
     public function create()
     {
-        $htmlOption = $this->getCategory($parent_id = '');
+        $htmlOption = $this->getCategory();
         $topics = $this->topic->all();
         return view('administrator.products.add', compact('htmlOption', 'topics'));
     }
 
-    public function getCategory($parent_id)
+    public function getCategory($parent_id = null)
     {
         $data = $this->category->all();
         $recusive = new Recusive($data);
@@ -86,6 +87,7 @@ class AdminProductController extends Controller
             DB::beginTransaction();
             $dataProductCreate = [
                 'name' => $request->name,
+                'slug' => Str::slug($request->name),
                 'price' => $request->price,
                 'content' => $request->contents,
                 'user_id' => auth()->id() ?? 0,
@@ -165,6 +167,7 @@ class AdminProductController extends Controller
             DB::beginTransaction();
             $dataProductUpdate = [
                 'name' => $request->name,
+                'slug' => Str::slug($request->name),
                 'price' => $request->price,
                 'content' => $request->contents,
                 'user_id' => auth()->id() ?? 0,

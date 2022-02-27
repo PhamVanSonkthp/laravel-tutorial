@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Process;
 use App\Models\Product;
 use App\Models\Slider;
@@ -15,25 +16,30 @@ class WelcomeController extends Controller
     private $trading;
     private $source;
     private $process;
-    private $sliders;
+    private $slider;
+    private $post;
 
-    public function __construct(Product $product, Trading $trading, Source $source, Process $process, Slider $slider)
+    public function __construct(Product $product, Trading $trading, Source $source, Process $process, Slider $slider, Post $post)
     {
         $this->product = $product;
         $this->trading = $trading;
         $this->source = $source;
         $this->process = $process;
         $this->slider = $slider;
+        $this->post = $post;
     }
 
-    public function index(){
+    public function index()
+    {
         $sliders = $this->slider->take(5)->latest()->get();
         $products = $this->product->take(8)->latest()->get();
         $tradings = $this->trading->take(8)->latest()->get();
-        return view('user.home.index' , compact('products', 'tradings','sliders'));
+        $posts = $this->post->take(8)->latest()->get();
+        return view('user.home.index', compact('products', 'tradings', 'sliders', 'posts'));
     }
 
-    public function product($id){
+    public function product($id)
+    {
         $product = $this->product->find($id);
 
         $counter = 0;
@@ -45,14 +51,15 @@ class WelcomeController extends Controller
 
         $processesd = [];
 
-        if(auth()){
-            $processesd = $this->process->where('user_id' , auth()->id())->get();
+        if (auth()) {
+            $processesd = $this->process->where('user_id', auth()->id())->get();
         }
 
-        return view('user.home.product', compact('product', 'counter','processesd'));
+        return view('user.home.product', compact('product', 'counter', 'processesd'));
     }
 
-    public function invoiceProduct($id){
+    public function invoiceProduct($id)
+    {
         $product = $this->product->find($id);
         return view('user.home.invoice-product', compact('product'));
     }

@@ -16,6 +16,7 @@ use App\Http\Controllers\Payment\StripeController;
 
 Route::get('/admin', 'App\Http\Controllers\Admin\AdminController@loginAdmin');
 Route::post('/admin', 'App\Http\Controllers\Admin\AdminController@postLoginAdmin');
+
 Route::get('/admin/logout', [
     'as' => 'administrator.logout',
     'uses'=>'\App\Http\Controllers\Admin\AdminController@logout'

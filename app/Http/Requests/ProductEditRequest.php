@@ -24,9 +24,11 @@ class ProductEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255|min:10',
+            'name'=>'required|unique:products',
             'price'=>'required|numeric|min:0',
             'contents'=>'required',
+            'point'=>'required|numeric|min:0',
+            'time_payment_again'=>'required|numeric|min:0',
         ];
     }
 

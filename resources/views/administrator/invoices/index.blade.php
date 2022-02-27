@@ -40,7 +40,7 @@
                             <tr>
                                 <td>{{ $invoiceItem->id }}</td>
                                 <td>{{ optional($invoiceItem->product)->name }}</td>
-                                <td>{{ number_format($invoiceItem->price) }}</td>
+                                <td>${{ number_format($invoiceItem->price) }}</td>
                                 <td>{{ $invoiceItem->created_at }}</td>
                                 <td>{{ $invoiceItem->user->name }}</td>
                                 <td>{{ $invoiceItem->user->email }}</td>
@@ -87,7 +87,7 @@
                             <tr>
                                 <td>{{ $invoiceTradingItem->id }}</td>
                                 <td>{{ optional($invoiceTradingItem->trading)->name }}</td>
-                                <td>{{ number_format($invoiceTradingItem->price) }}</td>
+                                <td>${{ number_format($invoiceTradingItem->price) }}</td>
                                 <td>{{ $invoiceTradingItem->created_at }}</td>
                                 <td>{{ $invoiceTradingItem->user->name }}</td>
                                 <td>{{ $invoiceTradingItem->user->email }}</td>

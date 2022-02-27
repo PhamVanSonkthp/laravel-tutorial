@@ -72,7 +72,7 @@
 
             <div class="form-group mt-3">
                 <label>Ảnh đại diện</label>
-                <input type="file" name="feature_image_path" class="form-control-file">
+                <input type="file" name="feature_image_path" class="form-control-file" accept="image/*">
                 <div class="col-md-4 container_feature_image">
                     <div class="row">
                         <img class="feature_image" src="{{$trading->feature_image_path}}" alt="">

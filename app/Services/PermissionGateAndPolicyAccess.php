@@ -22,6 +22,7 @@ class PermissionGateAndPolicyAccess{
         $this->defineGateSource();
         $this->defineGatePaymentStripe();
         $this->defineGateNotification();
+        $this->defineGatePost();
     }
 
     public function defineGateCategory(){
@@ -127,6 +128,13 @@ class PermissionGateAndPolicyAccess{
         Gate::define('notification-add','App\Policies\NotificationPolicy@create');
         Gate::define('notification-edit','App\Policies\NotificationPolicy@update');
         Gate::define('notification-delete','App\Policies\NotificationPolicy@delete');
+    }
+
+    public function defineGatePost(){
+        Gate::define('post-list','App\Policies\PostPolicy@view');
+        Gate::define('post-add','App\Policies\PostPolicy@create');
+        Gate::define('post-edit','App\Policies\PostPolicy@update');
+        Gate::define('post-delete','App\Policies\PostPolicy@delete');
     }
 
 }

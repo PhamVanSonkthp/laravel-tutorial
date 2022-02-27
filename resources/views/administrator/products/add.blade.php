@@ -40,7 +40,7 @@
             <div class="form-group mt-3">
                 <label>Điểm nhận được khi mua khóa học</label>
                 <input type="number" name="point" class="form-control @error('point') is-invalid @enderror"
-                       placeholder="Nhập điểm" value="{{old('point')}}">
+                       placeholder="Nhập điểm" value="{{old('point') ?? 0}}">
                 @error('point')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
@@ -50,7 +50,7 @@
                 <label>Thời gian đóng học lại (tháng). Nhập 0 nếu là khóa học không gia hạn</label>
                 <input type="text" name="time_payment_again"
                        class="form-control @error('time_payment_again') is-invalid @enderror"
-                       placeholder="Nhập thời gian" value="{{old('time_payment_again')}}">
+                       placeholder="Nhập thời gian" value="{{old('time_payment_again') ?? 0}}">
                 @error('time_payment_again')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror
@@ -67,7 +67,7 @@
 
             <div class="form-group mt-3">
                 <label>Ảnh đại diện</label>
-                <input type="file" name="feature_image_path" class="form-control-file">
+                <input type="file" name="feature_image_path" class="form-control-file" accept="image/*">
             </div>
 
 {{--            <div class="form-group mt-3">--}}
@@ -86,12 +86,12 @@
                 @enderror
             </div>
 
-            <div class="form-group mt-3">
-                <label>Nhập tags cho khóa học</label>
-                <select name="tags[]" class="form-control tags_select_choose" multiple>
+{{--            <div class="form-group mt-3">--}}
+{{--                <label>Nhập tags cho khóa học</label>--}}
+{{--                <select name="tags[]" class="form-control tags_select_choose" multiple>--}}
 
-                </select>
-            </div>
+{{--                </select>--}}
+{{--            </div>--}}
 
         </div>
 
@@ -137,9 +137,7 @@
 
 @section('js')
     <script src="{{asset('vendor/select2/select2.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.3/tinymce.min.js"
-            integrity="sha512-ykwx/3dGct2v2AKqqaDCHLt1QFVzdcpad7P5LfgpqY8PJCRqAqOeD4Bj63TKnSQy4Yok/6QiCHiSV/kPdxB7AQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{asset('vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{asset('admins/products/add/add.js') }}"></script>
 
     <script>

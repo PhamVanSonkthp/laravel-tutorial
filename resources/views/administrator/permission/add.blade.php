@@ -18,12 +18,15 @@
         @csrf
         <div class="form-group">
             <label>Chọn phân module</label>
-            <select class="form-control select2_init" name="module_parent">
+            <select class="form-control select2_init @error('module_parent') is-invalid @enderror" name="module_parent">
                 <option value="">Chọn tên module</option>
                 @foreach(config('permissions.table_module') as $module_item)
                     <option value="{{$module_item}}">{{$module_item}}</option>
                 @endforeach
             </select>
+            @error('module_parent')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
         </div>
 
         <div class="form-group mt-3">
@@ -31,7 +34,7 @@
                 @foreach(config('permissions.module_children') as $module_item_children)
                     <div class="col-md-3">
                         <label>
-                            <input name="module_children[]" type="checkbox" value="{{$module_item_children}}">
+                            <input name="module_children[]" type="checkbox" value="{{$module_item_children}}" checked>
                             {{$module_item_children}}
                         </label>
                     </div>

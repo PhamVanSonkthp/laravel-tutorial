@@ -38,7 +38,7 @@
 
             <div class="form-group mt-3">
                 <label>Hình ảnh</label>
-                <input type="file" name="image_path" class="form-control-file">
+                <input type="file" name="image_path" class="form-control-file" accept="image/*">
                 @error('image_path')
                 <div class="alert alert-danger">{{$message}}</div>
                 @enderror

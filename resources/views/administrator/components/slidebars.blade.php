@@ -47,14 +47,14 @@
 
                 <li class="menu-title">Quản lý Trading</li>
 
-                <li>
+                <li @yield('trading')>
                     <a href="{{route('administrator.tradings.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Danh sách trading </span>
                     </a>
                 </li>
 
-                <li>
+                <li @yield('register_trading')>
                     <a href="{{route('administrator.tradings.register.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Danh sách đăng ký trading </span>
@@ -77,8 +77,8 @@
                     </a>
                 </li>
 
-                <li @yield('menu')>
-                    <a href="{{route('administrator.menus.index')}}" class="waves-effect">
+                <li @yield('post')>
+                    <a href="{{route('administrator.post.index')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Bài viết </span>
                     </a>

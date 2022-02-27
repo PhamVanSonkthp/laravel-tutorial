@@ -21,7 +21,7 @@
         @csrf
         <div class="col-md-6">
 
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label>Nhập tên bài học</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                        placeholder="Nhập tên" value="{{$source->name}}">
@@ -48,26 +48,18 @@
 
         <div class="col-md-12 mt-3">
             <label>Nhập các bài học</label>
-            <div class="container_sources">
+            <div class="container_sources mt-3">
                 <div class="row">
-                    <div class="col-md-4 mt-1">
+                    <div class="col-md-6 mt-1">
                         <div class="form-group">
                             <label>Tên bài học</label>
                         </div>
                     </div>
 
-                    <div class="col-md-4 mt-1">
+                    <div class="col-md-6 mt-1">
                         <div class="form-group">
                             <div class="form-group">
                                 <label>Link video</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 mt-1">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label>Link tài liệu</label>
                             </div>
                         </div>
                     </div>
@@ -75,7 +67,7 @@
 
                 @foreach($source->sourceChildren as $sourceItem)
                     <div class="row">
-                        <div class="col-md-4 mt-1">
+                        <div class="col-md-6 mt-1">
                             <div class="form-group">
                                 <input name="sources_name[]" type="text"
                                        class="name form-control @error('sources_name') is-invalid @enderror"
@@ -86,23 +78,12 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mt-1">
+                        <div class="col-md-5 mt-1">
                             <div class="form-group">
                                 <input name="sources_link[]" type="text"
                                        class="link form-control @error('sources_link') is-invalid @enderror"
                                        placeholder="Link video" value="{{$sourceItem->link}}">
                                 @error('sources_link')
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 mt-1">
-                            <div class="form-group">
-                                <input name="sources_doc[]" type="text"
-                                       class="link form-control @error('sources_doc') is-invalid @enderror"
-                                       placeholder="Link tài liệu" value="{{$sourceItem->doc}}">
-                                @error('sources_doc')
                                 <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
                             </div>
@@ -114,6 +95,16 @@
                                 x
                             </button>
                         </div>
+
+                        <div class="form-group col-md-12 mt-1">
+                        <textarea style="min-height: 100px;" name="sources_doc[]" placeholder="Nhập tài liệu"
+                                  class="form-control tinymce_editor_init @error('sources_doc') is-invalid @enderror"
+                                  rows="5">{{$sourceItem->doc}}</textarea>
+                            @error('sources_doc')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+
                     </div>
                 @endforeach
             </div>
@@ -138,6 +129,7 @@
 
 @section('js')
     <script src="{{asset('vendor/select2/select2.min.js') }}"></script>
+    <script src="{{asset('vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{asset('admins/products/add/add.js') }}"></script>
 
     <script>
@@ -145,7 +137,7 @@
         function actionAddSource(event) {
             event.preventDefault()
             $(this).parent().parent().children('div').children('.container_sources').append(`<div class="row">
-                    <div class="col-md-4 mt-1">
+                    <div class="col-md-6 mt-1">
                         <div class="form-group">
                             <input name="sources_name[]" type="text"
                                    class="name form-control @error('sources_name') is-invalid @enderror"
@@ -156,23 +148,12 @@
             </div>
         </div>
 
-        <div class="col-md-4 mt-1">
+        <div class="col-md-5 mt-1">
             <div class="form-group">
                 <input name="sources_link[]" type="text"
                        class="link form-control @error('sources_link') is-invalid @enderror"
                                    placeholder="Link video">
                             @error('sources_link')
-            <div class="alert alert-danger">{{$message}}</div>
-                            @enderror
-            </div>
-        </div>
-
-        <div class="col-md-3 mt-1">
-            <div class="form-group">
-                <input name="sources_doc[]" type="text"
-                       class="link form-control @error('sources_doc') is-invalid @enderror"
-                                   placeholder="Link tài liệu">
-                            @error('sources_doc')
             <div class="alert alert-danger">{{$message}}</div>
                             @enderror
             </div>
@@ -184,13 +165,25 @@
                 x
             </button>
         </div>
-    </div>`)
+
+        <div class="form-group col-md-12 mt-1">
+                        <textarea style="min-height: 100px;" name="sources_doc[]" placeholder="Nhập tài liệu"
+                                  class="form-control tinymce_editor_init @error('sources_doc') is-invalid @enderror"
+                                  rows="5">{{old('sources_doc')}}</textarea>
+                        @error('sources_doc')
+            <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+            </div>
+
+</div>`)
+
+            //tinyMCE.remove();
+            reinstallTinymce();
         }
 
         function actionDeleteSource(event) {
             event.preventDefault()
-
-            $(this).parent().parent().parent().parent().remove()
+            $(this).parent().parent().remove()
         }
 
         $(function () {

@@ -77,6 +77,11 @@ return [
         'notification-add' => 'notification_add',
         'notification-edit' => 'notification_edit',
         'notification-delete' => 'notification_delete',
+
+        'post-list' => 'post_list',
+        'post-add' => 'post_add',
+        'post-edit' => 'post_edit',
+        'post-delete' => 'post_delete',
     ],
     'table_module'=>[
         'category',
@@ -94,6 +99,7 @@ return [
         'source',
         'payment-stripe',
         'notification',
+        'post',
     ],
     'module_children'=>[
         'list',
