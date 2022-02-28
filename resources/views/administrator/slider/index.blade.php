@@ -33,6 +33,7 @@
                             <th>Tên</th>
                             <th>Mô tả</th>
                             <th>Hình ảnh</th>
+                            <th>Link</th>
                             <th class="text-center" style="width: 100px;">Action</th>
                         </tr>
                         </thead>
@@ -43,6 +44,7 @@
                                 <td>{{$slidersItem->name}}</td>
                                 <td>{{ ($slidersItem->decription) }}</td>
                                 <td> <img class="product_image_150_100" src="{{$slidersItem->image_path}}"> </td>
+                                <td><a href="{{$slidersItem->link}}">{{ ($slidersItem->link) }}</a></td>
                                 <td>
                                     <a href="{{route('slider.edit' , ['id'=> $slidersItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Edit">

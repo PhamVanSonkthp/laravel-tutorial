@@ -24,7 +24,7 @@ class ProductEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:products',
+            'name'=>'required',
             'price'=>'required|numeric|min:0',
             'contents'=>'required',
             'point'=>'required|numeric|min:0',

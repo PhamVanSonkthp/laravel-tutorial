@@ -134,21 +134,21 @@
 
                 <li @yield('employee')>
                     <a href="{{route('administrator.employees.index')}}" class="waves-effect">
-                        <i class="mdi mdi-calendar-check"></i>
+                        <i class="mdi mdi-cube-outline"></i>
                         <span>Danh sách nhân viên</span>
                     </a>
                 </li>
 
                 <li @yield('role')>
                     <a href="{{route('administrator.roles.index')}}" class="waves-effect">
-                        <i class="mdi mdi-calendar-check"></i>
+                        <i class="mdi mdi-cube-outline"></i>
                         <span>Danh sách vai trò</span>
                     </a>
                 </li>
 
                 <li @yield('permission')>
                     <a href="{{route('administrator.permissions.create')}}" class="waves-effect">
-                        <i class="mdi mdi-calendar-check"></i>
+                        <i class="mdi mdi-cube-outline"></i>
                         <span>Tạo dữ liệu phân quyền</span>
                     </a>
                 </li>

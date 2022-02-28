@@ -45,7 +45,7 @@
                         @foreach($products as $index=> $productItem)
                             <tr>
                                 <th scope="row">{{ $productItem->id }}</th>
-                                <td>{{$productItem->name}}</td>
+                                <td> <a target="_blank" href="{{route('welcome.product', ['slug' => $productItem->slug])}}">{{$productItem->name}}</a> </td>
                                 <td>${{ number_format($productItem->price) }}</td>
                                 <td><img class="product_image_150_100" src="{{$productItem->feature_image_path}}"></td>
                                 <td>{{ optional($productItem->category)->name }}</td>

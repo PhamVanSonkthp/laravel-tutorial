@@ -3,7 +3,7 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index.html" class="logo logo-dark">
+                <a href="{{route('welcome.index')}}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="22">
                                 </span>
@@ -12,7 +12,7 @@
                                 </span>
                 </a>
 
-                <a href="index.html" class="logo logo-light">
+                <a href="{{route('welcome.index')}}" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="22">
                                 </span>
@@ -74,7 +74,7 @@
                         <div data-simplebar style="max-height: 230px;">
 
                             @foreach(\Illuminate\Support\Facades\Auth::user()->getUserNotification() as $notificationItem)
-                                <a href="" class="text-reset notification-item">
+                                <a href="{{route('user.notifications')}}" class="text-reset notification-item">
                                     <div class="d-flex">
                                         <div class="avatar-xs me-3">
                                                 <span class="avatar-title bg-warning rounded-circle font-size-16">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="p-2 border-top">
                             <div class="d-grid">
-                                <a class="btn btn-sm btn-link font-size-14  text-center" href="javascript:void(0)">
+                                <a class="btn btn-sm btn-link font-size-14  text-center" href="{{route('user.notifications')}}">
                                     View all
                                 </a>
                             </div>

@@ -5,12 +5,12 @@
             <div class="navbar-brand-box">
 
                 <a href="{{route('administrator.dashboard.index')}}" class="logo logo-light">
-                                <span class="logo-sm">
-                                    <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="22">
-                                </span>
-                    <span class="logo-lg">
-                                    <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="36">
-                                </span>
+{{--                                <span class="logo-sm">--}}
+{{--                                    <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="22">--}}
+{{--                                </span>--}}
+{{--                    <span class="logo-lg">--}}
+{{--                                    <img src="{{asset('administrator/assets/images/users/logo.png')}}" alt="" height="36">--}}
+{{--                                </span>--}}
                     <span class="ms-2">
                         {{ optional(\Illuminate\Support\Facades\Auth::user())->name  }}
                     </span>

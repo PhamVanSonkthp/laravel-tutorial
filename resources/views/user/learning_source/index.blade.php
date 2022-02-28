@@ -37,7 +37,7 @@
                                 allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen></iframe> -->
 
-                            <iframe src="https://player.vimeo.com/video/180016798?autoplay=1&amp;autopause=0"
+                            <iframe src="https://player.vimeo.com/video/{{$source->link}}?autoplay=1&amp;autopause=0"
                                     width="640" height="640" frameborder="0"
                                     allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     id="iframecheck" allowfullscreen="" data-ready="true"></iframe>
@@ -220,7 +220,7 @@
                                 <div class="tab-pane fade show active" id="document" role="tabpanel"
                                      aria-labelledby="document-tab">
                                     <p class="lecture__content-description">
-                                        {{$source->doc}}
+                                        {!! $source->doc !!}}
                                     </p>
                                 </div>
 

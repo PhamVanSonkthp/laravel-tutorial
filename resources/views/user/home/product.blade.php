@@ -36,7 +36,7 @@
 
                     <div class="course__content-main">
                         <div class="course__content-general">
-                            <span><strong>{{optional($product->topic->sourceChildren)->where('parent_id',0)->count()}} </strong>phần </span>&nbsp;•&nbsp;
+                            <span><strong>{{optional(optional(optional($product->topic)->sourceChildren)->where('parent_id',0))->count()}} </strong>phần </span>&nbsp;•&nbsp;
                             <span><strong>{{$counter}} </strong>bài học </span>
                         </div>
                     </div>
@@ -44,10 +44,12 @@
                     <div class="accordion course__accordion" id="accordionPanelsStayOpenExample">
 
                         @php
-                            $numberSource = 0
+                            $numberSource = 0;
+
+                            $sources = optional(optional($product->topic)->sourceChildren)->where('parent_id',0) ?? [];
                         @endphp
 
-                        @foreach(optional($product->topic->sourceChildren)->where('parent_id',0) as $index=> $sourceParent)
+                        @foreach($sources as $index=> $sourceParent)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="course_one">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -153,7 +155,7 @@
 
                         <a href="{{\Illuminate\Support\Facades\Auth::user()->checkHasProduct($product->id) ? route('user.learningSource' , ['id' => $product->id]) : route('user.paymentProduct' , ['id' => $product->id])}} " class="course__register-btn" style="width: 50%">{{\Illuminate\Support\Facades\Auth::user()->checkHasProduct($product->id) ? 'Tiếp tục học' : 'Đăng ký học'}}</a>
                     @else
-                        <a href="#" class="course__register-btn" style="width: 50%">Đăng ký học</a>
+                        <a href="{{ route('login') }}" class="course__register-btn" style="width: 50%">Đăng ký học</a>
                     @endauth
 
                     <ul class="course__register-info">

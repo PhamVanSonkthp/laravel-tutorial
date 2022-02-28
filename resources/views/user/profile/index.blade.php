@@ -21,7 +21,8 @@
                 <img src="{{asset('user/assets/images/Frame.svg')}}" alt="Ảnh hạng">
                 <div class="account__level-info">
                     <h3 class="account__level-title">Hạng thành viên hiện tại</h3>
-                    <p class="account__level-paces">Rising Star</p>
+                    <p class="text-start account__level-paces text-dark">Điểm của bạn: &nbsp;<span class="account__level-paces">{{number_format($user->point)}} P</span></p>
+                    <p class="text-start account__level-paces text-dark">Level: &nbsp;<span class="account__level-paces">{{$user->getUserLevel()}}</span></p>
                 </div>
             </div>
 
@@ -41,7 +42,6 @@
 {{--                    </div>--}}
 {{--                    <img src="{{asset('user/assets/images/level.png')}}" alt="Ảnh LevelUp">--}}
                 </div>
-                <div class="account__progress-heading">Điểm của bạn: &nbsp;<span>{{number_format($user->point)}} P</span></div>
             </div>
 
             <form action="{{route('user.updateProfile')}}" class="account__form" method="post" enctype="multipart/form-data">
@@ -67,6 +67,14 @@
                     <label for="formGroupPhone" class="form-label">Số điện thoại</label>
                     <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="formGroupPhone" placeholder="Phone input" value="{{$user->phone}}" disabled>
                     @error('phone')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
+                </div>
+
+                <div class="account__form-group">
+                    <label for="formGroupPassword" class="form-label">Mật khẩu</label>
+                    <input type="text" name="password" class="form-control @error('password') is-invalid @enderror" id="formGroupPassword" placeholder="Password input" disabled>
+                    @error('password')
                     <div class="alert alert-danger">{{$message}}</div>
                     @enderror
                 </div>

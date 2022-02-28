@@ -15,4 +15,9 @@ class Level extends Model
         return $this->hasOne(Gift::class);
     }
 
+
+    public function calculateLevel($id, $point){
+        $level = Level::find($id);
+        return ($point * 100) / $level->point_require;
+    }
 }

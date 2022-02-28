@@ -17,20 +17,27 @@
                 </li>
 
                 <li>
-                    <a href="#" class="waves-effect">
+                    <a href="{{route('welcome.products')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Các khóa học </span>
                     </a>
                 </li>
 
-                @auth
-
                 <li>
-                    <a href="#" class="waves-effect">
+                    <a href="{{route('welcome.tradings')}}" class="waves-effect">
                         <i class="mdi mdi-cube-outline"></i>
                         <span> Trading </span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{route('welcome.posts')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Bài viết </span>
+                    </a>
+                </li>
+
+                @auth
 
                 <li>
                     <a href="{{route('user.sources')}}" class="waves-effect">

@@ -5,7 +5,7 @@
 @endsection
 
 @section('name')
-    <h4 class="page-title">Khóa học</h4>
+    <h4 class="page-title">Trading</h4>
 @endsection
 
 @section('css')
@@ -27,7 +27,7 @@
                             <th scope="col">Trạng thái</th>
                             <th scope="col">Ngày học</th>
                             <th scope="col">Ngày gia hạn</th>
-                            <th class="text-center" style="width: 50px;">Action</th>
+                            <th scope="col">Link học</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,15 +39,7 @@
                                 <td>{{ ( $tradingItem->time_payment_again == 0 || (new DateTime($tradingItem->updated_at))->diff(new DateTime())->m  == 0 )? 'Hoạt động' : 'Hết hạn' }}</td>
                                 <td>{{$tradingItem->created_at}}</td>
                                 <td>{{ $tradingItem->time_payment_again == 0 ? 'Vĩnh viễn' : (new DateTime($tradingItem->created_at))->modify('+'. $tradingItem->time_payment_again .' month')->format('Y-m-d h:m:s')  }}</td>
-                                <td>
-                                    <a href=""
-                                       class="btn btn-outline-secondary btn-sm edit"
-                                       title="Learning">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-
-                                </td>
-
+                                <td><a href="{{$tradingItem->link}}">{{$tradingItem->link}}</a></td>
                             </tr>
                         @endforeach
 

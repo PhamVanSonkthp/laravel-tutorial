@@ -39,6 +39,7 @@ class AdminSliderController extends Controller
             $dataSliderCreate = [
                 'name'=> $request->name,
                 'decription'=> $request->decription,
+                'link'=> $request->link,
             ];
             $dataUploadFeatureImage = $this->storageTraitUpload($request , 'image_path' , 'slider');
 
@@ -67,6 +68,7 @@ class AdminSliderController extends Controller
         $updateItem = [
             'name' => $request->name,
             'decription'=> $request->decription,
+            'link'=> $request->link,
         ];
 
         $dataUploadFeatureImage = $this->storageTraitUpload($request , 'image_path' , 'slider');

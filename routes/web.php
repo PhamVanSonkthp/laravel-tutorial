@@ -28,9 +28,34 @@ Route::prefix('/')->group(function () {
         'uses'=>'App\Http\Controllers\WelcomeController@index',
     ]);
 
-    Route::get('/product/{id}', [
+    Route::get('/product/{slug}', [
         'as'=>'welcome.product',
         'uses'=>'App\Http\Controllers\WelcomeController@product',
+    ]);
+
+    Route::get('/trading/{slug}', [
+        'as'=>'welcome.trading',
+        'uses'=>'App\Http\Controllers\WelcomeController@trading',
+    ]);
+
+    Route::get('/post/{slug}', [
+        'as'=>'welcome.post',
+        'uses'=>'App\Http\Controllers\WelcomeController@post',
+    ]);
+
+    Route::get('/products', [
+        'as'=>'welcome.products',
+        'uses'=>'App\Http\Controllers\WelcomeController@products',
+    ]);
+
+    Route::get('/tradings', [
+        'as'=>'welcome.tradings',
+        'uses'=>'App\Http\Controllers\WelcomeController@tradings',
+    ]);
+
+    Route::get('/posts', [
+        'as'=>'welcome.posts',
+        'uses'=>'App\Http\Controllers\WelcomeController@posts',
     ]);
 
     Route::get('/invoice-product/{id}', [
@@ -40,5 +65,6 @@ Route::prefix('/')->group(function () {
 });
 
 Route::post('/stripe-product/{id}', [StripeController::class,'stripePaymentProduct'])->name("stripe_product.post");
+Route::post('/stripe-trading/{id}', [StripeController::class,'stripePaymentTrading'])->name("stripe_trading.post");
 
 Route::get('/send-notification', [\App\Http\Controllers\NotificationController::class, 'sendNotification']);

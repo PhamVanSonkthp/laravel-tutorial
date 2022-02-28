@@ -4,6 +4,10 @@
     <title>Home page</title>
 @endsection
 
+@section('name')
+    <h4 class="page-title">Quà tặng</h4>
+@endsection
+
 @section('css')
     <!-- App Css-->
     <link href="{{asset('user/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
@@ -15,7 +19,7 @@
 @section('content')
     <div class="container">
         <div class="mission account">
-            <h1 class="account__header mission__header">Các nhiệm vụ của bạn</h1>
+            <h1 class="account__header mission__header">Cấp độ</h1>
 
             @foreach($levels as $levelItem)
                 <div class="account__progress">
@@ -25,7 +29,7 @@
                             <h4 class="mission__progress-title"></h4>
                             <div class="progress">
                                 <div class="progress-bar account__progress-bar bg-success" role="progressbar"
-                                     style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                                     style="width: {{$levelItem->calculateLevel($levelItem->id , \Illuminate\Support\Facades\Auth::user()->point)}}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
                             <p class="mission__progress-description">
@@ -57,18 +61,18 @@
                                          style="background-image: url({{asset('user/assets/images/voucher.png')}});"></div>
 
                                     <p class="mission__reward-info">
-                                        {{$levelItem->content}}
+                                        Quà nhận ngay: <span class="text-danger">{{$levelItem->content}}</span>
                                     </p>
 
-                                    <button class="btn btn-warning mission__reward-btn">Nhận quà</button>
+                                    <button class="btn btn-warning mission__reward-btn active_get_gift {{\Illuminate\Support\Facades\Auth::user()->point < $levelItem->point_require ? 'stop' : ''}}" data-url="{{route('user.getGift' , ['level_id' => $levelItem->id])}}">Nhận quà</button>
                                 </div>
                             </div>
                             <div class="mission__reward-box">
                                 <img src="{{asset('user/assets/images/treasure.gif')}}" alt="Ảnh mở Rương">
 
-                                <div class='cont mission__progress-btn'>
+                                <div class='cont mission__progress-btn {{\Illuminate\Support\Facades\Auth::user()->point < $levelItem->point_require ? 'stop' : ''}}'>
                                     <button class='button' data-bs-toggle="modal" data-bs-target="#modalGifBox">
-                                        <div class='blob'>
+                                        <div class='blob action_open_gift' data-url="{{route('user.openGift' , ['level_id' => $levelItem->id])}}">
                                             <svg xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1'
                                                  xmlns='http://www.w3.org/2000/svg' viewBox='0 0 310 350'>
                                                 <path
@@ -84,6 +88,12 @@
                     @endif
 
                 </div>
+
+                @if($levelItem->calculateLevel($levelItem->id , \Illuminate\Support\Facades\Auth::user()->point) < 100)
+                    @php
+                        break;
+                    @endphp
+                @endif
             @endforeach
         </div>
     </div>
@@ -101,7 +111,7 @@
                     <img src="{{asset('user/assets/images/giftBox.png')}}" alt="Ảnh Quà">
                     <div class="mission__modal-info">
                         <p class="text-center" id="title_open_gift"></p>
-                        <button type="button" class="btn btn-primary mission__modal-btn"
+                        <button type="button" class="btn btn-primary mission__modal-btn action_refresh_page"
                                 data-bs-dismiss="modal">OK</button>
                     </div>
                 </div>
@@ -123,17 +133,27 @@
 
     <script>
 
-        $(function (){
+        $( document ).ready(function() {
+
+            function actionRefreshPage(event){
+                event.preventDefault()
+                location.reload()
+            }
 
             function actionOpenGift(event){
                 event.preventDefault()
-                let urlRequest = $(this).data('url')
+
+                const that = $(this)
+
+                let urlRequest = that.data('url')
 
                 $.ajax({
                     type: 'GET',
                     url: urlRequest,
                     success: function (response) {
                         console.log(response)
+
+                        $(that).parent().parent().parent().parent().parent().remove()
                         $('#title_open_gift').html(response.message)
                     },
                     error: function (err) {
@@ -142,8 +162,31 @@
                 })
             }
 
+            function actionGetGift(event){
+                event.preventDefault()
+                const that = $(this)
+                let urlRequest = that.data('url')
+
+                $.ajax({
+                    type: 'GET',
+                    url: urlRequest,
+                    success: function (response) {
+                        console.log(response)
+                        $(that).parent().parent().parent().remove()
+
+                        location.reload()
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    },
+                })
+            }
+
             $(document).on('click', '.action_open_gift', actionOpenGift);
-        })
+            $(document).on('click', '.active_get_gift', actionGetGift);
+            $(document).on('click', '.action_refresh_page', actionRefreshPage);
+        });
+
 
 
     </script>

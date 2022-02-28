@@ -46,6 +46,14 @@
                 </div>
             </div>
 
+            <div class="form-group mt-3">
+                <label>Link</label>
+                <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" placeholder="Nhập link" value="{{$slider->link}}">
+                @error('link')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
 
         </div>

@@ -106,4 +106,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function checkHasProduct($id){
         return Invoice::where('user_id', auth()->id())->where('product_id', $id)->first() != null;
     }
+
+    public function checkHasTrading($id){
+        return InvoiceTrading::where('user_id', auth()->id())->where('trading_id', $id)->first() != null;
+    }
 }

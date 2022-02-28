@@ -16,6 +16,7 @@ use App\Models\Trading;
 use App\Models\User;
 use App\Models\UserGift;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use function auth;
 use function view;
@@ -66,9 +67,9 @@ class UserController extends Controller
 
     public function openGift($level_id){
         try {
+            $level = $this->level->find($level_id);
             $gift = $this->gift->where('level_id' , $level_id)->first();
             $giftChildren = $gift->where('parent_id' , $gift->id)->get();
-
             $arrGifts = [];
 
             foreach($giftChildren as $giftChild){
@@ -79,7 +80,17 @@ class UserController extends Controller
 
             $content = $this->gift->find($arrGifts[rand(0,count($arrGifts)-1)])->content;
 
+            if(auth()->user()->point < $level->point_require){
+                return response()->json([
+                    'code'=>400,
+                    'message'=>'fail',
+                ],400);
+            }
+
             $this->userGift->firstOrCreate([
+                "user_id"=>auth()->id(),
+                "level_id"=>$level_id,
+            ],[
                 "user_id"=>auth()->id(),
                 "content"=>$content,
                 "level_id"=>$level_id,
@@ -96,16 +107,54 @@ class UserController extends Controller
                 'message'=>'fail',
             ],500);
         }
+    }
 
+    public function getGift($level_id){
+        try {
+            $level = $this->level->find($level_id);
+            $content = $level->content;
+
+            if(auth()->user()->point < $level->point_require){
+                return response()->json([
+                    'code'=>400,
+                    'message'=>'fail',
+                ],400);
+            }
+
+            $this->userGift->firstOrCreate([
+                "user_id"=>auth()->id(),
+                "level_id"=>$level_id,
+            ],[
+                "user_id"=>auth()->id(),
+                "content"=>$content,
+                "level_id"=>$level_id,
+            ]);
+
+            return response()->json([
+                'code'=>200,
+                'message'=>$content,
+            ],200);
+
+        }catch (\Exception $exception){Log::error('Message: ' . $exception->getMessage() . 'Line' . $exception->getLine());
+            return response()->json([
+                'code'=>500,
+                'message'=>'fail',
+            ],500);
+        }
     }
 
     public function updateProfile(UserEditRequest $request){
         $user = Auth::user();
 
-        Auth::user()->update([
+        $dataUpdate = [
             "name" => $request->name,
             "phone" => $request->phone,
-        ]);
+        ];
+        if (!empty($request->password)){
+            $dataUpdate['password'] = Hash::make($request->password);
+        }
+
+        Auth::user()->update($dataUpdate);
 
         return view('user.profile.index', compact('user'));
     }

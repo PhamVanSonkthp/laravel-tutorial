@@ -88,7 +88,7 @@
                             </div>
                         </div>
 
-                        <a href="#" class="btn btn-sm btn-warning text-white mt-4">View All Data</a>
+                        <a href="{{route('administrator.gifts.index')}}" class="btn btn-sm btn-warning text-white mt-4">View All Data</a>
                         <ul class="list-inline row mt-4 clearfix">
                             <li class="col-6">
                                 <p class="mb-1 font-size-18 fw-bold">{{\App\Models\UserGift::where('status' , 0)->get()->count()}}</p>
@@ -122,7 +122,7 @@
                             </div>
                         </div>
 
-                        <a href="#" class="btn btn-sm btn-success mt-4">View All Data</a>
+                        <a href="{{route('administrator.tradings.register.index')}}" class="btn btn-sm btn-success mt-4">View All Data</a>
                         <ul class="list-inline row mt-4 clearfix">
                             <li class="col-6">
                                 <p class="mb-1 font-size-18 fw-bold">{{\App\Models\RegisterTrading::where('status' , 'Chưa xác nhận')->get()->count()}}</p>
@@ -155,7 +155,7 @@
                             </div>
                         </div>
 
-                        <a href="#" class="btn btn-sm btn-brown mt-4">View All Data</a>
+                        <a href="{{route('invoices.index')}}" class="btn btn-sm btn-brown mt-4">View All Data</a>
                         <ul class="list-inline row mt-4 clearfix" style="opacity: 0">
                             <li class="col-6">
                                 <p class="mb-1 font-size-18 fw-bold">0</p>
@@ -187,7 +187,7 @@
                             </div>
                         </div>
 
-                        <a href="#" class="btn btn-sm btn-blue-grey mt-4">View All Data</a>
+                        <a href="{{route('invoices.index')}}" class="btn btn-sm btn-blue-grey mt-4">View All Data</a>
                         <ul class="list-inline row mt-4 clearfix" style="opacity: 0">
                             <li class="col-6">
                                 <p class="mb-1 font-size-18 fw-bold">0</p>

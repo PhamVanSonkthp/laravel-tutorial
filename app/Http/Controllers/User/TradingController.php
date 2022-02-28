@@ -31,7 +31,7 @@ class TradingController extends Controller
             ->where('invoice_tradings.user_id', auth()->id())
             ->latest('invoice_tradings.id')
             ->paginate(10);
-        return view('user.trading.index', compact('tradings'));
+        return view('user.my_trading.index', compact('tradings'));
     }
 
     public function sources(){

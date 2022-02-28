@@ -17,7 +17,7 @@ class CreateSourcesTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('link')->nullable();
-            $table->string('doc')->nullable();
+            $table->text('doc')->nullable();
             $table->timestamps();
         });
     }

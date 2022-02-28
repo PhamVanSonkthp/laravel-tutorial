@@ -66,6 +66,11 @@ Route::prefix('user')->group(function () {
         'uses'=>'App\Http\Controllers\User\UserController@openGift',
     ])->middleware('verified');
 
+    Route::get('/get-gift/{level_id}', [
+        'as'=>'user.getGift',
+        'uses'=>'App\Http\Controllers\User\UserController@getGift',
+    ])->middleware('verified');
+
     Route::put('/profile', [
         'as'=>'user.updateProfile',
         'uses'=>'App\Http\Controllers\User\UserController@updateProfile',

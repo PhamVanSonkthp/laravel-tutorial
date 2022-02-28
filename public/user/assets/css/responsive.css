@@ -74,6 +74,39 @@
     width: 62%;
   }
 
+  .news {
+    flex-wrap: wrap;
+  }
+
+  .news__related,
+  .news__main {
+    width: 100%;
+  }
+
+  .news__related-list {
+    justify-content: space-between;
+  }
+
+  .news__related-post {
+    padding: 10px 0px 26px;
+  }
+
+  .news__related {
+    margin: 0;
+  }
+
+  .news__related-post>img {
+    max-width: 45%;
+    max-height: 82px;
+  }
+
+  .news__main {
+    padding: 10px 0px;
+  }
+
+  .page-content {
+    background-color: #fff !important;
+  }
 }
 
 /* ==================== Tablet ===================*/
@@ -213,6 +246,10 @@
   .mission__modal-info {
     text-align: center;
     width: 250px;
+  }
+
+  .news__related-post>img {
+    max-width: 34%;
   }
 }
 

@@ -24,6 +24,7 @@ class CreateTradingsTable extends Migration
             $table->integer('time_payment_again')->default(0);
             $table->string('link')->nullable();
             $table->integer('point')->default(0);
+            $table->integer('views_count')->default(0);
             $table->timestamps();
         });
     }
