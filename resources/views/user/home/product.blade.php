@@ -24,9 +24,9 @@
                 <div class="course__heading">
                     <h1 class="course__heading-topic">{{$product->name}}</h1>
 
-                    <p class="course__heading-description">
+                    <div class="course__heading-description">
                         {!! $product->content !!}
-                    </p>
+                    </div>
                 </div>
 
                 <div class="course__content">
