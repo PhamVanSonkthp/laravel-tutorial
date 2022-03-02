@@ -1,7 +1,15 @@
 @extends('user.layouts.master')
 
+@php
+    $title = $trading->name;
+@endphp
+
 @section('title')
-    <title>Home page</title>
+    <title>{{$title}}</title>
+@endsection
+
+@section('name')
+    <h4 class="page-title">{{$title}}</h4>
 @endsection
 
 @section('css')
@@ -24,9 +32,9 @@
                 <div class="course__heading">
                     <h1 class="course__heading-topic">{{$trading->name}}</h1>
 
-                    <p class="course__heading-description">
+                    <div class="course__heading-description">
                         {!! $trading->content !!}
-                    </p>
+                    </div>
                 </div>
 
                 <div class="course__content">
@@ -36,11 +44,16 @@
 
                     <div class="course__content-main">
                         <div class="course__content-general">
-                            @if(\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id))
-                                <a href="{{$trading->link}}"></a>
+                            @auth()
+                                @if(\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id))
+                                    <a href="{{$trading->link}}"></a>
+                                @else
+                                    <span>Đăng ký để thấy link trading</span>
+                                @endif
                             @else
                                 <span>Đăng ký để thấy link trading</span>
-                            @endif
+                            @endauth
+
 
                         </div>
                     </div>
@@ -67,10 +80,18 @@
                     <h5 class="course__register-title">${{number_format($trading->price)}}</h5>
 
                     @auth
-                        <a href="{{\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id) ? route('user.learningSource' , ['id' => $trading->id]) : route('user.paymentTrading' , ['id' => $trading->id])}} " class="course__register-btn" style="width: 50%">{{\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id) ? 'Tiếp tục học' : 'Đăng ký trading'}}</a>
+                        <a href="{{\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id) ? route('user.learningSource' , ['id' => $trading->id]) : route('user.paymentTrading' , ['id' => $trading->id])}} " class="course__register-btn" style="width: 50%">{{\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id) ? 'Vào room' : 'Đăng ký room'}}</a>
                     @else
                         <a href="{{ route('login') }}" class="course__register-btn" style="width: 50%">Đăng ký trading</a>
                     @endauth
+
+                    <ul class="course__register-info">
+
+                        <li class="course__register-info-item">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Bạn sẽ nhận được <strong>{{$trading->point}}</strong> điểm</span>
+                        </li>
+                    </ul>
 
                 </div>
             </div>

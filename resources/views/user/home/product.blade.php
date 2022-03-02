@@ -1,7 +1,15 @@
 @extends('user.layouts.master')
 
+@php
+    $title = $product->name;
+@endphp
+
 @section('title')
-    <title>Home page</title>
+    <title>{{$title}}</title>
+@endsection
+
+@section('name')
+    <h4 class="page-title">{{$title}}</h4>
 @endsection
 
 @section('css')
@@ -161,6 +169,11 @@
                     <ul class="course__register-info">
 
                         <li class="course__register-info-item">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Bạn sẽ nhận được <strong>{{$product->point}}</strong> điểm</span>
+                        </li>
+
+                        <li class="course__register-info-item">
                             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="film"
                                  class="svg-inline--fa fa-film fa-w-16 CourseDetail_icon__1vsgK"
                                  role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -183,6 +196,7 @@
                             <span>Học mọi lúc mọi nơi</span>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </div>

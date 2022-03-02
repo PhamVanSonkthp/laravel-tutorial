@@ -10,17 +10,6 @@
 
 @section('css')
     <link href="{{asset('admins/products/index/list.css')}}" rel="stylesheet"/>
-
-    <style>
-        .ellipsis {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            max-width: 200px;
-        }
-    </style>
 @endsection
 
 @include('administrator.post.active_slidebar')

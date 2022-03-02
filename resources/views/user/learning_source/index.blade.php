@@ -1,7 +1,15 @@
 @extends('user.layouts.master')
 
+@php
+    $title = "khóa học";
+@endphp
+
 @section('title')
-    <title>Home page</title>
+    <title>{{$title}}</title>
+@endsection
+
+@section('name')
+    <h4 class="page-title">{{$title}}</h4>
 @endsection
 
 @section('css')
@@ -118,7 +126,7 @@
                                                     <div id="course_{{$index}}-m" class="accordion-collapse collapse show"
                                                          aria-labelledby="course_one-m">
 
-                                                        @foreach($sourceParent->where('parent_id' , $sourceParent->id)->get() as $sourceChild)
+                                                        @foreach($sourceParent->where('parent_id' , $sourceParent->id)->orderBy('id' , 'desc')->get() as $sourceChild)
 
                                                             @php
                                                                 $object = null;
@@ -273,7 +281,7 @@
 
                                 <div id="course_{{$index}}" class="accordion-collapse collapse show"
                                      aria-labelledby="course_one">
-                                    @foreach($sourceParent->where('parent_id' , $sourceParent->id)->get() as $sourceChild)
+                                    @foreach($sourceParent->where('parent_id' , $sourceParent->id)->orderBy('id' , 'desc')->get() as $sourceChild)
 
                                         @php
                                             $object = null;

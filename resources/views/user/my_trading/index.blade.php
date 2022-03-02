@@ -1,11 +1,15 @@
 @extends('user.layouts.master')
 
+@php
+    $title = "Trading của tôi";
+@endphp
+
 @section('title')
-    <title>Home page</title>
+    <title>{{$title}}</title>
 @endsection
 
 @section('name')
-    <h4 class="page-title">Trading</h4>
+    <h4 class="page-title">{{$title}}</h4>
 @endsection
 
 @section('css')

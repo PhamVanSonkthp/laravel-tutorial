@@ -61,6 +61,13 @@
                     </a>
                 </li>
 
+                <li @yield('post_trading')>
+                    <a href="{{route('administrator.tradings.post.index')}}" class="waves-effect">
+                        <i class="mdi mdi-cube-outline"></i>
+                        <span> Bài viết trading </span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Quản lý trang</li>
 
                 <li @yield('slider')>

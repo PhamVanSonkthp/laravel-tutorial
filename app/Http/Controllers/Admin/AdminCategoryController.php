@@ -28,7 +28,18 @@ class AdminCategoryController extends Controller
     }
 
     public function index(){
-        $categories = $this->category->latest()->paginate(10);
+
+        $query = $this->category;
+
+        if(isset($_GET['search_query'])){
+//            dd($_GET['search_query']);
+//            $query->where
+        }
+
+
+
+
+        $categories = $query->latest()->paginate(10);
         return view('administrator.category.index' , compact('categories'));
     }
 

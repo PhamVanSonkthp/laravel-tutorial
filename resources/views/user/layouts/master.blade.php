@@ -3,14 +3,12 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Dashboard | Admiria - Admin & Dashboard Template</title>
+    @yield('title')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-    <meta content="Themesbrand" name="author">
+    <meta content="Pham Son" name="author">
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('administrator/assets/images/users/logo.png')}}">
-
-    @yield('title')
 
     <!-- Bootstrap Css -->
     <link href="{{asset('administrator/assets/css/bootstrap.min.css')}}"  rel="stylesheet" type="text/css">
@@ -18,6 +16,8 @@
     <link href="{{asset('administrator/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="{{asset('administrator/assets/css/app.min.css')}}" rel="stylesheet" type="text/css">
+
+    <link href="{{asset('vendor/fontawesome-6.0.0/css/fontawesome.css')}}" rel="stylesheet" type="text/css">
 
     @yield('css')
 
@@ -149,7 +149,14 @@
 <script src="{{asset('administrator/assets/libs/node-waves/waves.min.js')}}"></script>
 <script src="{{asset('administrator/assets/js/app.js')}}"></script>
 
+<script>
+    function search(ele) {
+        if(event.key === 'Enter') {
+            window.location.href = "{{route("welcome.search")}}" + "?search_query="+ele.value
+        }
+    }
 
+</script>
 
 @yield('js')
 

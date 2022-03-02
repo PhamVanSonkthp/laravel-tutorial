@@ -40,6 +40,6 @@ trait UserTrait{
     }
 
     public function getUserNotificationTrait($id){
-        return Notification::where('notifiable_id' , $id)->get();
+        return Notification::where('notifiable_id' , $id)->whereNull('read_at')->get();
     }
 }

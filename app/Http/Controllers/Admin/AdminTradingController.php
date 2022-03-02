@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostAddRequest;
+use App\Http\Requests\PostEditRequest;
 use App\Http\Requests\ProductAddRequest;
 use App\Http\Requests\ProductEditRequest;
 use App\Http\Requests\RegisterTradingAddRequest;
 use App\Http\Requests\TradingAddRequest;
 use App\Http\Requests\TradingEditRequest;
 use App\Models\InvoiceTrading;
+use App\Models\PostTrading;
 use App\Models\RegisterTrading;
 use App\Models\Trading;
 use App\Models\User;
@@ -30,13 +33,15 @@ class AdminTradingController extends Controller
     private $invoiceTrading;
     private $registerTrading;
     private $user;
+    private $postTrading;
 
-    public function __construct(Trading $trading, RegisterTrading $registerTrading, User $user, InvoiceTrading $invoiceTrading)
+    public function __construct(Trading $trading, RegisterTrading $registerTrading, User $user, InvoiceTrading $invoiceTrading, PostTrading $postTrading)
     {
         $this->trading = $trading;
         $this->registerTrading = $registerTrading;
         $this->user = $user;
         $this->invoiceTrading = $invoiceTrading;
+        $this->postTrading = $postTrading;
     }
 
     public function index()
@@ -51,6 +56,12 @@ class AdminTradingController extends Controller
         return view('administrator.tradings.register.index', compact('registerTradings'));
     }
 
+    public function indexPost()
+    {
+        $postTradings = $this->postTrading->latest()->paginate(10);
+        return view('administrator.tradings.post.index', compact('postTradings'));
+    }
+
     public function create()
     {
         return view('administrator.tradings.add');
@@ -61,6 +72,11 @@ class AdminTradingController extends Controller
         $users = $this->user->where('is_admin', 0)->get();
         $tradings = $this->trading->get();
         return view('administrator.tradings.register.add', compact('users', 'tradings'));
+    }
+
+    public function createPost()
+    {
+        return view('administrator.tradings.post.add');
     }
 
     public function store(TradingAddRequest $request)
@@ -112,6 +128,26 @@ class AdminTradingController extends Controller
         return redirect()->route('administrator.tradings.register.index');
     }
 
+    public function storePost(PostAddRequest $request){
+
+        $dataCreate = [
+            'title'=> $request->title,
+            'content'=> $request->contents,
+            'slug'=> Str::slug($request->title),
+        ];
+
+        $dataUploadImage = $this->storageTraitUpload($request, 'image_path', 'post');
+
+        if (!empty($dataUploadImage)) {
+            $dataCreate['image_name'] = $dataUploadImage['file_name'];
+            $dataCreate['image_path'] = $dataUploadImage['file_path'];
+        }
+
+        $this->postTrading->create($dataCreate);
+
+        return redirect()->route('administrator.tradings.post.index');
+    }
+
     public function edit($id)
     {
         $trading = $this->trading->find($id);
@@ -125,6 +161,11 @@ class AdminTradingController extends Controller
         $registerTrading = $this->registerTrading->find($id);
 
         return view('administrator.tradings.register.edit', compact('registerTrading', 'users', 'tradings'));
+    }
+
+    public function editPost($id){
+        $post = $this->postTrading->find($id);
+        return view('administrator.tradings.post.edit' , compact('post'));
     }
 
     public function update($id, TradingEditRequest $request)
@@ -159,12 +200,35 @@ class AdminTradingController extends Controller
         return redirect()->route('administrator.tradings.register.index');
     }
 
+    public function updatePost($id , PostEditRequest $request){
+        $dataUpdate = [
+            'title'=> $request->title,
+            'content'=> $request->contents,
+            'slug'=> Str::slug($request->title),
+        ];
+
+        $dataUploadImage = $this->storageTraitUpload($request, 'image_path', 'post');
+
+        if (!empty($dataUploadImage)) {
+            $dataUpdate['image_name'] = $dataUploadImage['file_name'];
+            $dataUpdate['image_path'] = $dataUploadImage['file_path'];
+        }
+        $this->postTrading->find($id)->update($dataUpdate);
+
+        return redirect()->route('administrator.tradings.post.index');
+    }
+
     public function delete($id)
     {
         return $this->deleteModelTrait($id, $this->trading);
     }
 
     public function deleteRegister($id)
+    {
+        return $this->deleteModelTrait($id, $this->registerTrading);
+    }
+
+    public function deletePost($id)
     {
         return $this->deleteModelTrait($id, $this->registerTrading);
     }

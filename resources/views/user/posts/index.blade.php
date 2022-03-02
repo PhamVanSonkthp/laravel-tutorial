@@ -1,7 +1,15 @@
 @extends('user.layouts.master')
 
+@php
+    $title = "Tin tức";
+@endphp
+
 @section('title')
-    <title>Home page</title>
+    <title>{{$title}}</title>
+@endsection
+
+@section('name')
+    <h4 class="page-title">{{$title}}</h4>
 @endsection
 
 @section('css')
@@ -30,7 +38,7 @@
                                  style="background-image: url({{$postItem->image_path}})">
                                 <div class="overlay"></div>
                                 <div class="button">
-                                    <a href="{{ route('welcome.product', ['slug' => $postItem->slug]) }}">Xem chi tiết</a>
+                                    <a href="{{ route('welcome.post', ['slug' => $postItem->slug]) }}">Xem chi tiết</a>
                                 </div>
                             </div>
                             <h4 class="route__course-title">{{$postItem->title}}</h4>

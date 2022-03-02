@@ -43,6 +43,11 @@ Route::prefix('/')->group(function () {
         'uses'=>'App\Http\Controllers\WelcomeController@post',
     ]);
 
+    Route::get('/post-trading/{slug}', [
+        'as'=>'welcome.postTrading',
+        'uses'=>'App\Http\Controllers\WelcomeController@postTrading',
+    ]);
+
     Route::get('/products', [
         'as'=>'welcome.products',
         'uses'=>'App\Http\Controllers\WelcomeController@products',
@@ -58,10 +63,21 @@ Route::prefix('/')->group(function () {
         'uses'=>'App\Http\Controllers\WelcomeController@posts',
     ]);
 
+    Route::get('/post-tradings', [
+        'as'=>'welcome.postTradings',
+        'uses'=>'App\Http\Controllers\WelcomeController@postTradings',
+    ]);
+
     Route::get('/invoice-product/{id}', [
         'as'=>'welcome.invoiceProduct',
         'uses'=>'App\Http\Controllers\WelcomeController@invoiceProduct',
     ]);
+
+    Route::get('/search', [
+        'as'=>'welcome.search',
+        'uses'=>'App\Http\Controllers\WelcomeController@search',
+    ]);
+
 });
 
 Route::post('/stripe-product/{id}', [StripeController::class,'stripePaymentProduct'])->name("stripe_product.post");

@@ -519,6 +519,45 @@ Route::prefix('administrator')->group(function () {
 
         });
 
+        Route::prefix('post')->group(function () {
+            Route::get('/', [
+                'as'=>'administrator.tradings.post.index',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@indexPost',
+                'middleware'=>'can:trading-list',
+            ]);
+
+            Route::get('/create', [
+                'as'=>'administrator.tradings.post.create',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@createPost',
+                'middleware'=>'can:trading-list',
+            ]);
+
+            Route::post('/store', [
+                'as'=>'administrator.tradings.post.store',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@storePost',
+                'middleware'=>'can:trading-list',
+            ]);
+
+            Route::get('/edit/{id}', [
+                'as'=>'administrator.tradings.post.edit',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@editPost',
+                'middleware'=>'can:trading-list',
+            ]);
+
+            Route::put('/update/{id}', [
+                'as'=>'administrator.tradings.post.update',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@updatePost',
+                'middleware'=>'can:trading-list',
+            ]);
+
+            Route::get('/delete/{id}', [
+                'as'=>'administrator.tradings.post.delete',
+                'uses'=>'App\Http\Controllers\Admin\AdminTradingController@deletePost',
+                'middleware'=>'can:trading-list',
+            ]);
+
+        });
+
     });
 
     Route::prefix('topics')->group(function () {

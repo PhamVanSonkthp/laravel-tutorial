@@ -18,7 +18,6 @@ class InvoiceController extends Controller
         $this->invoiceTrading = $invoiceTrading;
     }
 
-
     public function index(){
         $invoices = $this->invoice->where('user_id', auth()->id())->latest()->paginate(10);
         $invoiceTradings = $this->invoiceTrading->where('user_id', auth()->id())->latest()->paginate(10);

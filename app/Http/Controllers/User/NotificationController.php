@@ -26,6 +26,9 @@ class NotificationController extends Controller
 
     public function index()
     {
+        $this->notification->where('notifiable_id' , auth()->id())->whereNull('read_at')->update([
+            'read_at' => DB::raw('CURRENT_TIMESTAMP')
+        ]);
         $notifications = $this->notification->where('notifiable_id' , auth()->id())->latest()->paginate(10);
         return view('user.notification.index' , compact('notifications'));
     }

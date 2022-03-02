@@ -35,7 +35,7 @@
         <!-- Search input -->
         <div class="search-wrap" id="search-wrap">
             <div class="search-bar">
-                <input class="search-input form-control" placeholder="Search">
+                <input class="search-input form-control" placeholder="Search" onkeydown="search(this)">
                 <a href="#" class="close-search toggle-search" data-target="#search-wrap">
                     <i class="mdi mdi-close-circle"></i>
                 </a>
@@ -61,7 +61,10 @@
                 <div class="dropdown d-inline-block me-2">
                     <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="ion ion-md-notifications"></i>
-                        <span class="badge bg-danger rounded-pill">{{\Illuminate\Support\Facades\Auth::user()->getUserNotification()->count()}}</span>
+                        @if(\Illuminate\Support\Facades\Auth::user()->getUserNotification()->count())
+                            <span class="badge bg-danger rounded-pill">{{\Illuminate\Support\Facades\Auth::user()->getUserNotification()->count()}}</span>
+                        @endif
+
                     </button>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
                         <div class="p-3">
