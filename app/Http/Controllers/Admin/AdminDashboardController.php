@@ -12,6 +12,6 @@ class AdminDashboardController extends Controller
         if(auth()->check()){
             return view('administrator.dashboard.index');
         }
-        return view('login');
+        return redirect()->to('/admin');
     }
 }
