@@ -19,11 +19,14 @@
 
         <div class="card">
             <div class="card-body">
+                <div class="row">
+                    @include('administrator.components.input_search')
 
-                <div class="col-md-12">
-                    <a href="{{route('administrator.tradings.register.createRegister')}}" class="btn btn-success float-end m-2">Add</a>
+                    <div class="col-md-6 text-end">
+                        <a href="{{route('administrator.tradings.register.createRegister')}}"
+                           class="btn btn-success float-end m-2">Add</a>
+                    </div>
                 </div>
-                <div class="clearfix"></div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
@@ -45,11 +48,16 @@
                         @foreach($registerTradings as $registerTradingItem)
                             <tr>
                                 <td>{{ $registerTradingItem->id }}</td>
-                                <td> <a href="{{ optional($registerTradingItem->trading)->slug }}">{{ optional($registerTradingItem->trading)->name }}</a></td>
+                                <td>
+                                    <a href="{{ optional($registerTradingItem->trading)->slug }}">{{ optional($registerTradingItem->trading)->name }}</a>
+                                </td>
                                 <td>{{ optional($registerTradingItem->user)->name }}</td>
                                 <td>{{ optional($registerTradingItem->trading)->price }}</td>
-                                <td><img class="product_image_150_100" src="{{ optional($registerTradingItem->trading)->feature_image_path }}"></td>
-                                <td><a href="{{ optional($registerTradingItem->trading)->link }}">{{ optional($registerTradingItem->trading)->link }}</a></td>
+                                <td><img class="product_image_150_100"
+                                         src="{{ optional($registerTradingItem->trading)->feature_image_path }}"></td>
+                                <td>
+                                    <a href="{{ optional($registerTradingItem->trading)->link }}">{{ optional($registerTradingItem->trading)->link }}</a>
+                                </td>
                                 <td>{{ $registerTradingItem->created_at }}</td>
                                 <td>{{ $registerTradingItem->status}}</td>
                                 <td>

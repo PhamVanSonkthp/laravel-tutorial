@@ -27,7 +27,14 @@ class AdminSourceController extends Controller
 
     public function index()
     {
-        $sources = $this->source->where('parent_id', 0)->latest()->paginate(10);
+        $query = $this->source;
+
+        if(isset($_GET['search_query'])){
+            $query = $query->where('name', 'LIKE', "%{$_GET['search_query']}%");
+        }
+
+        $sources = $query->where('parent_id', 0)->latest()->paginate(10);
+
         return view('administrator.sources.index', compact('sources'));
     }
 
@@ -41,6 +48,7 @@ class AdminSourceController extends Controller
     {
         try {
             DB::beginTransaction();
+
             $source = $this->source->create([
                 'topic_id' => $request->topic_id ?? 0,
                 'name' => $request->name,
@@ -57,6 +65,7 @@ class AdminSourceController extends Controller
                     'name' => $soucesName[$i],
                     'link' => $soucesLink[$i],
                     'doc' => $soucesDoc[$i],
+                    'order' => $i,
                 ]);
             }
             DB::commit();
@@ -96,6 +105,7 @@ class AdminSourceController extends Controller
                 'name' => $soucesName[$i],
                 'link' => $soucesLink[$i],
                 'doc' => $soucesDoc[$i],
+                'order' => $i,
             ]);
         }
 

@@ -19,11 +19,13 @@
 
         <div class="card">
             <div class="card-body">
-
-                <div class="col-md-12">
-                    <a href="{{route('administrator.sources.create')}}" class="btn btn-success float-end m-2">Add</a>
+                <div class="row">
+                    @include('administrator.components.input_search')
+                    <div class="col-md-6 text-end">
+                        <a href="{{route('administrator.sources.create')}}"
+                           class="btn btn-success float-end m-2">Add</a>
+                    </div>
                 </div>
-                <div class="clearfix"></div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">

@@ -155,7 +155,6 @@
             window.location.href = "{{route("welcome.search")}}" + "?search_query="+ele.value
         }
     }
-
 </script>
 
 @yield('js')

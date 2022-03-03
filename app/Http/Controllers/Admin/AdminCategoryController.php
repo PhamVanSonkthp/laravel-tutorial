@@ -32,14 +32,11 @@ class AdminCategoryController extends Controller
         $query = $this->category;
 
         if(isset($_GET['search_query'])){
-//            dd($_GET['search_query']);
-//            $query->where
+            $query = $query->where('name', 'LIKE', "%{$_GET['search_query']}%");
         }
 
-
-
-
         $categories = $query->latest()->paginate(10);
+
         return view('administrator.category.index' , compact('categories'));
     }
 

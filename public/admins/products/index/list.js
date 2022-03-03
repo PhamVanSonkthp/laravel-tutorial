@@ -36,6 +36,18 @@ function actionDelete(event){
     })
 }
 
+function search(ele) {
+    if(event.key === 'Enter') {
+        window.location.href = window.location.href.split("?")[0] + "?search_query="+ele.value
+    }
+}
+
 $(function (){
     $(document).on('click', '.action_delete', actionDelete);
+
+    if(window.location.href.split("?").length > 1){
+        $('#input_search').val(decodeURIComponent(window.location.href.split("?")[1].split("=")[1]))
+    }
 })
+
+

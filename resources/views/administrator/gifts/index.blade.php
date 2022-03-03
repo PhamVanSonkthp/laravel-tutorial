@@ -19,18 +19,21 @@
 
         <div class="card">
             <div class="card-body">
+                <div class="row">
+                    @include('administrator.components.input_search')
 
-                <div class="col-md-12">
-                    <a href="{{route('administrator.gifts.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    <div class="col-md-6 text-end">
+                        <a href="{{route('administrator.gifts.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    </div>
+
                 </div>
-                <div class="clearfix"></div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
                         <thead>
                         <tr>
                             <th>Tên rương quà</th>
-{{--                            <th>Nội dung</th>--}}
+                            {{--                            <th>Nội dung</th>--}}
                             <th>Phần quà - Xác xuất ( % )</th>
                             <th>Cấp độ yêu cầu</th>
                             <th class="text-center" style="width: 100px;">Action</th>
@@ -40,7 +43,7 @@
                         @foreach($gifts as $giftItem)
                             <tr>
                                 <th scope="row">{{ $giftItem->name }}</th>
-{{--                                <th scope="row">{{ $giftItem->content }}</th>--}}
+                                {{--                                <th scope="row">{{ $giftItem->content }}</th>--}}
                                 <th scope="row">
                                     <ul>
                                         @foreach($giftItem->giftChildren as $giftChildItem)

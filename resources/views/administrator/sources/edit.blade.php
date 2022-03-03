@@ -10,6 +10,7 @@
 @section('css')
     <link href="{{asset('vendor/select2/select2.min.css') }}" rel="stylesheet"/>
     <link href="{{asset('admins/products/add/add.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
 @endsection
 
 @include('administrator.sources.active_slidebar')
@@ -49,64 +50,66 @@
         <div class="col-md-12 mt-3">
             <label>Nhập các bài học</label>
             <div class="container_sources mt-3">
-                <div class="row">
-                    <div class="col-md-6 mt-1">
-                        <div class="form-group">
-                            <label>Tên bài học</label>
-                        </div>
-                    </div>
 
-                    <div class="col-md-6 mt-1">
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label>Link video</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table id="table" class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th width="30px">STT</th>
+                        <th>Nội dung</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tablecontents">
+                    @foreach($source->sourceChildren as $index=> $sourceItem)
+                        <tr data-id="{{$sourceItem->id}}">
+                            <td style="cursor: move;">
+                                Bài {{$index + 1}}
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-6 mt-1">
+                                        <div class="form-group">
+                                            <input name="sources_name[]" type="text"
+                                                   class="name form-control @error('sources_name') is-invalid @enderror"
+                                                   placeholder="Tên bài học" value="{{$sourceItem->name}}">
+                                            @error('sources_name')
+                                            <div class="alert alert-danger">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
 
-                @foreach($source->sourceChildren as $sourceItem)
-                    <div class="row">
-                        <div class="col-md-6 mt-1">
-                            <div class="form-group">
-                                <input name="sources_name[]" type="text"
-                                       class="name form-control @error('sources_name') is-invalid @enderror"
-                                       placeholder="Tên bài học" value="{{$sourceItem->name}}">
-                                @error('sources_name')
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
+                                    <div class="col-md-5 mt-1">
+                                        <div class="form-group">
+                                            <input name="sources_link[]" type="text"
+                                                   class="link form-control @error('sources_link') is-invalid @enderror"
+                                                   placeholder="Link video" value="{{$sourceItem->link}}">
+                                            @error('sources_link')
+                                            <div class="alert alert-danger">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
 
-                        <div class="col-md-5 mt-1">
-                            <div class="form-group">
-                                <input name="sources_link[]" type="text"
-                                       class="link form-control @error('sources_link') is-invalid @enderror"
-                                       placeholder="Link video" value="{{$sourceItem->link}}">
-                                @error('sources_link')
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
+                                    <div class="col-md-1 mt-1">
+                                        <button type="button"
+                                                class="btn btn-danger waves-effect waves-light action_delete_source">
+                                            x
+                                        </button>
+                                    </div>
 
-                        <div class="col-md-1 mt-1">
-                            <button type="button"
-                                    class="btn btn-danger waves-effect waves-light action_delete_source">
-                                x
-                            </button>
-                        </div>
-
-                        <div class="form-group col-md-12 mt-1">
+                                    <div class="form-group col-md-12 mt-1">
                         <textarea style="min-height: 100px;" name="sources_doc[]" placeholder="Nhập tài liệu"
                                   class="form-control tinymce_editor_init @error('sources_doc') is-invalid @enderror"
                                   rows="5">{{$sourceItem->doc}}</textarea>
-                            @error('sources_doc')
-                            <div class="alert alert-danger">{{$message}}</div>
-                            @enderror
-                        </div>
+                                        @error('sources_doc')
+                                        <div class="alert alert-danger">{{$message}}</div>
+                                        @enderror
+                                    </div>
 
-                    </div>
-                @endforeach
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
 
         </div>
@@ -131,6 +134,20 @@
     <script src="{{asset('vendor/select2/select2.min.js') }}"></script>
     <script src="{{asset('vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{asset('admins/products/add/add.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#table").DataTable({searching: false, paging: false, info: false, sort: false});
+
+            $("#tablecontents").sortable({
+                items: "tr",
+                cursor: 'move',
+                opacity: 0.6,
+            });
+        });
+    </script>
 
     <script>
 

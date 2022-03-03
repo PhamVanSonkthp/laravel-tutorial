@@ -46,19 +46,43 @@ class AdminTradingController extends Controller
 
     public function index()
     {
-        $tradings = $this->trading->latest()->paginate(10);
+        $query = $this->trading;
+
+        if(isset($_GET['search_query'])){
+            $query = $query->where('name', 'LIKE', "%{$_GET['search_query']}%");
+        }
+
+        $tradings = $query->latest()->paginate(10);
+
         return view('administrator.tradings.index', compact('tradings'));
     }
 
     public function indexRegister()
     {
+        if(isset($_GET['search_query'])){
+            $registerTradings = $this->registerTrading->select('register_tradings.*' , 'users.name')
+                ->join('users', 'users.id', '=', 'register_tradings.user_id')
+                ->where('users.name', 'LIKE', "%{$_GET['search_query']}%")
+                ->latest('register_tradings.id')
+                ->paginate(10);
+
+            return view('administrator.tradings.register.index', compact('registerTradings'));
+        }
+
         $registerTradings = $this->registerTrading->latest()->paginate(10);
         return view('administrator.tradings.register.index', compact('registerTradings'));
     }
 
     public function indexPost()
     {
-        $postTradings = $this->postTrading->latest()->paginate(10);
+        $query = $this->postTrading;
+
+        if(isset($_GET['search_query'])){
+            $query = $query->where('title', 'LIKE', "%{$_GET['search_query']}%");
+        }
+
+        $postTradings = $query->latest()->paginate(10);
+
         return view('administrator.tradings.post.index', compact('postTradings'));
     }
 

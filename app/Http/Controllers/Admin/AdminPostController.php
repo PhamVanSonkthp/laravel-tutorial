@@ -29,7 +29,15 @@ class AdminPostController extends Controller
     }
 
     public function index(){
-        $posts = $this->post->paginate(10);
+
+        $query = $this->post;
+
+        if(isset($_GET['search_query'])){
+            $query = $query->where('title', 'LIKE', "%{$_GET['search_query']}%");
+        }
+
+        $posts = $query->latest()->paginate(10);
+
         return view('administrator.post.index' , compact('posts'));
     }
 

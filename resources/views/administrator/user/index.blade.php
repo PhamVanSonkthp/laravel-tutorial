@@ -20,10 +20,13 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="col-md-12">
-                    <a href="{{route('users.create')}}" class="btn btn-success float-end m-2">Add</a>
+                <div class="row">
+                    @include('administrator.components.input_search')
+
+                    <div class="col-md-6 text-end">
+                        <a href="{{route('users.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    </div>
                 </div>
-                <div class="clearfix"></div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
@@ -47,8 +50,10 @@
                                 <td>{{$userItem->phone}}</td>
                                 <td>{{ number_format($userItem->point)}}</td>
                                 <td>{{number_format($userItem->getUserLevel($userItem->id))}}</td>
-                                <td><a href="#">--{{number_format($userItem->getUserNumberProduct($userItem->id))}}--</a></td>
-                                <td><a href="#">--{{number_format($userItem->getUserNumberTrading($userItem->id))}}--</a></td>
+                                <td><a href="#">--{{number_format($userItem->getUserNumberProduct($userItem->id))}}
+                                        --</a></td>
+                                <td><a href="#">--{{number_format($userItem->getUserNumberTrading($userItem->id))}}
+                                        --</a></td>
                                 <td>
                                     <a href="{{route('administrator.users.gift.index' , ['id'=> $userItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Gift">

@@ -19,11 +19,14 @@
 
         <div class="card">
             <div class="card-body">
+                <div class="row">
+                    @include('administrator.components.input_search')
 
-                <div class="col-md-12">
-                    <a href="{{route('administrator.tradings.create')}}" class="btn btn-success float-end m-2">Add</a>
+                    <div class="col-md-6 text-end">
+                        <a href="{{route('administrator.tradings.create')}}"
+                           class="btn btn-success float-end m-2">Add</a>
+                    </div>
                 </div>
-                <div class="clearfix"></div>
 
                 <div class="table-responsive">
                     <table class="table table-editable table-nowrap align-middle table-edits">
@@ -45,7 +48,7 @@
                                 <td>{{$tradingItem->name}}</td>
                                 <td>${{ number_format($tradingItem->price) }}</td>
                                 <td><img class="product_image_150_100" src="{{$tradingItem->feature_image_path}}"></td>
-                                <td> <a href="{{$tradingItem->link}}">{{ $tradingItem->link }}</a></td>
+                                <td><a href="{{$tradingItem->link}}">{{ $tradingItem->link }}</a></td>
 
                                 <td>
                                     <a href="{{route('administrator.tradings.edit' , ['id'=> $tradingItem->id])}}"

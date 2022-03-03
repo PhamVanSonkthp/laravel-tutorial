@@ -12,7 +12,7 @@ class Source extends Model
     protected $guarded = [];
 
     public function sourceChildren(){
-        return $this->hasMany(Source::class, 'parent_id' )->orderBy('id' , 'desc');
+        return $this->hasMany(Source::class, 'parent_id' )->orderBy('order');
     }
 
     public function topic(){

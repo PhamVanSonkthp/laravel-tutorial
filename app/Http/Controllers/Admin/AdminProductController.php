@@ -48,7 +48,11 @@ class AdminProductController extends Controller
 
     public function index()
     {
-        $products = $this->product->latest()->paginate(10);
+        $query = $this->product;
+        if(isset($_GET['search_query'])){
+            $query = $query->where('name', 'LIKE', "%{$_GET['search_query']}%");
+        }
+        $products = $query->latest()->paginate(10);
 
         $counters = [];
         foreach ($products as $productItem) {

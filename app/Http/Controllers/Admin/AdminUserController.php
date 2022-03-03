@@ -43,7 +43,15 @@ class AdminUserController extends Controller
     }
 
     public function index(){
-        $users = $this->user->where('is_admin' , 0)->paginate(10);
+
+        $query = $this->user;
+
+        if(isset($_GET['search_query'])){
+            $query = $query->where('name', 'LIKE', "%{$_GET['search_query']}%");
+        }
+
+        $users = $query->where('is_admin' , 0)->latest()->paginate(10);
+
         return view('administrator.user.index' , compact('users'));
     }
 

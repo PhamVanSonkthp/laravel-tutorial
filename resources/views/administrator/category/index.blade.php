@@ -21,13 +21,7 @@
             <div class="card-body">
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div id="datatable_filter" class="dataTables_filter">
-                            <label>Search:
-                                <input type="search" class="form-control form-control-sm" placeholder="Entering..." aria-controls="datatable">
-                            </label>
-                        </div>
-                    </div>
+                    @include('administrator.components.input_search')
 
                     <div class="col-md-6 text-end">
                         <a href="{{route('categories.create')}}" class="btn btn-success m-2">Add</a>

@@ -28,7 +28,14 @@ class AdminGiftController extends Controller
 
     public function index()
     {
-        $gifts = $this->gift->where('parent_id', 0)->latest()->paginate(10);
+        $query = $this->gift;
+
+        if(isset($_GET['search_query'])){
+            $query = $query->where('name', 'LIKE', "%{$_GET['search_query']}%");
+        }
+
+        $gifts = $query->where('parent_id', 0)->latest()->paginate(10);
+
         return view('administrator.gifts.index', compact('gifts'));
     }
 
