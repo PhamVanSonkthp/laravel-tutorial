@@ -210,7 +210,7 @@ class UserController extends Controller
     }
 
     public function sources(){
-        $products = $this->invoice->select('products.*')
+        $products = $this->invoice->select('products.name','products.feature_image_path','products.time_payment_again','invoices.id','invoices.created_at','invoices.updated_at')
             ->join('products', 'products.id', '=', 'invoices.product_id')
             ->where('invoices.user_id', auth()->id())
             ->latest('invoices.id')

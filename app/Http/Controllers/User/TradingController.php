@@ -26,7 +26,8 @@ class TradingController extends Controller
     }
 
     public function index(){
-        $tradings = $this->trading->select('tradings.*')
+
+        $tradings = $this->trading->select('tradings.name','tradings.feature_image_path','tradings.time_payment_again','invoice_tradings.id','tradings.link','invoice_tradings.created_at','invoice_tradings.updated_at')
             ->join('invoice_tradings', 'tradings.id', '=', 'invoice_tradings.trading_id')
             ->where('invoice_tradings.user_id', auth()->id())
             ->latest('invoice_tradings.id')

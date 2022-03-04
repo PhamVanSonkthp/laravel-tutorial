@@ -41,10 +41,10 @@
                             <tr>
                                 <td>{{$productItem->name}}</td>
                                 <td><img class="product_image_150_100" src="{{$productItem->feature_image_path}}"></td>
-                                <td>{{ ( $productItem->time_payment_again == 0 || (new DateTime($productItem->updated_at))->diff(new DateTime())->m  == 0 )? 'Hoạt động' : 'Hết hạn' }}</td>
+                                <td>{{ \App\Models\Invoice::isExpired($productItem->id) ? 'Hoạt động' : new \Illuminate\Support\HtmlString('<a href="#">Hết hạn! Gia hạn ngay!</a>') }}</td>
                                 <td> {{$counterProcessesd[$index]}} / {{ $processes[$index] }}</td>
                                 <td>{{$productItem->created_at}}</td>
-                                <td>{{ $productItem->time_payment_again == 0 ? 'Vĩnh viễn' : (new DateTime($productItem->created_at))->modify('+'. $productItem->time_payment_again .' month')->format('Y-m-d h:m:s')  }}</td>
+                                <td>{{ $productItem->time_payment_again == 0 ? 'Vĩnh viễn' : (new DateTime($productItem->updated_at))->modify('+'. $productItem->time_payment_again .' month')->format('Y-m-d h:m:s')  }}</td>
                                 <td>
                                     <a href="{{route('user.learningSource' , ['id' => $productItem->id])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Learning">
