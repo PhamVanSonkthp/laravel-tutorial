@@ -39,6 +39,13 @@ class StripeController extends Controller
     public function stripePaymentProduct($id, Request $req){
         $product = $this->product->find($id);
 
+        if( empty($product)){
+            return response()->json([
+                "code" => 404,
+                "message"=>"Không tìm thấy khóa học"
+            ],404);
+        }
+
         $paymentStripe = $this->paymentStripe->first();
         Stripe\Stripe::setApiKey($paymentStripe->secret_key);
         $data = Stripe\Charge::create([
@@ -48,23 +55,26 @@ class StripeController extends Controller
             "description" => optional(Auth::user())->name . " Buy " . $product->name
         ]);
 
-
-
-
         if ($data->created) {
             try {
                 DB::beginTransaction();
 
-                $this->invoice->create([
-                    'user_id' => auth()->id(),
-                    'product_id' => $id,
-                    'price' => $product->price,
-                ]);
+                $invoice = $this->invoice->where('product_id' , $product->id)->where('user_id' , auth()->id())->first();
 
+                if(empty($invoice)){
+                    $this->invoice->create([
+                        'user_id' => auth()->id(),
+                        'product_id' => $id,
+                        'price' => $product->price,
+                    ]);
+                }else{
+                    $invoice->touch();
+                }
 
                 $user = $this->user->find(auth()->id());
                 $user->increment('point', $product->point);
                 $user->save();
+
                 DB::commit();
             } catch (\Exception $exception) {
                 DB::rollBack();
@@ -79,6 +89,13 @@ class StripeController extends Controller
     public function stripePaymentTrading($id, Request $req){
         $trading = $this->trading->find($id);
 
+        if( empty($trading)){
+            return response()->json([
+                "code" => 404,
+                "message"=>"Không tìm thấy khóa học"
+            ],404);
+        }
+
         $paymentStripe = $this->paymentStripe->first();
         Stripe\Stripe::setApiKey($paymentStripe->secret_key);
         $data = Stripe\Charge::create([
@@ -91,12 +108,17 @@ class StripeController extends Controller
         if ($data->created) {
             try {
                 DB::beginTransaction();
+                $invoiceTrading = $this->invoiceTrading->where('trading_id' , $trading->id)->where('user_id' , auth()->id())->first();
 
-                $this->invoiceTrading->create([
-                    'user_id' => auth()->id(),
-                    'trading_id' => $id,
-                    'price' => $trading->price,
-                ]);
+                if(empty($invoiceTrading)){
+                    $this->invoiceTrading->create([
+                        'user_id' => auth()->id(),
+                        'trading_id' => $id,
+                        'price' => $trading->price,
+                    ]);
+                }else{
+                    $invoiceTrading->touch();
+                }
 
                 $user = $this->user->find(auth()->id());
                 $user->increment('point', $trading->point);

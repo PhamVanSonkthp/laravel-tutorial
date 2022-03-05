@@ -42,7 +42,7 @@
                             <tr>
                                 <td>{{ $invoiceItem->id }}</td>
                                 <td>{{ optional($invoiceItem->product)->name }}</td>
-                                <td>{{ number_format($invoiceItem->price) }}</td>
+                                <td>${{ number_format($invoiceItem->price) }}</td>
                                 <td>{{ $invoiceItem->created_at }}</td>
                             </tr>
                         @endforeach
@@ -85,7 +85,7 @@
                             <tr>
                                 <td>{{ $invoiceTradingItem->id }}</td>
                                 <td>{{ optional($invoiceTradingItem->trading)->name }}</td>
-                                <td>{{ number_format($invoiceTradingItem->price) }}</td>
+                                <td>${{ number_format($invoiceTradingItem->price) }}</td>
                                 <td>{{ $invoiceTradingItem->created_at }}</td>
                             </tr>
                         @endforeach

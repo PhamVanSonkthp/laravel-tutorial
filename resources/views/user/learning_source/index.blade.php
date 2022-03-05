@@ -126,7 +126,7 @@
                                                     <div id="course_{{$index}}-m" class="accordion-collapse collapse show"
                                                          aria-labelledby="course_one-m">
 
-                                                        @foreach($sourceParent->where('parent_id' , $sourceParent->id)->orderBy('id' , 'desc')->get() as $sourceChild)
+                                                        @foreach($sourceParent->where('parent_id' , $sourceParent->id)->orderBy('order')->get() as $sourceChild)
 
                                                             @php
                                                                 $object = null;
@@ -174,7 +174,7 @@
                                                                 </div>
 
                                                             @else
-                                                            <a href="{{route('user.learningSourceHasSource' , ['id'=>$product->id , 'source_id'=>$sourceChild->id]) }}"
+                                                            <a href="{{route('user.learningSourceHasSource' , ['idInvoice' => (optional(\App\Models\Product::invoiceFollowUser($product->id))->id) ,'idProduct'=>$product->id , 'source_id'=>$sourceChild->id]) }}"
                                                                class="course__accordion-lecture done {{ $is_end_video_to_next && $is_continue == false && !$object ? "inactive-link-m" : ""}}">
 
                                                             <div class="lecture__route-accordion-done"
@@ -281,7 +281,7 @@
 
                                 <div id="course_{{$index}}" class="accordion-collapse collapse show"
                                      aria-labelledby="course_one">
-                                    @foreach($sourceParent->where('parent_id' , $sourceParent->id)->orderBy('id' , 'desc')->get() as $sourceChild)
+                                    @foreach($sourceParent->where('parent_id' , $sourceParent->id)->orderBy('order')->get() as $sourceChild)
 
                                         @php
                                             $object = null;
@@ -330,7 +330,7 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <a href="{{route('user.learningSourceHasSource' , ['id'=>$product->id , 'source_id'=>$sourceChild->id]) }}"
+                                            <a href="{{route('user.learningSourceHasSource' , ['idInvoice' => (optional(\App\Models\Product::invoiceFollowUser($product->id))->id) ,'idProduct'=>$product->id , 'source_id'=>$sourceChild->id]) }}"
                                                class="course__accordion-lecture done {{ $is_end_video_to_next && $is_continue == false && !$object ? "inactive-link" : ""}}">
 
                                                 <div class="lecture__route-accordion-done" style="display: flex;">

@@ -26,10 +26,26 @@ class InvoiceTrading extends Model implements Auditable
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function isExpired($id)
+    public function isExpired($id, $user_id = null)
     {
-        $invoiceTrading = InvoiceTrading::find($id);
-        $trading = Trading::find($invoiceTrading->trading_id);
-        return ($trading->time_payment_again == 0 || (strtotime("+1 month", (new DateTime($invoiceTrading->updated_at))->getTimestamp()) >= (new DateTime())->getTimestamp()));
+        try {
+
+            if (empty($user_id)) {
+                $user_id = auth()->id();
+            }
+
+            $invoiceTrading = InvoiceTrading::where("id", $id)->where("user_id", $user_id)->first();
+
+            if (empty($invoice)) {
+                return true;
+            }
+
+            $trading = Trading::find($invoiceTrading->trading_id);
+            return ($trading->time_payment_again == 0 || (strtotime("+1 month", (new DateTime($invoiceTrading->updated_at))->getTimestamp()) >= (new DateTime())->getTimestamp()));
+
+        } catch (\Exception $exception) {
+            return true;
+        }
+
     }
 }

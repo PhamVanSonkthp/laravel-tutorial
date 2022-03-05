@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Payment\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +79,4 @@ Route::prefix('/')->group(function () {
 
 });
 
-Route::post('/stripe-product/{id}', [StripeController::class,'stripePaymentProduct'])->name("stripe_product.post");
-Route::post('/stripe-trading/{id}', [StripeController::class,'stripePaymentTrading'])->name("stripe_trading.post");
-
-Route::get('/send-notification', [\App\Http\Controllers\NotificationController::class, 'sendNotification']);
+//Route::get('/send-notification', [\App\Http\Controllers\NotificationController::class, 'sendNotification']);

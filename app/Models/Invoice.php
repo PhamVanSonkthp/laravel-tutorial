@@ -14,25 +14,41 @@ class Invoice extends Model implements Auditable
 
     protected $guarded = [];
 
-    public function product(){
-        return $this->hasOne(Product::class , 'id' , 'product_id');
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 
-    public function user(){
-        return $this->hasOne(User::class , 'id' , 'user_id');
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function getTotalPrice() {
+    public function getTotalPrice()
+    {
         return $this->all()->sum(function ($detail) {
             return $detail->price;
         });
     }
 
-    public function isExpired($id)
+    public function isExpired($id, $user_id = null)
     {
-        $invoice = Invoice::find($id);
-        $product = Trading::find($invoice->product_id);
-        return ($product->time_payment_again == 0 || (strtotime("+1 month", (new DateTime($invoice->updated_at))->getTimestamp()) >= (new DateTime())->getTimestamp()));
+        try {
+            if (empty($user_id)) {
+                $user_id = auth()->id();
+            }
+
+            $invoice = Invoice::where("id", $id)->where("user_id", $user_id)->first();
+
+            if (empty($invoice)) {
+                return true;
+            }
+
+            $product = Trading::find($invoice->product_id);
+            return !($product->time_payment_again == 0 || (strtotime("+1 month", (new DateTime($invoice->updated_at))->getTimestamp()) >= (new DateTime())->getTimestamp()));
+        } catch (\Exception $exception) {
+            return true;
+        }
     }
 
 }

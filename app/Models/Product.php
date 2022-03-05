@@ -37,4 +37,8 @@ class Product extends Model implements Auditable
     public function topic(){
         return $this->hasOne(Topic::class, 'product_id');
     }
+
+    public function invoiceFollowUser($id){
+        return Invoice::where("product_id" , $id)->where("user_id" , auth()->id())->first();
+    }
 }

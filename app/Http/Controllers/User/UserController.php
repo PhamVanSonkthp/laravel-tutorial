@@ -159,9 +159,26 @@ class UserController extends Controller
         return view('user.profile.index', compact('user'));
     }
 
-    public function learningSource($id){
-        $product = $this->product->find($id);
+    public function learningSource($idInvoice, $idProduct){
+
+        $invoice = $this->invoice->where("id", $idInvoice)->where("user_id", auth()->id())->first();
+
+        if( empty($invoice) || $invoice->isExpired($idInvoice)){
+            return response()->json([
+                "code" => 419,
+                "message"=>"Khóa học đã hết hạn"
+            ],419);
+        }
+
+        $product = $this->product->find($idProduct);
         $source = $this->source->where('topic_id', $product->topic->id)->first()->sourceChildren->first();
+
+        if( empty($source) || empty($product)){
+            return response()->json([
+                "code" => 404,
+                "message"=>"Không tìm thấy khóa học"
+            ],404);
+        }
 
         $this->process->firstOrCreate([
             "user_id"=>auth()->id(),
@@ -181,9 +198,26 @@ class UserController extends Controller
 
         return view('user.learning_source.index', compact('processesd','product', 'source', 'is_continue' , 'processedItem', 'is_end_video_to_next'));
     }
-    public function learningSourceHasSource($id, $source_id){
-        $product = $this->product->find($id);
+    public function learningSourceHasSource($idInvoice, $idProduct, $source_id){
+        $invoice = $this->invoice->where("id", $idInvoice)->where("user_id", auth()->id())->first();
+
+        if( empty($invoice) || $invoice->isExpired($idInvoice)){
+            return response()->json([
+                "code" => 419,
+                "message"=>"Khóa học đã hết hạn"
+            ],419);
+        }
+
+        $product = $this->product->find($idProduct);
         $source = $this->source->find($source_id);
+
+        if( empty($source) || empty($product)){
+            return response()->json([
+                "code" => 404,
+                "message"=>"Không tìm thấy khóa học"
+            ],404);
+        }
+
         $this->process->firstOrCreate([
             "user_id"=>auth()->id(),
             "source_id"=>$source->id,
@@ -210,7 +244,7 @@ class UserController extends Controller
     }
 
     public function sources(){
-        $products = $this->invoice->select('products.name','products.feature_image_path','products.time_payment_again','invoices.id','invoices.created_at','invoices.updated_at')
+        $products = $this->invoice->select('products.name','products.feature_image_path','products.time_payment_again','invoices.id as idInvoice','products.id as idProduct','invoices.created_at','invoices.updated_at')
             ->join('products', 'products.id', '=', 'invoices.product_id')
             ->where('invoices.user_id', auth()->id())
             ->latest('invoices.id')

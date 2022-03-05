@@ -37,28 +37,7 @@
                     </div>
                 </div>
 
-                <div class="course__content">
 
-                    <!-- Begin Content Course -->
-                    <h3 class="course__content-title">Link học trading</h3>
-
-                    <div class="course__content-main">
-                        <div class="course__content-general">
-                            @auth()
-                                @if(\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id))
-                                    <a href="{{$trading->link}}"></a>
-                                @else
-                                    <span>Đăng ký để thấy link trading</span>
-                                @endif
-                            @else
-                                <span>Đăng ký để thấy link trading</span>
-                            @endauth
-
-
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
             <div class="col-lg-4 col-md-12 col-sm-12 col-12">
@@ -80,7 +59,7 @@
                     <h5 class="course__register-title">${{number_format($trading->price)}}</h5>
 
                     @auth
-                        <a href="{{\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id) ? route('user.learningSource' , ['id' => $trading->id]) : route('user.paymentTrading' , ['id' => $trading->id])}} " class="course__register-btn" style="width: 50%">{{\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id) ? 'Vào room' : 'Đăng ký room'}}</a>
+                        <a href="{{\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id) ? $trading->link : route('user.paymentTrading' , ['id' => $trading->id])}} " class="course__register-btn" style="width: 50%">{{\Illuminate\Support\Facades\Auth::user()->checkHasTrading($trading->id) ? 'Vào room' : 'Đăng ký room'}}</a>
                     @else
                         <a href="{{ route('login') }}" class="course__register-btn" style="width: 50%">Đăng ký trading</a>
                     @endauth

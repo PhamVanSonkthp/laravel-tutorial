@@ -41,12 +41,12 @@
                             <tr>
                                 <td>{{$productItem->name}}</td>
                                 <td><img class="product_image_150_100" src="{{$productItem->feature_image_path}}"></td>
-                                <td>{{ \App\Models\Invoice::isExpired($productItem->id) ? 'Hoạt động' : new \Illuminate\Support\HtmlString('<a href="#">Hết hạn! Gia hạn ngay!</a>') }}</td>
+                                <td>{{ \App\Models\Invoice::isExpired($productItem->idInvoice) ? new \Illuminate\Support\HtmlString('<a href="'. route('user.paymentProduct' , ['id' => $productItem->idProduct]) .'">Hết hạn! Gia hạn ngay!</a>') : 'Hoạt động' }}</td>
                                 <td> {{$counterProcessesd[$index]}} / {{ $processes[$index] }}</td>
                                 <td>{{$productItem->created_at}}</td>
                                 <td>{{ $productItem->time_payment_again == 0 ? 'Vĩnh viễn' : (new DateTime($productItem->updated_at))->modify('+'. $productItem->time_payment_again .' month')->format('Y-m-d h:m:s')  }}</td>
                                 <td>
-                                    <a href="{{route('user.learningSource' , ['id' => $productItem->id])}}"
+                                    <a href="{{route('user.learningSource' , ['idInvoice' => $productItem->idInvoice, 'idProduct' => $productItem->idProduct])}}"
                                        class="btn btn-outline-secondary btn-sm edit" title="Learning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>

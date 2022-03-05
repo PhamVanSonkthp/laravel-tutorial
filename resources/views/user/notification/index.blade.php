@@ -27,7 +27,6 @@
                         <thead>
                         <tr>
                             <th>Tiêu đề</th>
-                            <th>Nội dung</th>
                             <th>Thời gian</th>
                         </tr>
                         </thead>
@@ -35,7 +34,6 @@
                         @foreach($notifications as $notificationItem)
                             <tr>
                                 <td>{{ json_decode($notificationItem->data, true)['body'] }}</td>
-                                <td>{{ json_decode($notificationItem->data, true)['text'] }}</td>
                                 <td>{{ $notificationItem->created_at }}</td>
                             </tr>
                         @endforeach

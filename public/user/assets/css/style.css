@@ -379,7 +379,8 @@ body {
       padding-top: 58%;
       border-radius: 20px;
       width: 100%;
-      cursor: pointer; }
+      /*cursor: pointer; */
+    }
       .course__register-img::after {
         content: "";
         display: block;

@@ -161,7 +161,7 @@
 
                     @auth
 
-                        <a href="{{\Illuminate\Support\Facades\Auth::user()->checkHasProduct($product->id) ? route('user.learningSource' , ['id' => $product->id]) : route('user.paymentProduct' , ['id' => $product->id])}} " class="course__register-btn" style="width: 50%">{{\Illuminate\Support\Facades\Auth::user()->checkHasProduct($product->id) ? 'Tiếp tục học' : 'Đăng ký học'}}</a>
+                        <a href="{{\Illuminate\Support\Facades\Auth::user()->checkHasProduct($product->id) ? route('user.learningSource' , ['idInvoice' => (optional(\App\Models\Product::invoiceFollowUser($product->id))->id) , 'idProduct' => $product->id]) : route('user.paymentProduct' , ['id' => $product->id])}} " class="course__register-btn" style="width: 50%">{{\Illuminate\Support\Facades\Auth::user()->checkHasProduct($product->id) ? 'Tiếp tục học' : 'Đăng ký học'}}</a>
                     @else
                         <a href="{{ route('login') }}" class="course__register-btn" style="width: 50%">Đăng ký học</a>
                     @endauth

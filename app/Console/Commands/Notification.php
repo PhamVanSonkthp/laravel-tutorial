@@ -44,10 +44,9 @@ class Notification extends Command
     {
         $invoices = Invoice::all();
         foreach ($invoices as $invoiceItem) {
-            $product = $invoiceItem->product;
-
-            if( $product->time_payment_again == 1 || (new DateTime($invoices->updated_at))->diff(new DateTime())->m  == 0 ){
+            if(Invoice::isExpired($invoiceItem->id , $invoiceItem->user_id)){
                 $user = $invoiceItem->user;
+                $product = $invoiceItem->product;
 
                 $notificationData = [
                     'body'=>'Khóa học "' . $product->name .'" của bạn sắp hết hạn, vui lòng truy cập "Khóa học của tôi" để gia hạn',
@@ -57,27 +56,25 @@ class Notification extends Command
                 ];
 
                 $user->notify(new Notifications($notificationData));
-
             }
         }
 
-//        $invoiceTradings = InvoiceTrading::all();
-//        foreach ($invoiceTradings as $invoiceTradingItem) {
-//            $trading = $invoiceTradingItem->trading();
-//            if( $trading->time_payment_again == 0 || (new DateTime($trading->updated_at))->diff(new DateTime())->m  != 0 ){
-//                $user = $invoiceTradingItem->user();
-//
-//                $notificationData = [
-//                    'body'=>'Trading "' . $trading->name .'" của bạn sắp hết hạn, vui lòng truy cập "Trading của tôi" để gia hạn',
-//                    'text'=>'Gia hạn ngay',
-//                    'url'=>route('user.tradings'),
-//                    'thankyou'=>'Cảm ơn bạn đã sử dụng dịch vụ!',
-//                ];
-//
-//                $user->notify(new Notifications($notificationData));
-//
-//            }
-//        }
+        $invoiceTradings = InvoiceTrading::all();
+        foreach ($invoiceTradings as $invoiceTradingItem) {
+            if(InvoiceTrading::isExpired($invoiceTradingItem->id , $invoiceTradingItem->user_id)){
+                $user = $invoiceTradingItem->user;
+                $trading = $invoiceTradingItem->trading;
+
+                $notificationData = [
+                    'body'=>'Trading "' . $trading->name .'" của bạn sắp hết hạn, vui lòng truy cập "Khóa học của tôi" để gia hạn',
+                    'text'=>'Gia hạn ngay',
+                    'url'=>route('user.tradings'),
+                    'thankyou'=>'Cảm ơn bạn đã sử dụng dịch vụ!',
+                ];
+
+                $user->notify(new Notifications($notificationData));
+            }
+        }
 
     }
 }

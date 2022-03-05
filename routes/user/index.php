@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Payment\StripeController;
 
 Route::prefix('user')->group(function () {
     Route::get('/my-sources', [
@@ -36,12 +37,12 @@ Route::prefix('user')->group(function () {
         'uses'=>'App\Http\Controllers\User\UserController@paymentTrading',
     ])->middleware('verified');
 
-    Route::get('/learning-source/{id}', [
+    Route::get('/learning-source/{idInvoice}/{idProduct}', [
         'as'=>'user.learningSource',
         'uses'=>'App\Http\Controllers\User\UserController@learningSource',
     ])->middleware('verified');
 
-    Route::get('/learning-source/{id}/{source_id}', [
+    Route::get('/learning-source/{idInvoice}/{idProduct}/{source_id}', [
         'as'=>'user.learningSourceHasSource',
         'uses'=>'App\Http\Controllers\User\UserController@learningSourceHasSource',
     ])->middleware('verified');
@@ -77,6 +78,9 @@ Route::prefix('user')->group(function () {
     ])->middleware('verified');
 
 });
+
+Route::post('/stripe-product/{id}', [StripeController::class,'stripePaymentProduct'])->name("stripe_product.post")->middleware('verified');
+Route::post('/stripe-trading/{id}', [StripeController::class,'stripePaymentTrading'])->name("stripe_trading.post")->middleware('verified');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
